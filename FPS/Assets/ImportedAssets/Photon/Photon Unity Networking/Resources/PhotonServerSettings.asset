@@ -37,4 +37,8 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
+  - StartWarmup
+  - JoinTeam
+  - SerializeMatchData
+  - DeserializeMatchData
   DisableAutoOpenWizard: 1
