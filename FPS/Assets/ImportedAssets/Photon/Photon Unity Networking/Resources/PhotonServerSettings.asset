@@ -41,4 +41,6 @@ MonoBehaviour:
   - JoinTeam
   - SerializeMatchData
   - DeserializeMatchData
+  - AskForJoiningInformation
+  - GiveJoiningInformation
   DisableAutoOpenWizard: 1

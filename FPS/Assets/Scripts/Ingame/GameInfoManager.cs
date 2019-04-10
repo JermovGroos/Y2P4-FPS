@@ -12,11 +12,18 @@ public class GameInfoManager : Photon.MonoBehaviour
     [Header("SpawnPoints")]
     public Transform[] team1SpawnPoints;
     public Transform[] team2SpawnPoints;
+    public string playerObject;
+    GameObject yourPlayer;
 
     [Header("BasicInfo")]
     public int warmupTime;
     public int playersNeededATeam;
     public int roundTime;
+    int currentRoundNumber;
+    int waitingTime;
+    int yourTeam;
+    RoundType currentRoundType;
+    public enum RoundType { Waiting,Warmup,Round}
 
     [Header("UI")]
     public Text time;
@@ -25,12 +32,50 @@ public class GameInfoManager : Photon.MonoBehaviour
     public Text team1Alive, team2Alive;
     public GameObject teams;
 
+    public void Respawn()
+    {
+        Transform position;
+        if (yourTeam == 1)
+            position = team1SpawnPoints[Random.Range(0, team1SpawnPoints.Length)];
+        else
+            position = team2SpawnPoints[Random.Range(0, team2SpawnPoints.Length)];
+
+        yourPlayer = PhotonNetwork.Instantiate(playerObject, position.position, position.rotation, 0);
+    }
+
+    [PunRPC]
+    public void AskForJoiningInformation(string asker)
+    {
+        SerializeMatchData();
+        photonView.RPC("GiveJoiningInformation", PhotonTargets.All, asker, waitingTime - 1, (currentRoundType == RoundType.Waiting) ? 1 : (currentRoundType == RoundType.Warmup) ? 2 : 3);
+    }
+
+    [PunRPC]
+    public void GiveJoiningInformation(string asker, int seconds, int roundTime)
+    {
+        if(asker == PhotonNetwork.playerName)
+        {
+            currentRoundType = (roundTime == 1) ? RoundType.Waiting : (roundTime == 2) ? RoundType.Warmup : RoundType.Round;
+            switch (currentRoundType)
+            {
+                case RoundType.Round:
+                    StartCoroutine(CheckAlive(seconds));
+                    break;
+                case RoundType.Warmup:
+                    StartCoroutine(WarmupTimer(seconds));
+                    break;
+            }
+        }
+    }
+    
     //JoinTeamButton
     ///Calls the RPC and closes the teamPicking UI
     public void JoinTeamButton(int index)
     {
         photonView.RPC("JoinTeam", PhotonTargets.MasterClient, index, PhotonNetwork.playerName);
+        yourTeam = index;
         teams.SetActive(false);
+        Respawn();
     }
 
     //JoinTeamRPC
@@ -69,6 +114,7 @@ public class GameInfoManager : Photon.MonoBehaviour
         if (PhotonNetwork.isMasterClient)
             StartCoroutine(CheckForEnoughPlayers());
         NetworkingPeer.RegisterType(typeof(PlayerInfo), 24, PlayerInfo.Serialize, PlayerInfo.Deserialize);
+        currentRoundType = RoundType.Waiting;
     }
 
     //OnJoinedRoom
@@ -77,6 +123,8 @@ public class GameInfoManager : Photon.MonoBehaviour
     public void OnJoinedRoom()
     {
         Start();
+        if (!PhotonNetwork.isMasterClient)
+            photonView.RPC("AskForJoiningInformation", PhotonTargets.MasterClient, PhotonNetwork.playerName);
     }
 
     //EnoughPlayerCheck
@@ -91,6 +139,7 @@ public class GameInfoManager : Photon.MonoBehaviour
             yield return null;
         }
         photonView.RPC("StartWarmup", PhotonTargets.All);
+        currentRoundType = RoundType.Warmup;
     }
 
     //StartWarmupRPC
@@ -99,18 +148,17 @@ public class GameInfoManager : Photon.MonoBehaviour
     [PunRPC]
     public void StartWarmup()
     {
-        StartCoroutine(WarmupTimer());
+        StartCoroutine(WarmupTimer(warmupTime));
     }
 
     //WarmupCountdown
     ///timer before the game starts
-    public IEnumerator WarmupTimer()
+    public IEnumerator WarmupTimer(int remainingTime)
     {
-        Debug.Log("StartedWarmup");
         currentRound.text = "Warmup";
-        for (int i = 0; i < warmupTime; i++)
+        for (int i = 0; i < remainingTime; i++)
         {
-            int waitingTime = warmupTime - i;
+            waitingTime = warmupTime - i - (warmupTime - remainingTime);
             CalculateTime(waitingTime,time);
             yield return new WaitForSeconds(1);
         }
@@ -121,7 +169,20 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///Starts the first round
     public void StartGame()
     {
+        StartCoroutine(CheckAlive(roundTime));
+        currentRoundType = RoundType.Round;
+    }
 
+    public IEnumerator CheckAlive(int remainingTime)
+    {
+        currentRoundNumber++;
+        currentRound.text = "Round: " + currentRoundNumber.ToString();
+        for (int i = 0; i < remainingTime; i++)
+        {
+            waitingTime = roundTime - i - (roundTime - remainingTime);
+            CalculateTime(waitingTime, time);
+            yield return new WaitForSeconds(1);
+        }
     }
 
     //CalculateTime
@@ -153,13 +214,14 @@ public class GameInfoManager : Photon.MonoBehaviour
             team2PhotonPlayers.Add(player.playerInfo);
         }
 
-        photonView.RPC("DeserializeMatchData", PhotonTargets.All, team1Players.ToArray(), team1PhotonPlayers.ToArray(), team2Players.ToArray(), team2PhotonPlayers.ToArray(), team1.teamwins, team2.teamwins);
+        photonView.RPC("DeserializeMatchData", PhotonTargets.All, team1Players.ToArray(), team1PhotonPlayers.ToArray(), team2Players.ToArray(), team2PhotonPlayers.ToArray(), team1.teamwins, team2.teamwins, currentRoundNumber);
     }
 
     //DeserializeMatchData
     ///This is what players recieve to get the right match info
+    [HideInInspector]
     [PunRPC]
-    public void DeserializeMatchData(PlayerInfo[] _team1Players, PhotonPlayer[] _team1Photon, PlayerInfo[] _team2Players, PhotonPlayer[] _team2Photon, int _team1Wins, int _team2Wins)
+    public void DeserializeMatchData(PlayerInfo[] _team1Players, PhotonPlayer[] _team1Photon, PlayerInfo[] _team2Players, PhotonPlayer[] _team2Photon, int _team1Wins, int _team2Wins, int round)
     {
         team1.players = new List<PlayerInfo>();
         team1.teamwins = _team1Wins;
@@ -178,7 +240,23 @@ public class GameInfoManager : Photon.MonoBehaviour
             info.playerInfo = _team2Photon[i];
             team2.players.Add(info);
         }
+
+        //How many team1 players are alive
+        int alive = 0;
+        foreach (PlayerInfo player in team1.players)
+            if (!player.isDead)
+                alive++;
+        team1Alive.text = alive.ToString() + " / " + team1.players.Count.ToString();
+        //how many team2 players are alive
+        alive = 0;
+        foreach (PlayerInfo player in team2.players)
+            if (!player.isDead)
+                alive++;
+        team2Alive.text = alive.ToString() + " / " + team2.players.Count.ToString();
+        //Round?
+        currentRoundNumber = round;
     }
+
     //PlayerInfo
     ///Stats for each player
     [System.Serializable]
@@ -189,6 +267,7 @@ public class GameInfoManager : Photon.MonoBehaviour
         public int assists;
         public int deaths;
         public PhotonPlayer playerInfo;
+
         //Serialize
         ///To be able to sent this through photon you need to serialize it to a byte[]
         public static byte[] Serialize(object info)
@@ -203,6 +282,7 @@ public class GameInfoManager : Photon.MonoBehaviour
 
             return bytes.ToArray();
         }
+
         //Deserialize
         ///Gets the values out of an byte[]
         public static PlayerInfo Deserialize(byte[] info)
@@ -215,6 +295,7 @@ public class GameInfoManager : Photon.MonoBehaviour
             return playerInf;
         }
     }
+
     //TeamInfo
     ///TeamStats and players
     [System.Serializable]
