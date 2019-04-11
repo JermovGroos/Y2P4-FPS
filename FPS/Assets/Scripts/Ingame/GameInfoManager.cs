@@ -138,7 +138,7 @@ public class GameInfoManager : Photon.MonoBehaviour
             SerializeMatchData();
         }
 
-        if (team1Defeated)
+        if (team2Defeated)
         {
             photonView.RPC("SendRoundEnding", PhotonTargets.All, 1);
             stopRoundTimer = true;
