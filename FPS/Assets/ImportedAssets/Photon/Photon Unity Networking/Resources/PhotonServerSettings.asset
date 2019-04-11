@@ -43,4 +43,7 @@ MonoBehaviour:
   - DeserializeMatchData
   - AskForJoiningInformation
   - GiveJoiningInformation
+  - PlayerKilled
+  - Damage
+  - KillFeed
   DisableAutoOpenWizard: 1
