@@ -22,8 +22,10 @@ public class GameInfoManager : Photon.MonoBehaviour
     int currentRoundNumber;
     int waitingTime;
     int yourTeam;
-    RoundType currentRoundType;
+    [HideInInspector]
+    public RoundType currentRoundType;
     public enum RoundType { Waiting,Warmup,Round}
+    bool stopRoundTimer;
 
     [Header("UI")]
     public Text time;
@@ -32,6 +34,92 @@ public class GameInfoManager : Photon.MonoBehaviour
     public Text team1Alive, team2Alive;
     public GameObject teams;
 
+    [Header("Killfeed")]
+    public GameObject killfeedPanel;
+    public Transform killfeedLayout;
+    public float killFeedMessageLifetime;
+
+    //PlayerKilled
+    //!!ONLY SEND THIS TO THE MASTER CLIENT!!
+    ///Call this when a player is killed.
+    ///You need to give the player that has been killed and the killers name, aswell as all the damage done to the player to give an assist.
+    [HideInInspector]
+    [PunRPC]
+    public void PlayerKilled(string killed, string killer, float[] damageDone, string[] damageingPlayers)
+    {
+        //Checks if there was an assist
+        bool isAssisted = false;
+        List<float> damageDoneList = new List<float>(damageDone);
+        List<string> damageingPlayersList = new List<string>(damageingPlayers);
+        if (damageingPlayers.Length > 1)
+        {
+            isAssisted = true;
+            for (int i = 0; i < damageingPlayersList.Count; i++)
+                if (damageingPlayersList[i] == killer)
+                {
+                    damageDoneList.RemoveAt(i);
+                    damageingPlayersList.RemoveAt(i);
+                    break;
+                }
+        }
+        //Checks in what team the killed person was
+        bool killedInTeam1 = false;
+        foreach(PlayerInfo player in team1.players)
+            if(player.playerInfo.NickName == killed)
+            {
+                player.deaths++;
+                player.isDead = true;
+                killedInTeam1 = true;
+                break;
+            }
+        if(!killedInTeam1)
+            foreach (PlayerInfo player in team2.players)
+                if (player.playerInfo.NickName == killed)
+                {
+                    player.deaths++;
+                    player.isDead = true;
+                    break;
+                }
+        //Gets the assister name if there was an assist
+        string assisterName = "";
+        if (isAssisted)
+        {
+            int bestDamage = 0;
+            for (int i = 0; i < damageDoneList.Count; i++)
+                if (damageDoneList[i] >= damageDoneList[bestDamage])
+                    bestDamage = i;
+            assisterName = damageingPlayersList[bestDamage];
+        }
+        //Gives the kills and assists to the right player
+        List<PlayerInfo> enemyTeam = killedInTeam1 ? team2.players : team1.players;
+        foreach(PlayerInfo player in enemyTeam)
+        {
+            if (player.playerInfo.NickName == killer)
+                player.kills++;
+            if (isAssisted && assisterName == player.playerInfo.NickName)
+                player.assists++;
+        }
+
+        if (killedInTeam1)
+            team2.players = enemyTeam;
+        else
+            team1.players = enemyTeam;
+        string message = killer + (isAssisted ? " + " + assisterName : "") + " Killed " + killed;
+        photonView.RPC("KillFeed", PhotonTargets.All, message);
+        SerializeMatchData();
+    }
+
+    [HideInInspector]
+    [PunRPC]
+    public void KillFeed(string message)
+    {
+        GameObject g = Instantiate(killfeedPanel, killfeedLayout);
+        g.GetComponent<Text>().text = message;
+        Destroy(g, killFeedMessageLifetime);
+    }
+
+    //Respawn
+    ///Respawns you on the right team
     public void Respawn()
     {
         Transform position;
@@ -43,6 +131,9 @@ public class GameInfoManager : Photon.MonoBehaviour
         yourPlayer = PhotonNetwork.Instantiate(playerObject, position.position, position.rotation, 0);
     }
 
+    //AskForJoinInfo
+    ///This is called when a player joins to get the information to the player
+    [HideInInspector]
     [PunRPC]
     public void AskForJoiningInformation(string asker)
     {
@@ -50,6 +141,9 @@ public class GameInfoManager : Photon.MonoBehaviour
         photonView.RPC("GiveJoiningInformation", PhotonTargets.All, asker, waitingTime - 1, (currentRoundType == RoundType.Waiting) ? 1 : (currentRoundType == RoundType.Warmup) ? 2 : 3);
     }
 
+    //GiveJoinInfo
+    ///Send the information to the other Player
+    [HideInInspector]
     [PunRPC]
     public void GiveJoiningInformation(string asker, int seconds, int roundTime)
     {
@@ -117,6 +211,26 @@ public class GameInfoManager : Photon.MonoBehaviour
         currentRoundType = RoundType.Waiting;
     }
 
+    public void OnPhotonPlayerDisconnected(PhotonPlayer player)
+    {
+        if (PhotonNetwork.isMasterClient)
+        {
+            for (int i = 0; i < team1.players.Count; i++)
+                if(team1.players[i].playerInfo.NickName == player.NickName)
+                {
+                    team1.players.RemoveAt(i);
+                    break;
+                }
+            for (int i = 0; i < team2.players.Count; i++)
+                if (team2.players[i].playerInfo.NickName == player.NickName)
+                {
+                    team1.players.RemoveAt(i);
+                    break;
+                }
+            SerializeMatchData();
+        }
+    }
+
     //OnJoinedRoom
     ///Calls the startFunction
     ///Sometimes the player isnt connected while he is in the scene, this is a failsave
@@ -155,9 +269,12 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///timer before the game starts
     public IEnumerator WarmupTimer(int remainingTime)
     {
+        stopRoundTimer = false;
         currentRound.text = "Warmup";
         for (int i = 0; i < remainingTime; i++)
         {
+            if (stopRoundTimer)
+                break;
             waitingTime = warmupTime - i - (warmupTime - remainingTime);
             CalculateTime(waitingTime,time);
             yield return new WaitForSeconds(1);
@@ -169,6 +286,10 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///Starts the first round
     public void StartGame()
     {
+        if (yourPlayer)
+            Destroy(yourPlayer);
+        if (yourTeam != 0)
+            Respawn();
         StartCoroutine(CheckAlive(roundTime));
         currentRoundType = RoundType.Round;
     }
@@ -214,15 +335,16 @@ public class GameInfoManager : Photon.MonoBehaviour
             team2PhotonPlayers.Add(player.playerInfo);
         }
 
-        photonView.RPC("DeserializeMatchData", PhotonTargets.All, team1Players.ToArray(), team1PhotonPlayers.ToArray(), team2Players.ToArray(), team2PhotonPlayers.ToArray(), team1.teamwins, team2.teamwins, currentRoundNumber);
+        photonView.RPC("DeserializeMatchData", PhotonTargets.All, team1Players.ToArray(), team1PhotonPlayers.ToArray(), team2Players.ToArray(), team2PhotonPlayers.ToArray(), team1.teamwins, team2.teamwins, currentRoundNumber, stopRoundTimer);
     }
 
     //DeserializeMatchData
     ///This is what players recieve to get the right match info
     [HideInInspector]
     [PunRPC]
-    public void DeserializeMatchData(PlayerInfo[] _team1Players, PhotonPlayer[] _team1Photon, PlayerInfo[] _team2Players, PhotonPlayer[] _team2Photon, int _team1Wins, int _team2Wins, int round)
+    public void DeserializeMatchData(PlayerInfo[] _team1Players, PhotonPlayer[] _team1Photon, PlayerInfo[] _team2Players, PhotonPlayer[] _team2Photon, int _team1Wins, int _team2Wins, int round, bool _stopTimer)
     {
+        stopRoundTimer = _stopTimer;
         team1.players = new List<PlayerInfo>();
         team1.teamwins = _team1Wins;
         for (int i = 0; i < _team1Players.Length; i++)
