@@ -133,17 +133,13 @@ public class GameInfoManager : Photon.MonoBehaviour
         if (team1Defeated)
         {
             photonView.RPC("SendRoundEnding", PhotonTargets.All, 2);
-            team2.teamwins++;
             stopRoundTimer = true;
-            SerializeMatchData();
         }
 
         if (team2Defeated)
         {
             photonView.RPC("SendRoundEnding", PhotonTargets.All, 1);
             stopRoundTimer = true;
-            team2.teamwins++;
-            SerializeMatchData();
         }
     }
 
@@ -155,10 +151,12 @@ public class GameInfoManager : Photon.MonoBehaviour
         {
             //Team1Wins
             case 1:
+                team1.teamwins++;
                 Debug.Log("Team1Wins");
                 break;
                 //Team2Wins
             case 2:
+                team2.teamwins++;
                 Debug.Log("Team2Wins");
                 break;
                 //Tie
@@ -166,6 +164,8 @@ public class GameInfoManager : Photon.MonoBehaviour
                 Debug.Log("Tie");
                 break;
         }
+
+        SerializeMatchData();
     }
 
     //Killfeed
@@ -361,6 +361,11 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///Delay before the next round starts, this gives time to send a message for who won that round.
     public IEnumerator NextRoundTimer(int remainingTime)
     {
+        stopRoundTimer = false;
+        foreach (PlayerInfo player in team1.players)
+            player.isDead = false;
+        foreach (PlayerInfo player in team2.players)
+            player.isDead = false;
         Debug.Log("NextRound = " + remainingTime);
         currentRound.text = "Round: " + currentRoundNumber.ToString();
         for (int i = 0; i < remainingTime; i++)
@@ -392,7 +397,7 @@ public class GameInfoManager : Photon.MonoBehaviour
         StartCoroutine(NextRoundTimer(nextRoundDelayTime));
         if (!stopRoundTimer)
             photonView.RPC("SendRoundEnding", PhotonTargets.All, 3);
-
+        SerializeMatchData();
     }
 
     //CalculateTime
