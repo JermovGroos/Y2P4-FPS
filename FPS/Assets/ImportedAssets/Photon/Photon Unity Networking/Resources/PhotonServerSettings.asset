@@ -46,4 +46,5 @@ MonoBehaviour:
   - PlayerKilled
   - Damage
   - KillFeed
+  - SendRoundEnding
   DisableAutoOpenWizard: 1

@@ -1634,9 +1634,11 @@ MonoBehaviour:
   - {fileID: 597316314}
   - {fileID: 1527955397}
   playerObject: TempPlayer
-  warmupTime: 130
+  warmupTime: 40
   playersNeededATeam: 1
-  roundTime: 300
+  roundTime: 50
+  nextRoundDelayTime: 10
+  currentRoundType: 0
   time: {fileID: 857209044}
   currentRound: {fileID: 2096555164}
   team1Wins: {fileID: 258138520}
@@ -2487,7 +2489,7 @@ Transform:
   m_GameObject: {fileID: 1175539212}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 37.40318, y: 13.19702, z: 30.61509}
-  m_LocalScale: {x: 3.9155502, y: 1.8049, z: 1.6653674}
+  m_LocalScale: {x: 3.9155502, y: 1.8049, z: 2.4012933}
   m_Children: []
   m_Father: {fileID: 392881234}
   m_RootOrder: 0
@@ -2927,8 +2929,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 11.1
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2952,7 +2954,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918655381}
   m_LocalRotation: {x: -0.0000016858713, y: 0.7071079, z: -0.70710576, w: 0.0000016858761}
-  m_LocalPosition: {x: -0.14, y: 18.99, z: -0.2}
+  m_LocalPosition: {x: 0, y: 9.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

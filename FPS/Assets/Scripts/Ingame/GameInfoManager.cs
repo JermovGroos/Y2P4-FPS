@@ -19,12 +19,15 @@ public class GameInfoManager : Photon.MonoBehaviour
     public int warmupTime;
     public int playersNeededATeam;
     public int roundTime;
+    public int nextRoundDelayTime;
+
+    [Header("NonInspectorVeriables")]
     int currentRoundNumber;
     int waitingTime;
     int yourTeam;
     [HideInInspector]
     public RoundType currentRoundType;
-    public enum RoundType { Waiting,Warmup,Round}
+    public enum RoundType { Waiting,Warmup,Round,RoundDelay}
     bool stopRoundTimer;
 
     [Header("UI")]
@@ -80,7 +83,7 @@ public class GameInfoManager : Photon.MonoBehaviour
                     player.isDead = true;
                     break;
                 }
-        //Gets the assister name if there was an assist
+        //Gets the assisters name if there was an assist
         string assisterName = "";
         if (isAssisted)
         {
@@ -106,9 +109,62 @@ public class GameInfoManager : Photon.MonoBehaviour
             team1.players = enemyTeam;
         string message = killer + (isAssisted ? " + " + assisterName : "") + " Killed " + killed;
         photonView.RPC("KillFeed", PhotonTargets.All, message);
-        SerializeMatchData();
+
+        CheckIfSOmeoneWon();
     }
 
+    public void CheckIfSOmeoneWon()
+    {
+        bool team1Defeated = true;
+        foreach (PlayerInfo player in team1.players)
+            if (!player.isDead)
+                team1Defeated = false;
+
+        bool team2Defeated = true;
+        foreach (PlayerInfo player in team2.players)
+            if (!player.isDead)
+                team2Defeated = false;
+
+        if (team1Defeated)
+        {
+            photonView.RPC("SendRoundEnding", PhotonTargets.All, 2);
+            team2.teamwins++;
+            stopRoundTimer = true;
+            SerializeMatchData();
+        }
+
+        if (team1Defeated)
+        {
+            photonView.RPC("SendRoundEnding", PhotonTargets.All, 1);
+            stopRoundTimer = true;
+            team2.teamwins++;
+            SerializeMatchData();
+        }
+    }
+
+    [HideInInspector]
+    [PunRPC]
+    public void SendRoundEnding(int roundEndingCase)
+    {
+        switch (roundEndingCase)
+        {
+            //Team1Wins
+            case 1:
+                Debug.Log("Team1Wins");
+                break;
+                //Team2Wins
+            case 2:
+                Debug.Log("Team2Wins");
+                break;
+                //Tie
+            case 3:
+                Debug.Log("Tie");
+                break;
+        }
+    }
+
+    //Killfeed
+    ///This is called when someone has been killed so everyone knows it
     [HideInInspector]
     [PunRPC]
     public void KillFeed(string message)
@@ -138,7 +194,7 @@ public class GameInfoManager : Photon.MonoBehaviour
     public void AskForJoiningInformation(string asker)
     {
         SerializeMatchData();
-        photonView.RPC("GiveJoiningInformation", PhotonTargets.All, asker, waitingTime - 1, (currentRoundType == RoundType.Waiting) ? 1 : (currentRoundType == RoundType.Warmup) ? 2 : 3);
+        photonView.RPC("GiveJoiningInformation", PhotonTargets.All, asker, waitingTime - 1, (currentRoundType == RoundType.Waiting) ? 1 : (currentRoundType == RoundType.Warmup) ? 2 : (currentRoundType == RoundType.Round)? 3 : 4);
     }
 
     //GiveJoinInfo
@@ -149,7 +205,7 @@ public class GameInfoManager : Photon.MonoBehaviour
     {
         if(asker == PhotonNetwork.playerName)
         {
-            currentRoundType = (roundTime == 1) ? RoundType.Waiting : (roundTime == 2) ? RoundType.Warmup : RoundType.Round;
+            currentRoundType = (roundTime == 1) ? RoundType.Waiting : (roundTime == 2) ? RoundType.Warmup : (roundTime == 3)? RoundType.Round : RoundType.RoundDelay;
             switch (currentRoundType)
             {
                 case RoundType.Round:
@@ -157,6 +213,9 @@ public class GameInfoManager : Photon.MonoBehaviour
                     break;
                 case RoundType.Warmup:
                     StartCoroutine(WarmupTimer(seconds));
+                    break;
+                case RoundType.RoundDelay:
+                    StartCoroutine(NextRoundTimer(seconds));
                     break;
             }
         }
@@ -269,12 +328,11 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///timer before the game starts
     public IEnumerator WarmupTimer(int remainingTime)
     {
+        Debug.Log("Warmup = " + remainingTime);
         stopRoundTimer = false;
         currentRound.text = "Warmup";
         for (int i = 0; i < remainingTime; i++)
         {
-            if (stopRoundTimer)
-                break;
             waitingTime = warmupTime - i - (warmupTime - remainingTime);
             CalculateTime(waitingTime,time);
             yield return new WaitForSeconds(1);
@@ -294,16 +352,42 @@ public class GameInfoManager : Photon.MonoBehaviour
         currentRoundType = RoundType.Round;
     }
 
+    //NextRoundTimer
+    ///Delay before the next round starts, this gives time to send a message for who won that round.
+    public IEnumerator NextRoundTimer(int remainingTime)
+    {
+        Debug.Log("NextRound = " + remainingTime);
+        currentRound.text = "Round: " + currentRoundNumber.ToString();
+        for (int i = 0; i < remainingTime; i++)
+        {
+            waitingTime = nextRoundDelayTime - i - (nextRoundDelayTime - remainingTime);
+            CalculateTime(waitingTime, time);
+            yield return new WaitForSeconds(1);
+        }
+        StartCoroutine(CheckAlive(roundTime));
+        if (yourPlayer)
+            Destroy(yourPlayer);
+        if (yourTeam != 0)
+            Respawn();
+    }
+
     public IEnumerator CheckAlive(int remainingTime)
     {
+        Debug.Log("CheckAlive = " + remainingTime);
         currentRoundNumber++;
         currentRound.text = "Round: " + currentRoundNumber.ToString();
         for (int i = 0; i < remainingTime; i++)
         {
+            if (stopRoundTimer)
+                break;
             waitingTime = roundTime - i - (roundTime - remainingTime);
             CalculateTime(waitingTime, time);
             yield return new WaitForSeconds(1);
         }
+        StartCoroutine(NextRoundTimer(nextRoundDelayTime));
+        if (!stopRoundTimer)
+            photonView.RPC("SendRoundEnding", PhotonTargets.All, 3);
+
     }
 
     //CalculateTime
@@ -377,6 +461,8 @@ public class GameInfoManager : Photon.MonoBehaviour
         team2Alive.text = alive.ToString() + " / " + team2.players.Count.ToString();
         //Round?
         currentRoundNumber = round;
+        team1Wins.text = team1.teamwins.ToString();
+        team2Wins.text = team2.teamwins.ToString();
     }
 
     //PlayerInfo
