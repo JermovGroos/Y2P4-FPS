@@ -71,8 +71,11 @@ public class GameInfoManager : Photon.MonoBehaviour
             if(player.playerInfo.NickName == killed)
             {
                 player.deaths++;
-                player.isDead = true;
-                killedInTeam1 = true;
+                if(currentRoundType != RoundType.Waiting && currentRoundType != RoundType.Warmup)
+                {
+                    player.isDead = true;
+                    killedInTeam1 = true;
+                }
                 break;
             }
         if(!killedInTeam1)
@@ -80,7 +83,8 @@ public class GameInfoManager : Photon.MonoBehaviour
                 if (player.playerInfo.NickName == killed)
                 {
                     player.deaths++;
-                    player.isDead = true;
+                    if (currentRoundType != RoundType.Waiting && currentRoundType != RoundType.Warmup)
+                        player.isDead = true;
                     break;
                 }
         //Gets the assisters name if there was an assist
@@ -110,7 +114,8 @@ public class GameInfoManager : Photon.MonoBehaviour
         string message = killer + (isAssisted ? " + " + assisterName : "") + " Killed " + killed;
         photonView.RPC("KillFeed", PhotonTargets.All, message);
 
-        CheckIfSOmeoneWon();
+        if (currentRoundType != RoundType.Waiting && currentRoundType != RoundType.Warmup)
+            CheckIfSOmeoneWon();
     }
 
     public void CheckIfSOmeoneWon()
@@ -345,7 +350,7 @@ public class GameInfoManager : Photon.MonoBehaviour
     public void StartGame()
     {
         if (yourPlayer)
-            Destroy(yourPlayer);
+            PhotonNetwork.Destroy(yourPlayer);
         if (yourTeam != 0)
             Respawn();
         StartCoroutine(CheckAlive(roundTime));
