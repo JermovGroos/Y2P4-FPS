@@ -71,7 +71,7 @@ public class GameInfoManager : Photon.MonoBehaviour
             if(player.playerInfo.NickName == killed)
             {
                 player.deaths++;
-                if(currentRoundType == RoundType.Round || currentRoundType == RoundType.RoundDelay)
+                if(currentRoundType == RoundType.Round)
                 {
                     player.isDead = true;
                     killedInTeam1 = true;
@@ -83,7 +83,7 @@ public class GameInfoManager : Photon.MonoBehaviour
                 if (player.playerInfo.NickName == killed)
                 {
                     player.deaths++;
-                    if (currentRoundType == RoundType.Round || currentRoundType == RoundType.RoundDelay)
+                    if (currentRoundType == RoundType.Round)
                         player.isDead = true;
                     break;
                 }
@@ -111,6 +111,7 @@ public class GameInfoManager : Photon.MonoBehaviour
             team2.players = enemyTeam;
         else
             team1.players = enemyTeam;
+
         string message = killer + (isAssisted ? " + " + assisterName : "") + " Killed " + killed;
         photonView.RPC("KillFeed", PhotonTargets.All, message);
 
@@ -360,6 +361,7 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///Delay before the next round starts, this gives time to send a message for who won that round.
     public IEnumerator NextRoundTimer(int remainingTime)
     {
+        currentRoundType = RoundType.RoundDelay;
         Debug.Log("NextRound = " + remainingTime);
         currentRound.text = "Round: " + currentRoundNumber.ToString();
         for (int i = 0; i < remainingTime; i++)
@@ -375,6 +377,8 @@ public class GameInfoManager : Photon.MonoBehaviour
             player.isDead = false;
 
         StartCoroutine(CheckAlive(roundTime));
+        currentRoundType = RoundType.Round;
+        SerializeMatchData();
 
         if (yourPlayer)
             PhotonNetwork.Destroy(yourPlayer);
