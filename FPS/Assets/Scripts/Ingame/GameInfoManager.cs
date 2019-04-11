@@ -71,7 +71,7 @@ public class GameInfoManager : Photon.MonoBehaviour
             if(player.playerInfo.NickName == killed)
             {
                 player.deaths++;
-                if(currentRoundType != RoundType.Waiting && currentRoundType != RoundType.Warmup)
+                if(currentRoundType == RoundType.Round || currentRoundType == RoundType.RoundDelay)
                 {
                     player.isDead = true;
                     killedInTeam1 = true;
@@ -83,7 +83,7 @@ public class GameInfoManager : Photon.MonoBehaviour
                 if (player.playerInfo.NickName == killed)
                 {
                     player.deaths++;
-                    if (currentRoundType != RoundType.Waiting && currentRoundType != RoundType.Warmup)
+                    if (currentRoundType == RoundType.Round || currentRoundType == RoundType.RoundDelay)
                         player.isDead = true;
                     break;
                 }
@@ -114,7 +114,7 @@ public class GameInfoManager : Photon.MonoBehaviour
         string message = killer + (isAssisted ? " + " + assisterName : "") + " Killed " + killed;
         photonView.RPC("KillFeed", PhotonTargets.All, message);
 
-        if (currentRoundType != RoundType.Waiting && currentRoundType != RoundType.Warmup)
+        if (currentRoundType == RoundType.Round)
             CheckIfSOmeoneWon();
     }
 
@@ -135,8 +135,7 @@ public class GameInfoManager : Photon.MonoBehaviour
             photonView.RPC("SendRoundEnding", PhotonTargets.All, 2);
             stopRoundTimer = true;
         }
-
-        if (team2Defeated)
+        else if (team2Defeated)
         {
             photonView.RPC("SendRoundEnding", PhotonTargets.All, 1);
             stopRoundTimer = true;
@@ -361,11 +360,6 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///Delay before the next round starts, this gives time to send a message for who won that round.
     public IEnumerator NextRoundTimer(int remainingTime)
     {
-        stopRoundTimer = false;
-        foreach (PlayerInfo player in team1.players)
-            player.isDead = false;
-        foreach (PlayerInfo player in team2.players)
-            player.isDead = false;
         Debug.Log("NextRound = " + remainingTime);
         currentRound.text = "Round: " + currentRoundNumber.ToString();
         for (int i = 0; i < remainingTime; i++)
@@ -374,7 +368,14 @@ public class GameInfoManager : Photon.MonoBehaviour
             CalculateTime(waitingTime, time);
             yield return new WaitForSeconds(1);
         }
+        stopRoundTimer = false;
+        foreach (PlayerInfo player in team1.players)
+            player.isDead = false;
+        foreach (PlayerInfo player in team2.players)
+            player.isDead = false;
+
         StartCoroutine(CheckAlive(roundTime));
+
         if (yourPlayer)
             PhotonNetwork.Destroy(yourPlayer);
         if (yourTeam != 0)
