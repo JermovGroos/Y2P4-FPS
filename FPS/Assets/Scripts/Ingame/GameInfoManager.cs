@@ -371,7 +371,7 @@ public class GameInfoManager : Photon.MonoBehaviour
         }
         StartCoroutine(CheckAlive(roundTime));
         if (yourPlayer)
-            Destroy(yourPlayer);
+            PhotonNetwork.Destroy(yourPlayer);
         if (yourTeam != 0)
             Respawn();
     }
