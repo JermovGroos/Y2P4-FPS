@@ -25,7 +25,6 @@ public class GameInfoManager : Photon.MonoBehaviour
     int currentRoundNumber;
     int waitingTime;
     int yourTeam;
-    [HideInInspector]
     public RoundType currentRoundType;
     public enum RoundType { Waiting,Warmup,Round,RoundDelay}
     bool stopRoundTimer;
@@ -119,6 +118,8 @@ public class GameInfoManager : Photon.MonoBehaviour
             CheckIfSOmeoneWon();
     }
 
+    //CheckIfWon
+    ///Checks if a team is dead so it can see if someone won
     public void CheckIfSOmeoneWon()
     {
         bool team1Defeated = true;
@@ -132,21 +133,21 @@ public class GameInfoManager : Photon.MonoBehaviour
                 team2Defeated = false;
 
         if (team1Defeated)
-        {
             photonView.RPC("SendRoundEnding", PhotonTargets.All, 2);
-            stopRoundTimer = true;
-        }
         else if (team2Defeated)
-        {
             photonView.RPC("SendRoundEnding", PhotonTargets.All, 1);
-            stopRoundTimer = true;
-        }
+        else
+            SerializeMatchData();
     }
 
+    //SendRoundEnding
+    ///This is called by the MasterClient to giev everyone a message that the round is won or tied
     [HideInInspector]
     [PunRPC]
     public void SendRoundEnding(int roundEndingCase)
     {
+
+        stopRoundTimer = true;
         switch (roundEndingCase)
         {
             //Team1Wins
@@ -164,7 +165,6 @@ public class GameInfoManager : Photon.MonoBehaviour
                 Debug.Log("Tie");
                 break;
         }
-
         SerializeMatchData();
     }
 
@@ -183,6 +183,8 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///Respawns you on the right team
     public void Respawn()
     {
+        if (yourPlayer)
+            PhotonNetwork.Destroy(yourPlayer);
         Transform position;
         if (yourTeam == 1)
             position = team1SpawnPoints[Random.Range(0, team1SpawnPoints.Length)];
@@ -214,7 +216,7 @@ public class GameInfoManager : Photon.MonoBehaviour
             switch (currentRoundType)
             {
                 case RoundType.Round:
-                    StartCoroutine(CheckAlive(seconds));
+                    StartCoroutine(RoundTimer(seconds));
                     break;
                 case RoundType.Warmup:
                     StartCoroutine(WarmupTimer(seconds));
@@ -333,7 +335,6 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///timer before the game starts
     public IEnumerator WarmupTimer(int remainingTime)
     {
-        Debug.Log("Warmup = " + remainingTime);
         stopRoundTimer = false;
         currentRound.text = "Warmup";
         for (int i = 0; i < remainingTime; i++)
@@ -349,12 +350,30 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///Starts the first round
     public void StartGame()
     {
-        if (yourPlayer)
-            PhotonNetwork.Destroy(yourPlayer);
         if (yourTeam != 0)
             Respawn();
-        StartCoroutine(CheckAlive(roundTime));
+        StartCoroutine(RoundTimer(roundTime));
         currentRoundType = RoundType.Round;
+    }
+
+    //RoundReset
+    ///Resets the round veriables and respawns your player
+    public void RoundReset()
+    {
+        stopRoundTimer = false;
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            foreach (PlayerInfo player in team1.players)
+                player.isDead = false;
+            foreach (PlayerInfo player in team2.players)
+                player.isDead = false;
+        }
+
+        if (yourTeam != 0)
+            Respawn();
+
+        SerializeMatchData();
     }
 
     //NextRoundTimer
@@ -362,7 +381,6 @@ public class GameInfoManager : Photon.MonoBehaviour
     public IEnumerator NextRoundTimer(int remainingTime)
     {
         currentRoundType = RoundType.RoundDelay;
-        Debug.Log("NextRound = " + remainingTime);
         currentRound.text = "Round: " + currentRoundNumber.ToString();
         for (int i = 0; i < remainingTime; i++)
         {
@@ -370,25 +388,18 @@ public class GameInfoManager : Photon.MonoBehaviour
             CalculateTime(waitingTime, time);
             yield return new WaitForSeconds(1);
         }
-        stopRoundTimer = false;
-        foreach (PlayerInfo player in team1.players)
-            player.isDead = false;
-        foreach (PlayerInfo player in team2.players)
-            player.isDead = false;
 
-        StartCoroutine(CheckAlive(roundTime));
+        RoundReset();
+
+        StartCoroutine(RoundTimer(roundTime));
         currentRoundType = RoundType.Round;
-        SerializeMatchData();
-
-        if (yourPlayer)
-            PhotonNetwork.Destroy(yourPlayer);
-        if (yourTeam != 0)
-            Respawn();
     }
 
-    public IEnumerator CheckAlive(int remainingTime)
+    //RoundTimer
+    ///The timer for a round
+    ///This also calls the tied round ending if no team won
+    public IEnumerator RoundTimer(int remainingTime)
     {
-        Debug.Log("CheckAlive = " + remainingTime);
         currentRoundNumber++;
         currentRound.text = "Round: " + currentRoundNumber.ToString();
         for (int i = 0; i < remainingTime; i++)
@@ -399,9 +410,11 @@ public class GameInfoManager : Photon.MonoBehaviour
             CalculateTime(waitingTime, time);
             yield return new WaitForSeconds(1);
         }
+
         StartCoroutine(NextRoundTimer(nextRoundDelayTime));
-        if (!stopRoundTimer)
+        if (!stopRoundTimer && PhotonNetwork.isMasterClient)
             photonView.RPC("SendRoundEnding", PhotonTargets.All, 3);
+
         SerializeMatchData();
     }
 
@@ -418,23 +431,26 @@ public class GameInfoManager : Photon.MonoBehaviour
     ///This is called if the master client wants to serialize the game data to all connected players
     public void SerializeMatchData()
     {
-        List<PlayerInfo> team1Players = new List<PlayerInfo>();
-        List<PhotonPlayer> team1PhotonPlayers = new List<PhotonPlayer>();
-        foreach (PlayerInfo player in team1.players)
+        if (PhotonNetwork.isMasterClient)
         {
-            team1Players.Add(player);
-            team1PhotonPlayers.Add(player.playerInfo);
-        }
+            List<PlayerInfo> team1Players = new List<PlayerInfo>();
+            List<PhotonPlayer> team1PhotonPlayers = new List<PhotonPlayer>();
+            foreach (PlayerInfo player in team1.players)
+            {
+                team1Players.Add(player);
+                team1PhotonPlayers.Add(player.playerInfo);
+            }
 
-        List<PlayerInfo> team2Players = new List<PlayerInfo>();
-        List<PhotonPlayer> team2PhotonPlayers = new List<PhotonPlayer>();
-        foreach (PlayerInfo player in team2.players)
-        {
-            team2Players.Add(player);
-            team2PhotonPlayers.Add(player.playerInfo);
-        }
+            List<PlayerInfo> team2Players = new List<PlayerInfo>();
+            List<PhotonPlayer> team2PhotonPlayers = new List<PhotonPlayer>();
+            foreach (PlayerInfo player in team2.players)
+            {
+                team2Players.Add(player);
+                team2PhotonPlayers.Add(player.playerInfo);
+            }
 
-        photonView.RPC("DeserializeMatchData", PhotonTargets.All, team1Players.ToArray(), team1PhotonPlayers.ToArray(), team2Players.ToArray(), team2PhotonPlayers.ToArray(), team1.teamwins, team2.teamwins, currentRoundNumber, stopRoundTimer);
+            photonView.RPC("DeserializeMatchData", PhotonTargets.All, team1Players.ToArray(), team1PhotonPlayers.ToArray(), team2Players.ToArray(), team2PhotonPlayers.ToArray(), team1.teamwins, team2.teamwins, currentRoundNumber, stopRoundTimer);
+        }
     }
 
     //DeserializeMatchData
@@ -454,7 +470,7 @@ public class GameInfoManager : Photon.MonoBehaviour
         }
 
         team2.players = new List<PlayerInfo>();
-        team2.teamwins = _team1Wins;
+        team2.teamwins = _team2Wins;
         for (int i = 0; i < _team2Players.Length; i++)
         {
             PlayerInfo info = _team2Players[i];

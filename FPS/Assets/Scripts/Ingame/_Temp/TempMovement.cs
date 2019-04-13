@@ -43,7 +43,8 @@ public class TempMovement : Photon.MonoBehaviour
                 GameInfoManager manager = GameObject.FindWithTag(gameManagerTag).GetComponent<GameInfoManager>();
                 if (manager.currentRoundType == GameInfoManager.RoundType.Waiting || manager.currentRoundType == GameInfoManager.RoundType.Warmup)
                     manager.Respawn();
-                PhotonNetwork.Destroy(gameObject);
+                else
+                    PhotonNetwork.Destroy(gameObject);
             }
         }
     }
