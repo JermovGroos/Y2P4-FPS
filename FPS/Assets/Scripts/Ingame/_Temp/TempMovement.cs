@@ -41,7 +41,7 @@ public class TempMovement : Photon.MonoBehaviour
                 }
                 GameObject.FindWithTag(gameManagerTag).GetComponent<PhotonView>().RPC("PlayerKilled", PhotonTargets.MasterClient, PhotonNetwork.playerName, damager, damages.ToArray(), damagers.ToArray());
                 GameInfoManager manager = GameObject.FindWithTag(gameManagerTag).GetComponent<GameInfoManager>();
-                if (manager.currentRoundType == GameInfoManager.RoundType.Waiting || manager.currentRoundType == GameInfoManager.RoundType.Warmup)
+                if (manager.allowRespawn)
                     manager.Respawn();
                 else
                     PhotonNetwork.Destroy(gameObject);

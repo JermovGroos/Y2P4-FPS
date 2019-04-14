@@ -7,6 +7,7 @@ public class RoomNetworking : Photon.MonoBehaviour
 {
     public string version;
     public string loadSeneName;
+    public string savingTag;
 
     [Header("UI")]
     public GameObject roomsPanel;
@@ -15,6 +16,7 @@ public class RoomNetworking : Photon.MonoBehaviour
     [Header("RoomsInfo")]
     public GameObject roomButton;
     public Transform roomButtonLayout;
+    public string[] roomTypes;
 
     [Header("CustomRoom")]
     public InputField roomNameInput;
@@ -23,10 +25,11 @@ public class RoomNetworking : Photon.MonoBehaviour
 
     //ConnectForRooms
     ///Connects to a certain room type to get a certain type of room
-    public void ConnectToRoomType(string roomType)
+    public void ConnectToRoomType(int roomType)
     {
-        Debug.Log("Connecting to: " + version + "_" + roomType);
-        PhotonNetwork.ConnectUsingSettings(version + "_" + roomType);
+        GameObject.FindWithTag(savingTag).GetComponent<Saving>().currentGamemodeIndex = roomType;
+        Debug.Log("Connecting to: " + version + "_" + roomTypes[roomType]);
+        PhotonNetwork.ConnectUsingSettings(version + "_" + roomTypes[roomType]);
         roomsPanel.SetActive(true);
         mainMenuPanel.SetActive(false);
         PhotonNetwork.automaticallySyncScene = true;

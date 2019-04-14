@@ -293,7 +293,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 882229695}
+      - m_Target: {fileID: 882229698}
         m_MethodName: JoinTeamButton
         m_Mode: 3
         m_Arguments:
@@ -487,7 +487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 6.5700073}
+  m_AnchoredPosition: {x: 0, y: 6.5700684}
   m_SizeDelta: {x: 0, y: -13.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &232517661
@@ -810,7 +810,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 6.5700073}
+  m_AnchoredPosition: {x: 0, y: 6.5700684}
   m_SizeDelta: {x: 0, y: -13.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &379490209
@@ -1036,7 +1036,7 @@ RectTransform:
   m_Children:
   - {fileID: 857209043}
   m_Father: {fileID: 1435790094}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 882229695}
+      - m_Target: {fileID: 882229698}
         m_MethodName: JoinTeamButton
         m_Mode: 3
         m_Arguments:
@@ -1589,8 +1589,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 882229696}
-  - component: {fileID: 882229695}
   - component: {fileID: 882229697}
+  - component: {fileID: 882229698}
+  - component: {fileID: 882229695}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Manager
@@ -1607,7 +1608,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 882229694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 732c359fdc9d1084398edeb992649431, type: 3}
+  m_Script: {fileID: 11500000, guid: 3db52bf5af2afcf4c97efec86ad2fc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   team1:
@@ -1616,41 +1617,17 @@ MonoBehaviour:
   team2:
     teamwins: 0
     players: []
-  team1SpawnPoints:
-  - {fileID: 1408379137}
-  - {fileID: 1003533722}
-  - {fileID: 2111946584}
-  - {fileID: 2138036444}
-  - {fileID: 965400750}
-  - {fileID: 1574847892}
-  - {fileID: 1433467659}
-  - {fileID: 286964168}
-  team2SpawnPoints:
-  - {fileID: 949510577}
-  - {fileID: 1383617094}
-  - {fileID: 82744650}
-  - {fileID: 420053812}
-  - {fileID: 1150277119}
-  - {fileID: 764736684}
-  - {fileID: 597316314}
-  - {fileID: 1527955397}
-  playerObject: TempPlayer
-  warmupTime: 40
+  warmupTime: 30
   playersNeededATeam: 1
-  roundTime: 50
+  roundTime: 240
   nextRoundDelayTime: 10
+  allowRespawn: 0
+  basic: {fileID: 0}
+  currentRoundNumber: 0
+  waitingTime: 0
+  yourTeam: 0
   currentRoundType: 0
-  time: {fileID: 857209044}
-  currentRound: {fileID: 2096555164}
-  team1Wins: {fileID: 258138520}
-  team2Wins: {fileID: 950039844}
-  team1Alive: {fileID: 661769332}
-  team2Alive: {fileID: 1308032941}
-  teams: {fileID: 875245495}
-  killfeedPanel: {fileID: 8383487468485172846, guid: 3823923650fb01248aceda2e1ba94cf6,
-    type: 3}
-  killfeedLayout: {fileID: 498514255}
-  killFeedMessageLifetime: 2.3
+  stopRoundTimer: 0
 --- !u!4 &882229696
 Transform:
   m_ObjectHideFlags: 0
@@ -1692,6 +1669,50 @@ MonoBehaviour:
   instantiationId: 1
   currentMasterID: -1
   isRuntimeInstantiated: 0
+--- !u!114 &882229698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882229694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e526929c2a1455141ad9a73ee0a4a616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team1SpawnPoints:
+  - {fileID: 1408379137}
+  - {fileID: 1003533722}
+  - {fileID: 2111946584}
+  - {fileID: 2138036444}
+  - {fileID: 965400750}
+  - {fileID: 1574847892}
+  - {fileID: 1433467659}
+  - {fileID: 286964168}
+  team2SpawnPoints:
+  - {fileID: 949510577}
+  - {fileID: 1383617094}
+  - {fileID: 82744650}
+  - {fileID: 420053812}
+  - {fileID: 1150277119}
+  - {fileID: 764736684}
+  - {fileID: 597316314}
+  - {fileID: 1527955397}
+  playerObject: TempPlayer
+  time: {fileID: 857209044}
+  currentRound: {fileID: 2096555164}
+  team1Wins: {fileID: 258138520}
+  team2Wins: {fileID: 950039844}
+  team1Alive: {fileID: 661769332}
+  team2Alive: {fileID: 1308032941}
+  teams: {fileID: 875245495}
+  killfeedPanel: {fileID: 8383487468485172846, guid: 3823923650fb01248aceda2e1ba94cf6,
+    type: 3}
+  killfeedLayout: {fileID: 498514255}
+  killFeedMessageLifetime: 2
+  manager: {fileID: 0}
+  savingTag: Saving
 --- !u!1 &941600903
 GameObject:
   m_ObjectHideFlags: 0
@@ -2610,7 +2631,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 52.615997, y: -0.17791748}
+  m_AnchoredPosition: {x: 52.615997, y: -0.17797852}
   m_SizeDelta: {x: -105.23, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1356907716
@@ -2769,8 +2790,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2096555163}
   - {fileID: 451856584}
+  - {fileID: 2096555163}
   - {fileID: 1074894386}
   - {fileID: 1356907715}
   m_Father: {fileID: 2874544}
@@ -3128,7 +3149,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1435790094}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -15,6 +15,8 @@ public class Saving : MonoBehaviour
     public GameObject nameInput;
     public Text playerName;
 
+    public int currentGamemodeIndex;
+
     //StartFunction
     ///Makes it so the object wont be destroyed && checks if there is a savefile by checking the name
     public void Start()
