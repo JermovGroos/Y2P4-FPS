@@ -28,6 +28,26 @@ public class ManagerBasicStuff : Photon.MonoBehaviour
     public GameInfoManager manager;
     public string savingTag;
     public GameObject victoryScreenCamera;
+    
+    [Header("RoundInfoMessage")]
+    public GameObject roundInfoPanel;
+    public Text roundInfoText;
+    public float roundInfoVisibleTime;
+
+    [HideInInspector]
+    [PunRPC]
+    public void SendRoundMessage(string message)
+    {
+        StartCoroutine(DisplayRoundMessage(message));
+    }
+
+    public IEnumerator DisplayRoundMessage(string _message)
+    {
+        roundInfoText.text = _message;
+        roundInfoPanel.SetActive(true);
+        yield return new WaitForSeconds(roundInfoVisibleTime);
+        roundInfoPanel.SetActive(false);
+    }
 
     public void DisplayWinningTeam(int winningTeam)
     {

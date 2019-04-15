@@ -239,6 +239,8 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
     [PunRPC]
     public void StartWarmup()
     {
+        if (PhotonNetwork.isMasterClient)
+            photonView.RPC("SendRoundMessage", PhotonTargets.All, "There are enough players, Starting the warmup");
         StartCoroutine(WarmupTimer(warmupTime));
     }
 

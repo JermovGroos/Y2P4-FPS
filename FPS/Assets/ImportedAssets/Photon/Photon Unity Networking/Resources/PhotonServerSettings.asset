@@ -49,4 +49,6 @@ MonoBehaviour:
   - SendRoundEnding
   - DisplayWinningTeam
   - GameWon
+  - SendRoundInfo
+  - SendRoundMessage
   DisableAutoOpenWizard: 1
