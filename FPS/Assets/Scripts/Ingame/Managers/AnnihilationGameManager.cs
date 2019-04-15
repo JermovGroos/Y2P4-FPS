@@ -38,24 +38,38 @@ public class AnnihilationGameManager : GameInfoManager
     ///Delay before the next round starts, this gives time to send a message for who won that round.
     public IEnumerator NextRoundTimer(int remainingTime)
     {
-        currentRoundType = RoundType.RoundDelay;
-        basic.currentRound.text = "Round: " + currentRoundNumber.ToString();
-        for (int i = 0; i < remainingTime; i++)
+        if (!CheckIfGameWon())
         {
-            waitingTime = nextRoundDelayTime - i - (nextRoundDelayTime - remainingTime);
-            basic.CalculateTime(waitingTime, basic.time);
-            yield return new WaitForSeconds(1);
+            currentRoundType = RoundType.RoundDelay;
+            basic.currentRound.text = "Round: " + currentRoundNumber.ToString();
+            for (int i = 0; i < remainingTime; i++)
+            {
+                waitingTime = nextRoundDelayTime - i - (nextRoundDelayTime - remainingTime);
+                basic.CalculateTime(waitingTime, basic.time);
+                yield return new WaitForSeconds(1);
+            }
+
+            RoundReset();
+
+            StartCoroutine(RoundTimer(roundTime));
+            currentRoundType = RoundType.Round;
         }
+        else if(PhotonNetwork.isMasterClient)
+        {
+            int teamWinner = (team1.teamwins == pointsToWin) ? 1 : 2;
+            photonView.RPC("GameWon", PhotonTargets.All, teamWinner);
+        }
+    }
 
-        RoundReset();
-
-        StartCoroutine(RoundTimer(roundTime));
-        currentRoundType = RoundType.Round;
+    [HideInInspector]
+    [PunRPC]
+    public override void GameWon(int winnerIndex)
+    {
+        basic.DisplayWinningTeam(winnerIndex);
     }
 
     public override IEnumerator RoundTimer(int remainingTime)
     {
-        allowRespawn = false;
         currentRoundNumber++;
         basic.currentRound.text = "Round: " + currentRoundNumber.ToString();
         for (int i = 0; i < remainingTime; i++)
@@ -96,6 +110,14 @@ public class AnnihilationGameManager : GameInfoManager
             SerializeMatchData();
     }
 
+    public override bool CheckIfGameWon()
+    {
+        if (team1.teamwins == pointsToWin || team2.teamwins == pointsToWin)
+            return true;
+
+        return false;
+    }
+
     //SendRoundEnding
     ///This is called by the MasterClient to giev everyone a message that the round is won or tied
     [HideInInspector]
@@ -121,6 +143,7 @@ public class AnnihilationGameManager : GameInfoManager
                 Debug.Log("Tie");
                 break;
         }
+        CheckIfGameWon();
         SerializeMatchData();
     }
 }

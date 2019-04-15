@@ -9,6 +9,7 @@ public class ManagerBasicStuff : Photon.MonoBehaviour
     public Transform[] team1SpawnPoints;
     public Transform[] team2SpawnPoints;
     public string playerObject;
+    public Transform[] victoryScreenSpawnPoints;
 
     [Header("UI")]
     public Text time;
@@ -16,6 +17,7 @@ public class ManagerBasicStuff : Photon.MonoBehaviour
     public Text team1Wins, team2Wins;
     public Text team1Alive, team2Alive;
     public GameObject teams;
+    public Text victoryTeamTextBar;
 
     [Header("Killfeed")]
     public GameObject killfeedPanel;
@@ -25,6 +27,24 @@ public class ManagerBasicStuff : Photon.MonoBehaviour
     [Header("Other")]
     public GameInfoManager manager;
     public string savingTag;
+    public GameObject victoryScreenCamera;
+
+    public void DisplayWinningTeam(int winningTeam)
+    {
+        victoryScreenCamera.SetActive(true);
+        victoryTeamTextBar.gameObject.SetActive(true);
+        victoryTeamTextBar.text = "Team" + winningTeam.ToString() + " Won";
+        GameInfoManager.TeamInfo team = (winningTeam == 1)? manager.team1 : manager.team2;
+        for (int i = 0; i < team.players.Count; i++)
+            if (team.players[i].playerInfo.NickName == PhotonNetwork.playerName)
+            {
+                if (manager.yourPlayer)
+                    PhotonNetwork.Destroy(manager.yourPlayer);
+                manager.yourPlayer = PhotonNetwork.Instantiate(playerObject, victoryScreenSpawnPoints[i].position, victoryScreenSpawnPoints[i].rotation, 0);
+                manager.yourPlayer.GetComponent<TempMovement>().allowMovment = false;
+                break;
+            }
+    }
     
     //Killfeed
     ///This is called when someone has been killed so everyone knows it

@@ -12,6 +12,8 @@ public class TempMovement : Photon.MonoBehaviour
     public float health = 100;
     public List<DamageInfo> damageInfo = new List<DamageInfo>();
     public string gameManagerTag;
+    [HideInInspector]
+    public bool allowMovment = true;
 
     [PunRPC]
     public void Damage(float damage, string damager)
@@ -41,7 +43,7 @@ public class TempMovement : Photon.MonoBehaviour
                 }
                 GameObject.FindWithTag(gameManagerTag).GetComponent<PhotonView>().RPC("PlayerKilled", PhotonTargets.MasterClient, PhotonNetwork.playerName, damager, damages.ToArray(), damagers.ToArray());
                 GameInfoManager manager = GameObject.FindWithTag(gameManagerTag).GetComponent<GameInfoManager>();
-                if (manager.allowRespawn)
+                if (manager.allowRespawn || manager.currentRoundType == GameInfoManager.RoundType.Waiting || manager.currentRoundType == GameInfoManager.RoundType.Warmup)
                     manager.Respawn();
                 else
                     PhotonNetwork.Destroy(gameObject);
@@ -51,14 +53,14 @@ public class TempMovement : Photon.MonoBehaviour
 
     public void Start()
     {
-        if (photonView.isMine)
+        if (photonView.isMine && allowMovment)
         {
             cam.SetActive(true);
             isMine = true;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
-        else
+        else if (!photonView.isMine)
             StartCoroutine(LerpPosition());
     }
 
@@ -74,7 +76,7 @@ public class TempMovement : Photon.MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (isMine)
+        if (isMine && allowMovment)
         {
             transform.Translate(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * speed * Time.deltaTime);
             transform.Rotate(Vector3.up * Input.GetAxis("Mouse X"));
