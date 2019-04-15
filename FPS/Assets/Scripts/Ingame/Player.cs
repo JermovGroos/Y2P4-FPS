@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Photon.MonoBehaviour {
-    [Header("Networking")]
+    [Header ("Networking")]
     public bool isLocal;
+    public float networkLerpSmoothing;
+    Vector3 networkPosition;
+    Quaternion networkRotation;
 
     [Header ("Movement")]
     public float speed; //Speed of the player
@@ -16,13 +19,42 @@ public class Player : Photon.MonoBehaviour {
     float camRotation = 0; //Rotation of camera on the X axis.
 
     void Start () {
+        if (!isLocal)
+            if (photonView.isMine)
+                playerCam.SetActive (true);
+            else
+                StartCoroutine (LerpPlayer ());
+        else
+            playerCam.SetActive (true);
 
     }
 
     void Update () {
-        Move ();
         RotatePlayer ();
         RotateCameraFirstPerson ();
+    }
+
+    void FixedUpdate () {
+        Move ();
+    }
+
+    void OnPhotonSerializeView (PhotonStream stream, PhotonMessageInfo info) {
+        if (stream.isWriting) {
+            stream.SendNext (transform.position); //Send player position
+            stream.SendNext (transform.rotation); //Send player rotation
+        } else {
+            networkPosition = (Vector3) stream.ReceiveNext (); //Receive player position
+            networkRotation = (Quaternion) stream.ReceiveNext (); //Receive player rotation
+        }
+
+    }
+
+    public IEnumerator LerpPlayer () {
+        while (true) {
+            transform.position = Vector3.Lerp (transform.position, networkPosition, networkLerpSmoothing * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp (transform.rotation, networkRotation, networkLerpSmoothing * Time.deltaTime);
+            yield return null;
+        }
     }
 
     #region MoveAndRotate
@@ -43,7 +75,6 @@ public class Player : Photon.MonoBehaviour {
         //Rotate the player
         transform.Rotate (Vector3.up * Input.GetAxis ("Mouse X") * sensitivity * Time.deltaTime);
     }
-
 
     void RotateCameraFirstPerson () {
 
