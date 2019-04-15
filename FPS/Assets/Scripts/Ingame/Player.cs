@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Photon.MonoBehaviour {
+    [Header("Networking")]
+    public bool isLocal;
+
     [Header ("Movement")]
     public float speed; //Speed of the player
 
@@ -22,6 +25,7 @@ public class Player : Photon.MonoBehaviour {
         RotateCameraFirstPerson ();
     }
 
+    #region MoveAndRotate
     void Move () {
 
         //Vector to translate to position
@@ -61,5 +65,6 @@ public class Player : Photon.MonoBehaviour {
         else
             return input;
     }
+    #endregion
 
 }
