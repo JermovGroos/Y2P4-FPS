@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Player : Photon.MonoBehaviour {
     [Header ("Networking")]
-    public bool isLocal;
-    public float networkLerpSmoothing;
-    Vector3 networkPosition;
-    Quaternion networkRotation;
+    public bool isLocal = false; //Is playing locally
+    public float networkLerpSmoothing = 10; //Smoothing of network player
+    Vector3 networkPosition; //Position of network player
+    Quaternion networkRotation; //Rotation of network player
 
     [Header ("Movement")]
-    public float speed; //Speed of the player
+    public float speed = 15; //Speed of the player
 
     [Header ("Camera")]
-    public float sensitivity; //Sensitivity of the camera
+    public float sensitivity = 50; //Sensitivity of the camera
     public GameObject playerCam; //Camera of the player
     public Vector2 clampRotation; //Min and max clamp
     float camRotation = 0; //Rotation of camera on the X axis.
