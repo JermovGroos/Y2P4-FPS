@@ -16,7 +16,8 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
     public bool allowRespawn;
     [HideInInspector]
     public ManagerBasicStuff basic;
-    GameObject yourPlayer;
+    [HideInInspector]
+    public GameObject yourPlayer;
 
     [Header("NonInspectorVeriables")]
     [HideInInspector]public int currentRoundNumber;
@@ -140,7 +141,8 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
                     StartCoroutine(RoundTimer(seconds));
                     break;
                 case RoundType.Warmup:
-                    StartCoroutine(WarmupTimer(seconds));
+                    if(PhotonNetwork.isMasterClient)
+                        StartCoroutine(WarmupTimer(seconds));
                     break;
             }
         }
@@ -237,6 +239,8 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
     [PunRPC]
     public void StartWarmup()
     {
+        if (PhotonNetwork.isMasterClient)
+            photonView.RPC("SendRoundMessage", PhotonTargets.All, "There are enough players, Starting the warmup");
         StartCoroutine(WarmupTimer(warmupTime));
     }
 
@@ -261,7 +265,6 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
     {
         if (yourTeam != 0)
             Respawn();
-        allowRespawn = true;
         StartCoroutine(RoundTimer(roundTime));
         currentRoundType = RoundType.Round;
     }
@@ -285,6 +288,11 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
 
         SerializeMatchData();
     }
+
+
+    public abstract bool CheckIfGameWon();
+
+    public abstract void GameWon(int winnerIndex);
 
     //RoundTimer
     ///The timer for a round

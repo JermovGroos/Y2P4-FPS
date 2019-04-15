@@ -47,4 +47,8 @@ MonoBehaviour:
   - Damage
   - KillFeed
   - SendRoundEnding
+  - DisplayWinningTeam
+  - GameWon
+  - SendRoundInfo
+  - SendRoundMessage
   DisableAutoOpenWizard: 1

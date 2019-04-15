@@ -38,24 +38,40 @@ public class AnnihilationGameManager : GameInfoManager
     ///Delay before the next round starts, this gives time to send a message for who won that round.
     public IEnumerator NextRoundTimer(int remainingTime)
     {
-        currentRoundType = RoundType.RoundDelay;
-        basic.currentRound.text = "Round: " + currentRoundNumber.ToString();
-        for (int i = 0; i < remainingTime; i++)
+        if (!CheckIfGameWon())
         {
-            waitingTime = nextRoundDelayTime - i - (nextRoundDelayTime - remainingTime);
-            basic.CalculateTime(waitingTime, basic.time);
-            yield return new WaitForSeconds(1);
+            currentRoundType = RoundType.RoundDelay;
+            basic.currentRound.text = "Round: " + (currentRoundNumber + 1).ToString();
+            for (int i = 0; i < remainingTime; i++)
+            {
+                waitingTime = nextRoundDelayTime - i - (nextRoundDelayTime - remainingTime);
+                basic.CalculateTime(waitingTime, basic.time);
+                yield return new WaitForSeconds(1);
+            }
+
+            RoundReset();
+
+            StartCoroutine(RoundTimer(roundTime));
+            currentRoundType = RoundType.Round;
         }
+        else if(PhotonNetwork.isMasterClient)
+        {
+            int teamWinner = (team1.teamwins == pointsToWin) ? 1 : 2;
+            photonView.RPC("GameWon", PhotonTargets.All, teamWinner);
+        }
+    }
 
-        RoundReset();
-
-        StartCoroutine(RoundTimer(roundTime));
-        currentRoundType = RoundType.Round;
+    [HideInInspector]
+    [PunRPC]
+    public override void GameWon(int winnerIndex)
+    {
+        basic.DisplayWinningTeam(winnerIndex);
     }
 
     public override IEnumerator RoundTimer(int remainingTime)
     {
-        allowRespawn = false;
+        if (PhotonNetwork.isMasterClient)
+            photonView.RPC("SendRoundMessage", PhotonTargets.All, "Round: " + currentRoundNumber.ToString());
         currentRoundNumber++;
         basic.currentRound.text = "Round: " + currentRoundNumber.ToString();
         for (int i = 0; i < remainingTime; i++)
@@ -96,6 +112,14 @@ public class AnnihilationGameManager : GameInfoManager
             SerializeMatchData();
     }
 
+    public override bool CheckIfGameWon()
+    {
+        if (team1.teamwins == pointsToWin || team2.teamwins == pointsToWin)
+            return true;
+
+        return false;
+    }
+
     //SendRoundEnding
     ///This is called by the MasterClient to giev everyone a message that the round is won or tied
     [HideInInspector]
@@ -109,18 +133,22 @@ public class AnnihilationGameManager : GameInfoManager
             //Team1Wins
             case 1:
                 team1.teamwins++;
-                Debug.Log("Team1Wins");
+                if (PhotonNetwork.isMasterClient)
+                    photonView.RPC("SendRoundMessage", PhotonTargets.All, "Team 1 won this round");
                 break;
             //Team2Wins
             case 2:
                 team2.teamwins++;
-                Debug.Log("Team2Wins");
+                if (PhotonNetwork.isMasterClient)
+                    photonView.RPC("SendRoundMessage", PhotonTargets.All, "Team 2 won this round");
                 break;
             //Tie
             case 3:
-                Debug.Log("Tie");
+                if (PhotonNetwork.isMasterClient)
+                    photonView.RPC("SendRoundMessage", PhotonTargets.All, "Nobody won this round");
                 break;
         }
+        CheckIfGameWon();
         SerializeMatchData();
     }
 }
