@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThimoNetworkConnect : Photon.MonoBehaviour {
     [Header ("Networking")]
-    public string gameVersion = "0.1";
+    public string gameVersion = "0.2";
     public string roomName = "ThimoTest";
     public int maxPlayers = 4;
 
