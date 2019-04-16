@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Photon.MonoBehaviour {
+
     [Header ("Networking")]
     public bool isLocal = false; //Is playing locally
     public float networkLerpSmoothing = 10; //Smoothing of network player
@@ -14,26 +15,62 @@ public class Player : Photon.MonoBehaviour {
     public float sprintMultiplier = 1.3f; //Multiplication of speed when sprinting
     public float crouchMultiplier = 0.75f; //Multiplication of speed when crouching
 
+    [Header ("Scene")]
+    public string sceneCameraTag = "SceneCamera"; //Tag of the scene camera
+    GameObject sceneCam; //Camera of the scene
+
     [Header ("Camera")]
-    public float sensitivity = 50; //Sensitivity of the camera
     public GameObject playerCam; //Camera of the player
+    public float sensitivity = 50; //Sensitivity of the camera
     public Vector2 clampRotation; //Min and max clamp
     float camRotation = 0; //Rotation of camera on the X axis.
+    bool camToggle; //Toggle camera bool
 
     void Start () {
-        if (!isLocal)
-            if (photonView.isMine)
-                playerCam.SetActive (true);
-            else
-                StartCoroutine (LerpPlayer ());
-        else
-            playerCam.SetActive (true);
 
+        //Set scene camera
+        sceneCam = GameObject.FindGameObjectWithTag (sceneCameraTag);
+
+        if (!isLocal)
+            if (photonView.isMine) {
+                print ("Photon View is mine");
+                ChangeCam (true);
+            }
+        else {
+            print ("Photon View isn't mine");
+            StartCoroutine (LerpPlayer ());
+        } else {
+            print ("Is Local");
+            ChangeCam (true);
+        }
+
+    }
+
+    void ChangeCam (bool changeToPlayerCam) {
+
+        //Change camera
+        if (changeToPlayerCam) {
+
+            //From scene to player
+            sceneCam.SetActive (false);
+            playerCam.SetActive (true);
+        } else {
+
+            //From player to scene
+            sceneCam.SetActive (true);
+            playerCam.SetActive (false);
+        }
     }
 
     void Update () {
         RotatePlayer ();
         RotateCameraFirstPerson ();
+
+        //TEMPORARY
+        if (Input.GetButtonDown ("Temp")) {
+            ChangeCam (!camToggle);
+            camToggle = !camToggle;
+        }
     }
 
     void FixedUpdate () {

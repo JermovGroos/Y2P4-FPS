@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5c64593d9cccb7142aa6ea4286c43c8f
+guid: 045d5d3e62f3e8f4f96cb0f0be61365e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,7 +8,7 @@ ModelImporter:
     2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Plane
+    4300000: Cube
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -71,7 +71,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

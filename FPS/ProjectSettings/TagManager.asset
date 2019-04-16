@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Manager
   - Saving
+  - SceneCamera
   layers:
   - Default
   - TransparentFX
