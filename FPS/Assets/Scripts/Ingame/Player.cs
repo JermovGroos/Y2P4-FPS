@@ -63,18 +63,24 @@ public class Player : Photon.MonoBehaviour {
     }
 
     void Update () {
-        RotatePlayer ();
-        RotateCameraFirstPerson ();
+        if (photonView.isMine) {
+            RotatePlayer ();
+            RotateCameraFirstPerson ();
 
-        //TEMPORARY
-        if (Input.GetButtonDown ("Temp")) {
-            ChangeCam (!camToggle);
-            camToggle = !camToggle;
+            //TEMPORARY
+            if (Input.GetButtonDown ("Temp")) {
+                ChangeCam (!camToggle);
+                camToggle = !camToggle;
+            }
         }
+
     }
 
     void FixedUpdate () {
-        Move ();
+        if (photonView.isMine) {
+
+            Move ();
+        }
     }
 
     void OnPhotonSerializeView (PhotonStream stream, PhotonMessageInfo info) {
