@@ -10,7 +10,9 @@ public class Player : Photon.MonoBehaviour {
     Quaternion networkRotation; //Rotation of network player
 
     [Header ("Movement")]
-    public float speed = 15; //Speed of the player
+    public float mainSpeed = 15; //Speed of the player
+    public float sprintMultiplier = 1.3f; //Multiplication of speed when sprinting
+    public float crouchMultiplier = 0.75f; //Multiplication of speed when crouching
 
     [Header ("Camera")]
     public float sensitivity = 50; //Sensitivity of the camera
@@ -51,8 +53,10 @@ public class Player : Photon.MonoBehaviour {
 
     public IEnumerator LerpPlayer () {
         while (true) {
-            transform.position = Vector3.Lerp (transform.position, networkPosition, networkLerpSmoothing * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp (transform.rotation, networkRotation, networkLerpSmoothing * Time.deltaTime);
+            if (!isLocal) {
+                transform.position = Vector3.Lerp (transform.position, networkPosition, networkLerpSmoothing * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp (transform.rotation, networkRotation, networkLerpSmoothing * Time.deltaTime);
+            }
             yield return null;
         }
     }
@@ -66,8 +70,14 @@ public class Player : Photon.MonoBehaviour {
         movementVector.y = 0;
         movementVector.z = Input.GetAxis ("Vertical");
 
+        //Check if sprinting
+        if (Input.GetButton ("Sprint"))
+            movementVector *= sprintMultiplier;
+        else if (Input.GetButton ("Crouch"))
+            movementVector *= crouchMultiplier;
+
         //Translate the position
-        transform.Translate (movementVector * speed * Time.deltaTime);
+        transform.Translate (movementVector * mainSpeed * Time.deltaTime);
     }
 
     void RotatePlayer () {
