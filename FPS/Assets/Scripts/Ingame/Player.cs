@@ -19,7 +19,7 @@ public class Player : Photon.MonoBehaviour {
     Vector3 movementVector; //Movement vector of player
 
     [Space (10)]
-    public float jumpForce; //Force of the jump
+    public float jumpForce = 250; //Force of the jump
     public Vector3 jumpBoxCheckSize; //Size of the box that detects jumpable layers
     public LayerMask playerLayer; //Layer of the player
     Rigidbody playerRigidbody; //Rigidbody of the player
