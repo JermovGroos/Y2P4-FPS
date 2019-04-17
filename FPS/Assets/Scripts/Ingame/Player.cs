@@ -14,6 +14,15 @@ public class Player : Photon.MonoBehaviour {
     public float mainSpeed = 15; //Speed of the player
     public float sprintMultiplier = 1.3f; //Multiplication of speed when sprinting
     public float crouchMultiplier = 0.75f; //Multiplication of speed when crouching
+    public float inAirMultiplier = 0.2f; //Multiplication of speed when in-air
+    bool isGrounded; //Check if grounded
+    Vector3 movementVector; //Movement vector of player
+
+    [Space (10)]
+    public float jumpForce; //Force of the jump
+    public Vector3 jumpBoxCheckSize; //Size of the box that detects jumpable layers
+    public LayerMask playerLayer; //Layer of the player
+    Rigidbody playerRigidbody; //Rigidbody of the player
 
     [Header ("Scene")]
     public string sceneCameraTag = "SceneCamera"; //Tag of the scene camera
@@ -21,7 +30,7 @@ public class Player : Photon.MonoBehaviour {
 
     [Header ("Camera")]
     public GameObject playerCam; //Camera of the player
-    public float sensitivity = 50; //Sensitivity of the camera
+    public int sensitivity = 100; //Sensitivity of the camera
     public Vector2 clampRotation; //Min and max clamp
     float camRotation = 0; //Rotation of camera on the X axis.
     bool camToggle; //Toggle camera bool
@@ -30,6 +39,9 @@ public class Player : Photon.MonoBehaviour {
 
         //Set scene camera
         sceneCam = GameObject.FindGameObjectWithTag (sceneCameraTag);
+
+        //Set player rigidbody
+        playerRigidbody = GetComponent<Rigidbody> ();
 
         if (!isLocal)
             if (photonView.isMine) {
@@ -66,6 +78,7 @@ public class Player : Photon.MonoBehaviour {
         if (photonView.isMine) {
             RotatePlayer ();
             RotateCameraFirstPerson ();
+            Jumper ();
 
             //TEMPORARY
             if (Input.GetButtonDown ("Temp")) {
@@ -78,7 +91,6 @@ public class Player : Photon.MonoBehaviour {
 
     void FixedUpdate () {
         if (photonView.isMine) {
-
             Move ();
         }
     }
@@ -104,23 +116,54 @@ public class Player : Photon.MonoBehaviour {
         }
     }
 
+    public void Jumper () {
+
+        //Set layermask
+        LayerMask notPlayer = ~playerLayer;
+
+        Vector3 halfExtends = jumpBoxCheckSize / 2f;
+
+        //Check if the player is grounded
+        if (Physics.CheckBox (transform.position, halfExtends, transform.rotation, notPlayer)) {
+
+            //Set isGrounded bool true
+            isGrounded = true;
+
+            //Check if player presses the Jump button
+            if (Input.GetButtonDown ("Jump")) {
+
+                //Add force to the player rigidbody
+                playerRigidbody.AddRelativeForce (Vector3.up * jumpForce + movementVector * jumpForce, ForceMode.Impulse);
+            }
+        } else {
+
+            //Set isGrounded bool false
+            isGrounded = false;
+        }
+    }
+
     #region MoveAndRotate
     void Move () {
 
         //Vector to translate to position
-        Vector3 movementVector;
+
         movementVector.x = Input.GetAxis ("Horizontal");
         movementVector.y = 0;
         movementVector.z = Input.GetAxis ("Vertical");
 
-        //Check if sprinting
-        if (Input.GetButton ("Sprint"))
+        //Check multipliers
+        if (!isGrounded)
+            movementVector *= inAirMultiplier;
+        else if (Input.GetButton ("Sprint"))
             movementVector *= sprintMultiplier;
         else if (Input.GetButton ("Crouch"))
             movementVector *= crouchMultiplier;
 
+        Vector3 final = movementVector * mainSpeed * Time.deltaTime;
+
         //Translate the position
-        transform.Translate (movementVector * mainSpeed * Time.deltaTime);
+        transform.Translate (final);
+
     }
 
     void RotatePlayer () {

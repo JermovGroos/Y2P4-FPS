@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5278546856005232737}
   - component: {fileID: 5278546856005232738}
   - component: {fileID: 8940287637289879052}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ThimoTempPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,10 +95,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocal: 0
-  networkLerpSmoothing: 10
+  networkLerpSmoothing: 5
   mainSpeed: 5
   sprintMultiplier: 1.5
   crouchMultiplier: 0.5
+  inAirMultiplier: 0
+  jumpForce: 250
+  jumpBoxCheckSize: {x: 0.4, y: 0.05, z: 0.2}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
   sceneCameraTag: SceneCamera
   playerCam: {fileID: 5278546857207505779}
   sensitivity: 30
@@ -171,7 +177,7 @@ GameObject:
   - component: {fileID: 5278546857207505781}
   - component: {fileID: 5278546857207505780}
   - component: {fileID: 5278546857207505783}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
