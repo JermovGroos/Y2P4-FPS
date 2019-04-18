@@ -46,16 +46,21 @@ public class Player : Photon.MonoBehaviour {
         if (!isLocal)
             if (photonView.isMine) {
                 print ("Photon View is mine");
-                ChangeCam (true);
+                IsMineOrLocal();
             }
         else {
             print ("Photon View isn't mine");
             StartCoroutine (LerpPlayer ());
         } else {
             print ("Is Local");
-            ChangeCam (true);
+            IsMineOrLocal();
         }
 
+    }
+
+    public void IsMineOrLocal() {
+        ChangeCam(true);
+        playerRigidbody.useGravity = true;
     }
 
     void ChangeCam (bool changeToPlayerCam) {
