@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLocal: 0
   networkLerpSmoothing: 5
+  playerArmor: {fileID: 11400000, guid: 6da65139796a52c449f5c6d876517a7d, type: 2}
   mainSpeed: 5
   sprintMultiplier: 1.5
   crouchMultiplier: 0.5

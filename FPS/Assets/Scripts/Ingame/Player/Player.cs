@@ -10,6 +10,9 @@ public class Player : Photon.MonoBehaviour {
     Vector3 networkPosition; //Position of network player
     Quaternion networkRotation; //Rotation of network player
 
+    [Header("Items")]
+    public Armor playerArmor;
+
     [Header ("Movement")]
     public float mainSpeed = 15; //Speed of the player
     public float sprintMultiplier = 1.3f; //Multiplication of speed when sprinting
@@ -158,11 +161,13 @@ public class Player : Photon.MonoBehaviour {
 
         //Check multipliers
         if (!isGrounded)
-            movementVector *= inAirMultiplier;
+            movementVector *= inAirMultiplier; //Add in air multiplier
         else if (Input.GetButton ("Sprint"))
-            movementVector *= sprintMultiplier;
+            movementVector *= sprintMultiplier; //Add sprinting multiplier
         else if (Input.GetButton ("Crouch"))
-            movementVector *= crouchMultiplier;
+            movementVector *= crouchMultiplier; //Add crouching multiplier
+        
+        movementVector *= playerArmor.speedMultiplier; //Add armor multiplier
 
         Vector3 final = movementVector * mainSpeed * Time.deltaTime;
 
