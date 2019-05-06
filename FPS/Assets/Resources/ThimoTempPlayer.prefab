@@ -96,11 +96,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLocal: 0
   networkLerpSmoothing: 5
+  mainHealth: 100
+  health: 0
   playerArmor: {fileID: 11400000, guid: 6da65139796a52c449f5c6d876517a7d, type: 2}
+  damages: []
   mainSpeed: 5
   sprintMultiplier: 1.5
   crouchMultiplier: 0.5
-  inAirMultiplier: 0
+  inAirMultiplier: 0.1
   jumpForce: 250
   jumpBoxCheckSize: {x: 0.4, y: 0.05, z: 0.2}
   playerLayer:

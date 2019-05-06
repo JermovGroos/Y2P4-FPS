@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49554764007f46d4187a9b267bb3a461, type: 3}
   m_Name: Light
   m_EditorClassIdentifier: 
-  speedMultiplier: 0
+  speedMultiplier: 1

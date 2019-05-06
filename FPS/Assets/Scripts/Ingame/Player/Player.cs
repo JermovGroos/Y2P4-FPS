@@ -10,8 +10,11 @@ public class Player : Photon.MonoBehaviour {
     Vector3 networkPosition; //Position of network player
     Quaternion networkRotation; //Rotation of network player
 
-    [Header("Items")]
-    public Armor playerArmor;
+    [Header("Health")]
+    public float mainHealth = 100; //Main health of the player
+    public float health; //Current health of the player
+    public Armor playerArmor; //Armor of the player
+    public List<Damage> damages = new List<Damage>();
 
     [Header ("Movement")]
     public float mainSpeed = 15; //Speed of the player
@@ -45,6 +48,9 @@ public class Player : Photon.MonoBehaviour {
 
         //Set player rigidbody
         playerRigidbody = GetComponent<Rigidbody> ();
+
+        //Set player health
+        health = mainHealth;
 
         if (!isLocal)
             if (photonView.isMine) {
@@ -114,6 +120,8 @@ public class Player : Photon.MonoBehaviour {
 
     }
 
+    #region Movement
+
     public IEnumerator LerpPlayer () {
         while (true) {
             if (!isLocal) {
@@ -150,7 +158,6 @@ public class Player : Photon.MonoBehaviour {
         }
     }
 
-    #region MoveAndRotate
     void Move () {
 
         //Vector to translate to position
@@ -204,4 +211,42 @@ public class Player : Photon.MonoBehaviour {
     }
     #endregion
 
+    #region Health
+
+    [PunRPC]
+    public void DamagePlayer(string damager, float damageAmount) {
+        if(photonView.isMine) {
+
+            //Subtract damage from health
+            health -= damageAmount; 
+
+            //Check if player already got damaged by damager     
+            bool containsDamage = false;
+            foreach(Damage damage in damages) {
+                if(damage.damager == damager) {
+
+                    //Add damageamount to damager's damage
+                    containsDamage = true;
+                    damage.damageAmount += damageAmount;
+                    break;
+                }
+            }
+            
+            //Add new damage
+            if(!containsDamage) 
+                damages.Add(new Damage(damager, damageAmount));
+            
+            //Print to console
+            print(transform.name + " took " + damageAmount + " damage by " + damager + ".");
+            
+            //Check if player has died
+            if(health <= 0) {
+
+            }
+
+            
+        }
+        
+    }
+    #endregion
 }
