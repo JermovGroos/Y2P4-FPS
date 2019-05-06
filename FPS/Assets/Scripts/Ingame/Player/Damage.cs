@@ -6,10 +6,10 @@ using UnityEngine;
 public class Damage
 {
     public string damager;
-    public float damageAmount;
+    public float amount;
 
-    public Damage(string _damager, float _damageAmount) {
+    public Damage(string _damager, float _amount) {
         damager = _damager;
-        damageAmount = _damageAmount;
+        amount = _amount;
     }
 }

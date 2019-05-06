@@ -10,11 +10,11 @@ public class Player : Photon.MonoBehaviour {
     Vector3 networkPosition; //Position of network player
     Quaternion networkRotation; //Rotation of network player
 
-    [Header("Health")]
+    [Header ("Health")]
     public float mainHealth = 100; //Main health of the player
     public float health; //Current health of the player
     public Armor playerArmor; //Armor of the player
-    public List<Damage> damages = new List<Damage>();
+    public List<Damage> damages = new List<Damage> ();
 
     [Header ("Movement")]
     public float mainSpeed = 15; //Speed of the player
@@ -41,6 +41,10 @@ public class Player : Photon.MonoBehaviour {
     float camRotation = 0; //Rotation of camera on the X axis.
     bool camToggle; //Toggle camera bool
 
+    [Header ("Managers")]
+    public string gameInfoManagerTag; //Tag of the game info manager gameobject
+    GameInfoManager gameInfoManager; //Game info manager
+
     void Start () {
 
         //Set scene camera
@@ -52,23 +56,26 @@ public class Player : Photon.MonoBehaviour {
         //Set player health
         health = mainHealth;
 
+        //Set game info manager
+        gameInfoManager = GameObject.FindWithTag (gameInfoManagerTag).GetComponent<GameInfoManager> ();
+
         if (!isLocal)
             if (photonView.isMine) {
                 print ("Photon View is mine");
-                IsMineOrLocal();
+                IsMineOrLocal ();
             }
         else {
             print ("Photon View isn't mine");
             StartCoroutine (LerpPlayer ());
         } else {
             print ("Is Local");
-            IsMineOrLocal();
+            IsMineOrLocal ();
         }
 
     }
 
-    public void IsMineOrLocal() {
-        ChangeCam(true);
+    public void IsMineOrLocal () {
+        ChangeCam (true);
         playerRigidbody.useGravity = true;
     }
 
@@ -173,7 +180,7 @@ public class Player : Photon.MonoBehaviour {
             movementVector *= sprintMultiplier; //Add sprinting multiplier
         else if (Input.GetButton ("Crouch"))
             movementVector *= crouchMultiplier; //Add crouching multiplier
-        
+
         movementVector *= playerArmor.speedMultiplier; //Add armor multiplier
 
         Vector3 final = movementVector * mainSpeed * Time.deltaTime;
@@ -214,39 +221,54 @@ public class Player : Photon.MonoBehaviour {
     #region Health
 
     [PunRPC]
-    public void DamagePlayer(string damager, float damageAmount) {
-        if(photonView.isMine) {
+    public void DamagePlayer (string damager, float damageAmount) {
+        if (photonView.isMine) {
 
             //Subtract damage from health
-            health -= damageAmount; 
+            health -= damageAmount;
 
             //Check if player already got damaged by damager     
             bool containsDamage = false;
-            foreach(Damage damage in damages) {
-                if(damage.damager == damager) {
+            foreach (Damage damage in damages) {
+                if (damage.damager == damager) {
 
                     //Add damageamount to damager's damage
                     containsDamage = true;
-                    damage.damageAmount += damageAmount;
+                    damage.amount += damageAmount;
                     break;
                 }
             }
-            
+
             //Add new damage
-            if(!containsDamage) 
-                damages.Add(new Damage(damager, damageAmount));
-            
+            if (!containsDamage)
+                damages.Add (new Damage (damager, damageAmount));
+
             //Print to console
-            print(transform.name + " took " + damageAmount + " damage by " + damager + ".");
-            
+            print (transform.name + " took " + damageAmount + " damage by " + damager + ".");
+
             //Check if player has died
-            if(health <= 0) {
+            if (health <= 0) {
+
+                //Make lists of the damages
+                float[] damageAmounts = new float[damages.Count];
+                string[] damagers = new string[damages.Count];
+
+                int index = 0;
+                foreach (Damage damage in damages) {
+                    damageAmounts[index] = damage.amount;
+                    damagers[index] = damage.damager;
+                    index += 1;
+                }
+
+                if (gameInfoManager.allowRespawn || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Waiting || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Warmup)
+                    gameInfoManager.Respawn ();
+                else
+                    PhotonNetwork.Destroy (gameObject);
 
             }
 
-            
         }
-        
+
     }
     #endregion
 }
