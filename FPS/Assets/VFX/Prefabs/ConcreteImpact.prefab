@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4178183907638282799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.013927769, z: 0}
-  m_LocalScale: {x: 0.032616884, y: 0.032616884, z: 0.032616884}
+  m_LocalScale: {x: 0.17, y: 0.17, z: 0.17}
   m_Children: []
   m_Father: {fileID: 4178183908996972708}
   m_RootOrder: 0
@@ -43,14 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f19d9143a39eb3b46bc4563e9889cfbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 75e3478dc764cd240bba2f35df16b6bb, type: 2}
+  m_Material: {fileID: 2100000, guid: 3647b7bd87b1eb441a7ffb9e240ddbd6, type: 2}
   m_DrawDistance: 1000
   m_FadeScale: 0.9
   m_UVScale: {x: 1, y: 1}
   m_UVBias: {x: 0, y: 0}
   m_AffectsTransparency: 0
   m_Offset: {x: 0, y: 0, z: 0}
-  m_Size: {x: 1, y: 1.854022, z: 1}
+  m_Size: {x: 1.2, y: 1.854022, z: 1.2}
   m_IsCropModeEnabled: 0
 --- !u!1 &4178183908386944421
 GameObject:
@@ -9574,7 +9574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4178183908996972708}
   m_Layer: 0
-  m_Name: ImpactPointConcrete
+  m_Name: ConcreteImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
