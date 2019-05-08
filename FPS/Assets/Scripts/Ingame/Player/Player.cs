@@ -42,7 +42,7 @@ public class Player : Photon.MonoBehaviour {
     bool camToggle; //Toggle camera bool
 
     [Header ("Managers")]
-    public string gameInfoManagerTag; //Tag of the game info manager gameobject
+    public string gameInfoManagerTag = "Manager"; //Tag of the game info manager gameobject
     GameInfoManager gameInfoManager; //Game info manager
 
     void Start () {
@@ -57,7 +57,9 @@ public class Player : Photon.MonoBehaviour {
         health = mainHealth;
 
         //Set game info manager
-        gameInfoManager = GameObject.FindWithTag (gameInfoManagerTag).GetComponent<GameInfoManager> ();
+        if (GameObject.FindWithTag (gameInfoManagerTag)) {
+            gameInfoManager = GameObject.FindWithTag (gameInfoManagerTag).GetComponent<GameInfoManager> ();
+        }
 
         if (!isLocal)
             if (photonView.isMine) {

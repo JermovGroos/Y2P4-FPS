@@ -113,6 +113,7 @@ MonoBehaviour:
   playerCam: {fileID: 5278546857207505779}
   sensitivity: 100
   clampRotation: {x: -70, y: 70}
+  gameInfoManagerTag: Manager
 --- !u!114 &5278546856005232737
 MonoBehaviour:
   m_ObjectHideFlags: 0
