@@ -41,6 +41,12 @@ public class Player : Photon.MonoBehaviour {
     float camRotation = 0; //Rotation of camera on the X axis.
     bool camToggle; //Toggle camera bool
 
+    [Header ("Animations")]
+    public Animator animator; //Animator of the player  
+    public string idleTrigger = "Idle"; //Name of idle animation trigger
+    public string walkingTrigger = "Walk"; //Name of idle animation trigger
+    public string sprintingTrigger = "Sprint"; //Name of idle animation trigger
+
     [Header ("Managers")]
     public string gameInfoManagerTag = "Manager"; //Tag of the game info manager gameobject
     GameInfoManager gameInfoManager; //Game info manager
@@ -170,7 +176,6 @@ public class Player : Photon.MonoBehaviour {
     void Move () {
 
         //Vector to translate to position
-
         movementVector.x = Input.GetAxis ("Horizontal");
         movementVector.y = 0;
         movementVector.z = Input.GetAxis ("Vertical");
@@ -185,7 +190,17 @@ public class Player : Photon.MonoBehaviour {
 
         movementVector *= playerArmor.speedMultiplier; //Add armor multiplier
 
+        //Set the final Vector
         Vector3 final = movementVector * mainSpeed * Time.deltaTime;
+
+        //Set animation triggers
+        if (Input.GetAxis ("Vertical") != 0)
+            if (Input.GetButton ("Sprint"))
+                animator.SetTrigger (sprintingTrigger);
+            else
+                animator.SetTrigger (walkingTrigger);
+        else
+            animator.SetTrigger (idleTrigger);
 
         //Translate the position
         transform.Translate (final);
