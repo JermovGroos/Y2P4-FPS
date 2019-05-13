@@ -63,7 +63,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 823
+    m_Bits: 2871
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2781,7 +2781,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 212e55bdef3fee64fae82db644d8800b, type: 2}
   m_TargetDisplay: 0
@@ -2817,7 +2817,7 @@ MonoBehaviour:
   clearColorMode: 0
   backgroundColorHDR: {r: 0, g: 0.060996596, b: 0.0754717, a: 0}
   clearDepth: 1
-  renderingPath: 0
+  renderingPath: 1
   volumeLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -2826,15 +2826,15 @@ MonoBehaviour:
   shutterSpeed: 0.005
   iso: 400
   m_FrameSettings:
-    overrides: 0
-    enableShadow: 1
-    enableContactShadows: 1
-    enableShadowMask: 1
+    overrides: 2089975
+    enableShadow: 0
+    enableContactShadows: 0
+    enableShadowMask: 0
     enableSSR: 0
-    enableSSAO: 1
-    enableSubsurfaceScattering: 1
-    enableTransmission: 1
-    enableAtmosphericScattering: 1
+    enableSSAO: 0
+    enableSubsurfaceScattering: 0
+    enableTransmission: 0
+    enableAtmosphericScattering: 0
     enableVolumetrics: 1
     enableReprojectionForVolumetrics: 1
     enableLightLayers: 1
@@ -2842,14 +2842,14 @@ MonoBehaviour:
     specularGlobalDimmer: 1
     shaderLitMode: 1
     enableDepthPrepassWithDeferredRendering: 0
-    enableTransparentPrepass: 1
+    enableTransparentPrepass: 0
     enableMotionVectors: 1
     enableObjectMotionVectors: 1
-    enableDecals: 1
-    enableRoughRefraction: 1
-    enableTransparentPostpass: 1
-    enableDistortion: 1
-    enablePostprocess: 1
+    enableDecals: 0
+    enableRoughRefraction: 0
+    enableTransparentPostpass: 0
+    enableDistortion: 0
+    enablePostprocess: 0
     enableAsyncCompute: 1
     enableOpaqueObjects: 1
     enableTransparentObjects: 1
