@@ -38,6 +38,7 @@ public class Player : Photon.MonoBehaviour {
     public GameObject playerCam; //Camera of the player
     public int sensitivity = 100; //Sensitivity of the camera
     public Vector2 clampRotation; //Min and max clamp
+    public GameObject minimapCam; //Camera of the minimap
     float camRotation = 0; //Rotation of camera on the X axis.
     bool camToggle; //Toggle camera bool
 
@@ -84,6 +85,7 @@ public class Player : Photon.MonoBehaviour {
 
     public void IsMineOrLocal () {
         ChangeCam (true);
+        minimapCam.SetActive(true);
         playerRigidbody.useGravity = true;
     }
 
