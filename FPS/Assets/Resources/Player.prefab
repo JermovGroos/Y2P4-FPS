@@ -1619,6 +1619,9 @@ MonoBehaviour:
   idleTrigger: Idle
   walkingTrigger: Walk
   sprintingTrigger: Sprint
+  minimapSprite: {fileID: 1427764205102978273}
+  teammateSpriteColor: {r: 0, g: 0.56514657, b: 0.7411765, a: 1}
+  enemySpriteColor: {r: 0.6415094, g: 0.04538981, b: 0.04538981, a: 1}
   gameInfoManagerTag: Manager
 --- !u!114 &5316563111692898508
 MonoBehaviour:

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Photon.MonoBehaviour {
 
@@ -48,6 +49,11 @@ public class Player : Photon.MonoBehaviour {
     public string walkingTrigger = "Walk"; //Name of idle animation trigger
     public string sprintingTrigger = "Sprint"; //Name of idle animation trigger
 
+    [Header ("UI")]
+    public SpriteRenderer minimapSprite; //Sprite of the player on the minimap
+    public Color teammateSpriteColor = Color.blue; //Color to make your teammates sprites
+    public Color enemySpriteColor = Color.red; //Color to make your enemies sprites
+
     [Header ("Managers")]
     public string gameInfoManagerTag = "Manager"; //Tag of the game info manager gameobject
     GameInfoManager gameInfoManager; //Game info manager
@@ -85,7 +91,7 @@ public class Player : Photon.MonoBehaviour {
 
     public void IsMineOrLocal () {
         ChangeCam (true);
-        minimapCam.SetActive(true);
+        minimapCam.SetActive (true);
         playerRigidbody.useGravity = true;
     }
 
@@ -290,4 +296,16 @@ public class Player : Photon.MonoBehaviour {
 
     }
     #endregion
+
+    void SetMinimapColors (List<Player> teammates, List<Player> enemies) {
+
+        //Set teammate color
+        foreach (Player teammate in teammates)
+            teammate.minimapSprite.color = teammateSpriteColor;
+
+        //Set enemy color
+        foreach (Player enemy in enemies)
+            enemy.minimapSprite.color = enemySpriteColor;
+
+    }
 }
