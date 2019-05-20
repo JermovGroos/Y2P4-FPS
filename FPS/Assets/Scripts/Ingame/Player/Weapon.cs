@@ -16,6 +16,8 @@ public class Weapon : MonoBehaviour
     public string playerTag;
     public string managerTag;
 
+    public ParticleSystem p;
+
     public void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -24,6 +26,7 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
+        p.Play();
         for (int i = 0; i < bulletAmount; i++)
         {
             RaycastHit hit = new RaycastHit();
