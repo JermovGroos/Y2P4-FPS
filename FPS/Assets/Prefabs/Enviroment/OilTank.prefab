@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4845196225408594931}
-  - component: {fileID: 4845196225408723321}
   m_Layer: 0
   m_Name: OilTank
   m_TagString: Untagged
@@ -24,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4845196225408757715}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.98349, y: 0.000000009125918, z: 7.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4845196225408723321
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4845196225408757715}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6.54, y: 2.72, z: 2.1}
-  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!1 &4845196225408757721
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +45,7 @@ GameObject:
   - component: {fileID: 4845196225408594937}
   - component: {fileID: 4845196225411986393}
   - component: {fileID: 4845196225411019033}
+  - component: {fileID: 817518841756543716}
   m_Layer: 0
   m_Name: Cap_low
   m_TagString: Untagged
@@ -125,6 +112,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &817518841756543716
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4845196225408757721}
+  m_Material: {fileID: 13400000, guid: badf7e3bcb95d3247b44b43683a8aacb, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300002, guid: 97a75445f27cbc044b1c967747fac737, type: 3}
 --- !u!1 &4845196225408757723
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,6 +137,7 @@ GameObject:
   - component: {fileID: 4845196225408594939}
   - component: {fileID: 4845196225411986395}
   - component: {fileID: 4845196225411019035}
+  - component: {fileID: 1062217116557833779}
   m_Layer: 0
   m_Name: Acces_low
   m_TagString: Untagged
@@ -202,6 +204,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &1062217116557833779
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4845196225408757723}
+  m_Material: {fileID: 13400000, guid: badf7e3bcb95d3247b44b43683a8aacb, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 97a75445f27cbc044b1c967747fac737, type: 3}
 --- !u!1 &4845196225408757725
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +229,7 @@ GameObject:
   - component: {fileID: 4845196225408594941}
   - component: {fileID: 4845196225411986397}
   - component: {fileID: 4845196225411019037}
+  - component: {fileID: 8772973829797391850}
   m_Layer: 0
   m_Name: OilTank_low
   m_TagString: Untagged
@@ -279,6 +296,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8772973829797391850
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4845196225408757725}
+  m_Material: {fileID: 13400000, guid: badf7e3bcb95d3247b44b43683a8aacb, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300006, guid: 97a75445f27cbc044b1c967747fac737, type: 3}
 --- !u!1 &4845196225408757727
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +321,7 @@ GameObject:
   - component: {fileID: 4845196225408594943}
   - component: {fileID: 4845196225411986399}
   - component: {fileID: 4845196225411019039}
+  - component: {fileID: 4997673219637739258}
   m_Layer: 0
   m_Name: LadderStuff_low
   m_TagString: Untagged
@@ -356,3 +388,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &4997673219637739258
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4845196225408757727}
+  m_Material: {fileID: 13400000, guid: badf7e3bcb95d3247b44b43683a8aacb, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300004, guid: 97a75445f27cbc044b1c967747fac737, type: 3}

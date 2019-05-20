@@ -52,4 +52,5 @@ MonoBehaviour:
   - SendRoundInfo
   - SendRoundMessage
   - DamagePlayer
+  - SpawnParticle
   DisableAutoOpenWizard: 1
