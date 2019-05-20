@@ -1891,7 +1891,7 @@ MonoBehaviour:
   - {fileID: 764736684}
   - {fileID: 597316314}
   - {fileID: 1527955397}
-  playerObject: TempPlayer
+  playerObject: Player
   victoryScreenSpawnPoints:
   - {fileID: 1511153957}
   - {fileID: 4958573}

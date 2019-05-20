@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/JelmerMainMenu.unity
     guid: 7ef3a973d61ed394eb14cc5c14a944c1
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/JelmerIngame.unity
     guid: b8db1faabf0dc6048a69bd4c719cd8a9
   - enabled: 1
