@@ -233,14 +233,14 @@ public class Player : Photon.MonoBehaviour
         //Set the final Vector
         Vector3 final = movementVector * mainSpeed * Time.deltaTime;
 
-        //Set animation triggers
-        if (Input.GetAxis("Vertical") != 0)
-            if (Input.GetButton("Sprint"))
-                animator.SetTrigger(sprintingTrigger);
-            else
-                animator.SetTrigger(walkingTrigger);
-        else
-            animator.SetTrigger(idleTrigger);
+        // //Set animation triggers
+        // if (Input.GetAxis("Vertical") != 0)
+        //     if (Input.GetButton("Sprint"))
+        //        animator.SetTrigger(sprintingTrigger);
+        //    else
+        //        animator.SetTrigger(walkingTrigger);
+        // else
+        //    animator.SetTrigger(idleTrigger);
 
         //Translate the position
         transform.Translate(final);
