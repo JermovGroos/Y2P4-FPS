@@ -159,12 +159,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d113546ba36934bb6ef27ce53590ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireType: 0
+  fireType: 2
   damage: 10
-  fireRate: 1
-  spread: 0
+  fireRate: 0.08
+  spread: 0.05
   clipSize: 45
-  bulletAmount: 1
+  bulletAmount: 8
+  burstDelay: 0.08
   playerTag: Player
   managerTag: Manager
   p: {fileID: 7659339023907374197}
@@ -2971,6 +2972,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1450457877772915188, guid: a5c8179888934ca4eabf1f1c12297593,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1450457877772915189, guid: a5c8179888934ca4eabf1f1c12297593,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3026,10 +3032,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1450457877772915188, guid: a5c8179888934ca4eabf1f1c12297593,
+    - target: {fileID: 1450457878264914935, guid: a5c8179888934ca4eabf1f1c12297593,
         type: 3}
-      propertyPath: looping
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450457878264914932, guid: a5c8179888934ca4eabf1f1c12297593,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450457877307577967, guid: a5c8179888934ca4eabf1f1c12297593,
+        type: 3}
+      propertyPath: m_RenderAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1450457878264914933, guid: a5c8179888934ca4eabf1f1c12297593,
         type: 3}
@@ -3055,21 +3071,6 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.alignToDirection
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450457878264914935, guid: a5c8179888934ca4eabf1f1c12297593,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450457878264914932, guid: a5c8179888934ca4eabf1f1c12297593,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450457877307577967, guid: a5c8179888934ca4eabf1f1c12297593,
-        type: 3}
-      propertyPath: m_RenderAlignment
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5c8179888934ca4eabf1f1c12297593, type: 3}
