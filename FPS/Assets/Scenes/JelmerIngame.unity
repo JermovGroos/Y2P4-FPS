@@ -3816,7 +3816,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPanels: []
   scoreboardUI: {fileID: 1048572023}
-  panelParent: {fileID: 407753018}
+  team1PanelParent: {fileID: 407753018}
+  team2PanelParent: {fileID: 860849630}
   panelPrefab: {fileID: 4387836842240753404, guid: 73bc73bfed867fc4b846a2efcdda1a4f,
     type: 3}
   manager: {fileID: 882229695}

@@ -8,7 +8,8 @@ public class Scoreboard : MonoBehaviour
 
     public List<GameObject> uiPanels;
     public GameObject scoreboardUI;
-    public GameObject panelParent;
+    public GameObject team1PanelParent;
+    public GameObject team2PanelParent;
     public GameObject panelPrefab;
     public GameInfoManager manager;
     public int hertz = 10;
@@ -44,7 +45,32 @@ public class Scoreboard : MonoBehaviour
                 string assists = info.assists.ToString();
 
                 //Instantiate panel and set text
-                GameObject newPanel = Instantiate(panelPrefab, panelParent.transform);
+                GameObject newPanel = Instantiate(panelPrefab, team1PanelParent.transform);
+                newPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = playerName;
+                newPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = kills;
+                newPanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = deaths;
+                newPanel.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = assists;
+
+                //Add it to the list
+                uiPanels.Add(newPanel);
+
+            }
+
+            //Instantiate score panels
+            for (int i = 0; i < manager.team2.players.Count; i++)
+            {
+
+                //Get info
+                GameInfoManager.PlayerInfo info = manager.team2.players[i];
+
+                //Create panel
+                string playerName = info.playerInfo.NickName;
+                string kills = info.kills.ToString();
+                string deaths = info.deaths.ToString();
+                string assists = info.assists.ToString();
+
+                //Instantiate panel and set text
+                GameObject newPanel = Instantiate(panelPrefab, team2PanelParent.transform);
                 newPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = playerName;
                 newPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = kills;
                 newPanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = deaths;
