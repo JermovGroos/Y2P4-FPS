@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -350, y: 0}
-  m_SizeDelta: {x: 259.3, y: 50}
+  m_AnchoredPosition: {x: -81.2, y: 0}
+  m_SizeDelta: {x: 77.76, y: 14.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4387836841483999961
 CanvasRenderer:
@@ -93,8 +93,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -194,8 +194,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -70, y: 0}
-  m_SizeDelta: {x: 105.8, y: 50}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 42.6, y: 14.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4387836841525175978
 CanvasRenderer:
@@ -253,8 +253,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -354,8 +354,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: 0}
-  m_SizeDelta: {x: 105.8, y: 50}
+  m_AnchoredPosition: {x: 50.1, y: 0.000012398}
+  m_SizeDelta: {x: 41.46, y: 14.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4387836841827644565
 CanvasRenderer:
@@ -413,8 +413,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -514,8 +514,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 230, y: 0}
-  m_SizeDelta: {x: 105.8, y: 50}
+  m_AnchoredPosition: {x: 97.7, y: 0.000012398}
+  m_SizeDelta: {x: 36.86, y: 14.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4387836841867937993
 CanvasRenderer:
@@ -573,8 +573,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -651,7 +651,6 @@ GameObject:
   - component: {fileID: 4387836842240753403}
   - component: {fileID: 4387836842240753401}
   - component: {fileID: 4387836842240753402}
-  - component: {fileID: 2106817180272077501}
   m_Layer: 5
   m_Name: ScorePanel
   m_TagString: Untagged
@@ -668,7 +667,7 @@ RectTransform:
   m_GameObject: {fileID: 4387836842240753404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8781559, y: 0.8781559, z: 0.8781559}
   m_Children:
   - {fileID: 4387836841483999963}
   - {fileID: 4387836841525175980}
@@ -679,7 +678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 101.20001, y: 235.42499}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1000, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4387836842240753401
@@ -719,26 +718,3 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &2106817180272077501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4387836842240753404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec4e44706e3741c4d9ddce2fa2be4ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerName: {fileID: 0}
-  score: {fileID: 0}
-  kills: {fileID: 0}
-  deaths: {fileID: 0}
-  assists: {fileID: 0}
-  ping: {fileID: 0}
-  playerInfo:
-    isDead: 0
-    kills: 0
-    assists: 0
-    deaths: 0

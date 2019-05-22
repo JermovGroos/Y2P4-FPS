@@ -55,6 +55,7 @@ public class Player : Photon.MonoBehaviour
     public SpriteRenderer minimapSprite; //Sprite of the player on the minimap
     public Color teammateSpriteColor = Color.blue; //Color to make your teammates sprites
     public Color enemySpriteColor = Color.red; //Color to make your enemies sprites
+    Scoreboard scoreboard; //Scoreboard manager
 
     [Header("Managers")]
     public string gameInfoManagerTag = "Manager"; //Tag of the game info manager gameobject
@@ -75,7 +76,9 @@ public class Player : Photon.MonoBehaviour
         //Set game info manager
         if (GameObject.FindWithTag(gameInfoManagerTag))
         {
-            gameInfoManager = GameObject.FindWithTag(gameInfoManagerTag).GetComponent<GameInfoManager>();
+            GameObject manager = GameObject.FindWithTag(gameInfoManagerTag);
+            gameInfoManager = manager.GetComponent<GameInfoManager>();
+            scoreboard = manager.GetComponent<Scoreboard>();
         }
 
         if (!isLocal)
@@ -133,6 +136,15 @@ public class Player : Photon.MonoBehaviour
 
             if (movementAllowed)
                 Jumper();
+
+            if(scoreboard != null)
+            {
+                if(Input.GetButton("Scoreboard"))
+                    scoreboard.scoreboardUI.SetActive(true);
+                 else
+                    scoreboard.scoreboardUI.SetActive(false);
+                
+            }
 
             //TEMPORARY
             if (Input.GetButtonDown("Temp"))
