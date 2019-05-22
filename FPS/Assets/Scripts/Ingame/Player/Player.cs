@@ -33,6 +33,12 @@ public class Player : Photon.MonoBehaviour
     public LayerMask playerLayer; //Layer of the player
     Rigidbody playerRigidbody; //Rigidbody of the player
 
+    [Header("Damage")]
+    public float meleeRange = 1;
+    public float meleeDamage = 10;
+    public float meleeCooldown = 3;
+    bool canMelee = true;
+
     [Header("Scene")]
     public string sceneCameraTag = "SceneCamera"; //Tag of the scene camera
     GameObject sceneCam; //Camera of the scene
@@ -144,6 +150,11 @@ public class Player : Photon.MonoBehaviour
                  else
                     scoreboard.scoreboardUI.SetActive(false);
                 
+            }
+
+            if(Input.GetButtonDown("Melee") && canMelee)
+            {
+                Melee();
             }
 
             //TEMPORARY
@@ -349,6 +360,26 @@ public class Player : Photon.MonoBehaviour
 
     }
     #endregion
+
+
+    void Melee()
+    {
+        RaycastHit hit;
+
+        if(Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, meleeRange, playerLayer))
+        {
+            hit.transform.GetComponent<Player>().DamagePlayer(PhotonNetwork.playerName, meleeDamage);
+            StartCoroutine(WaitForMelee(meleeCooldown));
+            print("Melee!");
+        }
+    }
+
+    IEnumerator WaitForMelee(float seconds)
+    {
+        canMelee = false;
+        yield return new WaitForSeconds(seconds);
+        canMelee = true;
+    }
 
     void SetMinimapColors(List<Player> teammates, List<Player> enemies)
     {
