@@ -1563,7 +1563,7 @@ GameObject:
   - component: {fileID: 4139221198510190765}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1635,6 +1635,9 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 512
+  meleeRange: 1
+  meleeDamage: 10
+  meleeCooldown: 3
   sceneCameraTag: SceneCamera
   playerCam: {fileID: 2070167055768534041}
   sensitivity: 100

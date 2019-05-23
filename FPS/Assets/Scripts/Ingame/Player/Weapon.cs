@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.forward + addDirection ,out hit, Mathf.Infinity))
             {
                 if (hit.transform.tag == playerTag)
-                    hit.transform.GetComponent<Player>().DamagePlayer(PhotonNetwork.playerName, damage);
+                    hit.transform.GetComponent<PhotonView>().RPC("DamagePlayer", PhotonTargets.All, PhotonNetwork.playerName, damage);
                 GameObject.FindWithTag(managerTag).GetComponent<ImpactManager>().SendImpactInfo(hit.collider.material, hit);
             }
             if (fireType == FireTypes.Burst)
