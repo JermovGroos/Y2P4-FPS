@@ -350,7 +350,9 @@ public class Player : Photon.MonoBehaviour
                 }
 
                 if (gameInfoManager.allowRespawn || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Waiting || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Warmup)
-                    gameInfoManager.Respawn();
+                    //gameInfoManager.Respawn();
+                    GameObject.FindWithTag(gameInfoManagerTag).GetComponent<PhotonView>().RPC("PlayerKilled", PhotonTargets.MasterClient, PhotonNetwork.playerName, damager, damages.ToArray(), damagers);
+
                 else
                     PhotonNetwork.Destroy(gameObject);
 
@@ -390,7 +392,7 @@ public class Player : Photon.MonoBehaviour
 
         //Set enemy color
         foreach (Player enemy in enemies)
-            enemy.minimapSprite.color = enemySpriteColor;
+            enemy.minimapSprite = null;
 
     }
 }
