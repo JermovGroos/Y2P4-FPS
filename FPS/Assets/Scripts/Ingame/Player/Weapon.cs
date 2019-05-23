@@ -13,20 +13,40 @@ public class Weapon : MonoBehaviour
     [Range(1,20)]
     public int bulletAmount;
     public float burstDelay;
+    public float recoil;
+    public float recoilSpeed;
+    public float recoilReturnSpeed;
 
     public string playerTag;
     public string managerTag;
+
+    private int currentAmmo;
 
     public ParticleSystem p;
 
     bool allowFire = true;
 
-    public void Update()
+    public void FixedUpdate()
     {
+        transform.rotation = Quaternion.Lerp(transform.rotation, transform.parent.rotation, recoilReturnSpeed * Time.deltaTime);
         if (Input.GetButtonDown("Fire1") && fireType == FireTypes.SingleFire && allowFire || Input.GetButtonDown("Fire1") && fireType == FireTypes.Burst && allowFire)
             StartCoroutine(Fire(fireRate));
         else if (Input.GetButton("Fire1") && fireType == FireTypes.Auto && allowFire)
             StartCoroutine(Fire(fireRate));
+    }
+
+    public IEnumerator Recoil()
+    {
+        Vector3 tempRecoil = new Vector3();
+        tempRecoil += Vector3.right * -recoil;
+        tempRecoil += Vector3.up * Random.Range(-recoil, recoil);
+
+        while(Vector3.Distance(tempRecoil,new Vector3()) > 0.1f)
+        {
+            transform.Rotate(tempRecoil * recoilSpeed);
+            tempRecoil -= (tempRecoil * recoilSpeed);
+            yield return null;
+        }
     }
 
     public IEnumerator Fire(float time)
@@ -43,6 +63,12 @@ public class Weapon : MonoBehaviour
                     hit.transform.GetComponent<PhotonView>().RPC("DamagePlayer", PhotonTargets.All, PhotonNetwork.playerName, damage);
                 GameObject.FindWithTag(managerTag).GetComponent<ImpactManager>().SendImpactInfo(hit.collider.material, hit);
             }
+
+            if (fireType != FireTypes.Burst && i == 0)
+                StartCoroutine(Recoil());
+            else if (fireType != FireTypes.Burst)
+                StartCoroutine(Recoil());
+
             if (fireType == FireTypes.Burst)
                 yield return new WaitForSeconds(burstDelay);
         }

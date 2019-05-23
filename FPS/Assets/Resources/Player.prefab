@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2999209194016881956
 Transform:
   m_ObjectHideFlags: 0
@@ -28,11 +28,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070167055768534041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.053, y: 1.603, z: 0.18}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4994115830984267500}
-  m_RootOrder: 3
+  m_Father: {fileID: 5829344103273558660}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &5884619937232919807
 Camera:
@@ -161,11 +161,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireType: 2
   damage: 10
-  fireRate: 0.08
+  fireRate: 0.05
   spread: 0.05
   clipSize: 45
-  bulletAmount: 8
+  bulletAmount: 1
   burstDelay: 0.08
+  recoil: 1.54
+  recoilSpeed: 0.15
+  recoilReturnSpeed: 5.84
   playerTag: Player
   managerTag: Manager
   p: {fileID: 7659339023907374197}
@@ -1582,7 +1585,7 @@ Transform:
   - {fileID: 4994115830984267496}
   - {fileID: 4994115830984267498}
   - {fileID: 4994115830984267490}
-  - {fileID: 2999209194016881956}
+  - {fileID: 5829344103273558660}
   - {fileID: 1738574701059984719}
   - {fileID: 2844754643584922666}
   m_Father: {fileID: 0}
@@ -1639,7 +1642,7 @@ MonoBehaviour:
   meleeDamage: 10
   meleeCooldown: 3
   sceneCameraTag: SceneCamera
-  playerCam: {fileID: 2070167055768534041}
+  playerCam: {fileID: 6252299375550960138}
   sensitivity: 100
   clampRotation: {x: -70, y: 70}
   minimapCam: {fileID: 8785701808446925179}
@@ -2749,6 +2752,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6252299375550960138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5829344103273558660}
+  m_Layer: 9
+  m_Name: CameraJoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5829344103273558660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252299375550960138}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.053, y: 1.603, z: 0.18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2999209194016881956}
+  m_Father: {fileID: 4994115830984267500}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8785701808446925179
 GameObject:
   m_ObjectHideFlags: 0
