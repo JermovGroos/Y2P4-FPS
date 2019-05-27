@@ -127,27 +127,21 @@ public class Player : Photon.MonoBehaviour
 
     public void IsMineOrLocal()
     {
-        ChangeCam(true);
+        TurnOnCamera(true);
         minimapCam.SetActive(true);
         playerRigidbody.useGravity = true;
     }
 
-    void ChangeCam(bool changeToPlayerCam)
+    void TurnOnCamera(bool onOrOff)
     {
 
         //Change camera
-        if (changeToPlayerCam)
+        if (onOrOff)
         {
-
-            //From scene to player
-            sceneCam.SetActive(false);
             playerCam.SetActive(true);
         }
         else
         {
-
-            //From player to scene
-            sceneCam.SetActive(true);
             playerCam.SetActive(false);
         }
     }
@@ -179,7 +173,7 @@ public class Player : Photon.MonoBehaviour
             //TEMPORARY
             if (Input.GetButtonDown("Temp"))
             {
-                ChangeCam(!camToggle);
+                TurnOnCamera(!camToggle);
                 camToggle = !camToggle;
             }
         }
