@@ -211,6 +211,7 @@ RectTransform:
   - {fileID: 1047163206}
   - {fileID: 621349873}
   - {fileID: 1048572024}
+  - {fileID: 129731402}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -402,6 +403,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Barrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 221808701076530338, guid: 2976f2482793c7f439cec025f159e720,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 221808701076830338, guid: 2976f2482793c7f439cec025f159e720,
         type: 3}
@@ -666,6 +672,78 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &129731401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 129731402}
+  - component: {fileID: 129731404}
+  - component: {fileID: 129731403}
+  m_Layer: 5
+  m_Name: Minimap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &129731402
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129731401}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.41676724, y: 0.41676724, z: 0.41676724}
+  m_Children: []
+  m_Father: {fileID: 2874544}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 83.35292, y: 83.352905}
+  m_SizeDelta: {x: 250, y: 250}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &129731403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129731401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Texture: {fileID: 8400000, guid: 212e55bdef3fee64fae82db644d8800b, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &129731404
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129731401}
+  m_CullTransparentMesh: 0
 --- !u!1 &176831357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,7 +1273,7 @@ GameObject:
   - component: {fileID: 295843500}
   - component: {fileID: 295843499}
   - component: {fileID: 295843498}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1458,6 +1536,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Barricade (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295578665564951571, guid: 6b45e1b61061acb4a9bcb51b9071c0d7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7295578665565112371, guid: 6b45e1b61061acb4a9bcb51b9071c0d7,
         type: 3}
@@ -1791,6 +1874,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 221808701076530338, guid: 2976f2482793c7f439cec025f159e720,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 221808701076830338, guid: 2976f2482793c7f439cec025f159e720,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1863,7 +1951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 392881234}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Enviroment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2438,6 +2526,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barricade (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7295578665564951571, guid: 6b45e1b61061acb4a9bcb51b9071c0d7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7295578665565112371, guid: 6b45e1b61061acb4a9bcb51b9071c0d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2517,6 +2610,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Locker
+      objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826244, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 468685438489595876, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
         type: 3}
@@ -2643,6 +2741,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826246, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826248, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826250, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826252, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826254, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a, type: 3}
 --- !u!4 &632492220 stripped
@@ -2662,6 +2785,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarrelRed Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007143739211085456, guid: 0061a342c4dbcda4a9f3d412d45c7bb4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8007143739211180720, guid: 0061a342c4dbcda4a9f3d412d45c7bb4,
         type: 3}
@@ -2890,6 +3018,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Barricade
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295578665564951571, guid: 6b45e1b61061acb4a9bcb51b9071c0d7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7295578665565112371, guid: 6b45e1b61061acb4a9bcb51b9071c0d7,
         type: 3}
@@ -4358,6 +4491,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barricade (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7295578665564951571, guid: 6b45e1b61061acb4a9bcb51b9071c0d7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7295578665565112371, guid: 6b45e1b61061acb4a9bcb51b9071c0d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4649,7 +4787,7 @@ GameObject:
   - component: {fileID: 1072190385}
   - component: {fileID: 1072190384}
   - component: {fileID: 1072190383}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5037,7 +5175,7 @@ GameObject:
   - component: {fileID: 1175539215}
   - component: {fileID: 1175539214}
   - component: {fileID: 1175539213}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5128,6 +5266,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarrelYellow Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442532627156426172, guid: 89cf346d9c288fa41901bda6e8ef1479,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8442532627156189596, guid: 89cf346d9c288fa41901bda6e8ef1479,
         type: 3}
@@ -5453,6 +5596,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Locker (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826244, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 468685438489595876, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5507,6 +5655,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826246, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826248, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826250, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826252, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 468685438489826254, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f52607e4e2c88f5459a4a9ebdc3a1e7a, type: 3}
@@ -6082,6 +6255,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BarrelRed Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8007143739211085456, guid: 0061a342c4dbcda4a9f3d412d45c7bb4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8007143739211180720, guid: 0061a342c4dbcda4a9f3d412d45c7bb4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6558,6 +6736,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OilTank
       objectReference: {fileID: 0}
+    - target: {fileID: 4845196225408757715, guid: 6b73ed028f1d4cf409c83968ceeaebab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4845196225408594931, guid: 6b73ed028f1d4cf409c83968ceeaebab,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6612,6 +6795,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845196225408757721, guid: 6b73ed028f1d4cf409c83968ceeaebab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845196225408757723, guid: 6b73ed028f1d4cf409c83968ceeaebab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845196225408757725, guid: 6b73ed028f1d4cf409c83968ceeaebab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845196225408757727, guid: 6b73ed028f1d4cf409c83968ceeaebab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b73ed028f1d4cf409c83968ceeaebab, type: 3}
@@ -7061,6 +7264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarrelYellow Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442532627156426172, guid: 89cf346d9c288fa41901bda6e8ef1479,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8442532627156189596, guid: 89cf346d9c288fa41901bda6e8ef1479,
         type: 3}
