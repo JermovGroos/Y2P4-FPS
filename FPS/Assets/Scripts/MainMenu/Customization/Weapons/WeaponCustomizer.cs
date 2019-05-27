@@ -39,16 +39,39 @@ public class WeaponCustomizer : MonoBehaviour
 
     public void ChangeWeapon(int i)
     {
+        currentWeapon += i;
+        if (currentWeapon == -1)
+            currentWeapon = layout.weapons.Length - 1;
+        if (currentWeapon == layout.weapons.Length)
+            currentWeapon = 0;
 
+        currentBarrel = 0;
+        currentMagazine = 0;
+
+        DisplayCurrentThings();
     }
 
     public void ChangeBarrel(int i)
     {
+        WeaponCustomizations customization = currentItem.GetComponent<WeaponCustomizations>();
+        currentBarrel += i;
+        if (currentBarrel == -1)
+            currentBarrel = customization.barrels.Length - 1;
+        if (currentBarrel == customization.barrels.Length)
+            currentBarrel = 0;
 
+        DisplayCurrentThings();
     }
 
     public void ChangeMagazine(int i)
     {
+        WeaponCustomizations customization = currentItem.GetComponent<WeaponCustomizations>();
+        currentMagazine += i;
+        if (currentMagazine == -1)
+            currentMagazine = customization.magazines.Length - 1;
+        if (currentMagazine == customization.magazines.Length)
+            currentMagazine = 0;
 
+        DisplayCurrentThings();
     }
 }
