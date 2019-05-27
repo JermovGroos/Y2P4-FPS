@@ -1,0 +1,208 @@
+fileFormatVersion: 2
+guid: 31b3628727520a24a9d002fea3335b48
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: BackSight1_low
+    100002: BackSIght2_low
+    100004: Barrel_low
+    100006: Bolt_low
+    100008: Bullet1_low
+    100010: Bullet2_low
+    100012: ExtendedMagazine_low
+    100014: Frame_low
+    100016: FrontGrip2_low
+    100018: FrontGrip_low
+    100020: IronSightFront_low
+    100022: Magazine_low
+    100024: Railing1_low
+    100026: Railing2_low
+    100028: //RootNode
+    100030: Side1_low
+    100032: Side2_low
+    100034: SilencedBarrel_low
+    100036: Stock_low
+    100038: TopBarrel_low
+    100040: Trigger_low
+    100042: UnderSight1_low
+    100044: UnderSight2_low
+    400000: BackSight1_low
+    400002: BackSIght2_low
+    400004: Barrel_low
+    400006: Bolt_low
+    400008: Bullet1_low
+    400010: Bullet2_low
+    400012: ExtendedMagazine_low
+    400014: Frame_low
+    400016: FrontGrip2_low
+    400018: FrontGrip_low
+    400020: IronSightFront_low
+    400022: Magazine_low
+    400024: Railing1_low
+    400026: Railing2_low
+    400028: //RootNode
+    400030: Side1_low
+    400032: Side2_low
+    400034: SilencedBarrel_low
+    400036: Stock_low
+    400038: TopBarrel_low
+    400040: Trigger_low
+    400042: UnderSight1_low
+    400044: UnderSight2_low
+    2100000: FN Scar-H Extended Magazine
+    2100002: FN Scar-H Silenced Barrel
+    2100004: FN Scar-H Normal Barrel
+    2100006: FN Scar-H Magazine
+    2100008: FN Scar-H
+    2300000: BackSight1_low
+    2300002: BackSIght2_low
+    2300004: Barrel_low
+    2300006: Bolt_low
+    2300008: Bullet1_low
+    2300010: Bullet2_low
+    2300012: ExtendedMagazine_low
+    2300014: Frame_low
+    2300016: FrontGrip2_low
+    2300018: FrontGrip_low
+    2300020: IronSightFront_low
+    2300022: Magazine_low
+    2300024: Railing1_low
+    2300026: Railing2_low
+    2300028: Side1_low
+    2300030: Side2_low
+    2300032: SilencedBarrel_low
+    2300034: Stock_low
+    2300036: TopBarrel_low
+    2300038: Trigger_low
+    2300040: UnderSight1_low
+    2300042: UnderSight2_low
+    3300000: BackSight1_low
+    3300002: BackSIght2_low
+    3300004: Barrel_low
+    3300006: Bolt_low
+    3300008: Bullet1_low
+    3300010: Bullet2_low
+    3300012: ExtendedMagazine_low
+    3300014: Frame_low
+    3300016: FrontGrip2_low
+    3300018: FrontGrip_low
+    3300020: IronSightFront_low
+    3300022: Magazine_low
+    3300024: Railing1_low
+    3300026: Railing2_low
+    3300028: Side1_low
+    3300030: Side2_low
+    3300032: SilencedBarrel_low
+    3300034: Stock_low
+    3300036: TopBarrel_low
+    3300038: Trigger_low
+    3300040: UnderSight1_low
+    3300042: UnderSight2_low
+    4300000: ExtendedMagazine_low
+    4300002: SilencedBarrel_low
+    4300004: Barrel_low
+    4300006: Magazine_low
+    4300008: BackSight1_low
+    4300010: BackSIght2_low
+    4300012: Bolt_low
+    4300014: Bullet1_low
+    4300016: Bullet2_low
+    4300018: Frame_low
+    4300020: FrontGrip2_low
+    4300022: FrontGrip_low
+    4300024: IronSightFront_low
+    4300026: Railing1_low
+    4300028: Railing2_low
+    4300030: Side1_low
+    4300032: Side2_low
+    4300034: Stock_low
+    4300036: TopBarrel_low
+    4300038: Trigger_low
+    4300040: UnderSight1_low
+    4300042: UnderSight2_low
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

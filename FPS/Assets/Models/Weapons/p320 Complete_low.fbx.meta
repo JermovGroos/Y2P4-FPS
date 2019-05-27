@@ -1,81 +1,68 @@
 fileFormatVersion: 2
-guid: 39cf9ed2fd15cf648b5fb69ce7aad489
+guid: 9a8609ea3a0ca9747a1f9773ba437083
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: 7.62x51 Bullet_low
-    100002: Barrel_low
+    100000: Barrel_low
+    100002: BarrelSilencer_low
     100004: Bolt_low
-    100006: IronSighHolder_low
-    100008: IronSight_low
-    100010: IronSightFront_low
-    100012: IronSightTop_low
-    100014: Magazine_low
-    100016: OnTopBarrel_low
-    100018: //RootNode
-    100020: Scar-H_low
-    100022: Side Details_low
-    100024: TopRailing1_low
-    100026: TopRailing2_low
-    100028: Trigger_low
-    400000: 7.62x51 Bullet_low
-    400002: Barrel_low
+    100006: Clip_low
+    100008: ExtendedMagazine_low
+    100010: Grip_low
+    100012: Magazine_low
+    100014: Others1_low
+    100016: Others2_low
+    100018: Others_low
+    100020: //RootNode
+    100022: Trigger_low
+    400000: Barrel_low
+    400002: BarrelSilencer_low
     400004: Bolt_low
-    400006: IronSighHolder_low
-    400008: IronSight_low
-    400010: IronSightFront_low
-    400012: IronSightTop_low
-    400014: Magazine_low
-    400016: OnTopBarrel_low
-    400018: //RootNode
-    400020: Scar-H_low
-    400022: Side Details_low
-    400024: TopRailing1_low
-    400026: TopRailing2_low
-    400028: Trigger_low
-    2100000: FN Scar-H
-    2300000: 7.62x51 Bullet_low
-    2300002: Barrel_low
+    400006: Clip_low
+    400008: ExtendedMagazine_low
+    400010: Grip_low
+    400012: Magazine_low
+    400014: Others1_low
+    400016: Others2_low
+    400018: Others_low
+    400020: //RootNode
+    400022: Trigger_low
+    2100000: p320
+    2100002: p320 Magazine
+    2100004: p320 Attachments
+    2300000: Barrel_low
+    2300002: BarrelSilencer_low
     2300004: Bolt_low
-    2300006: IronSighHolder_low
-    2300008: IronSight_low
-    2300010: IronSightFront_low
-    2300012: IronSightTop_low
-    2300014: Magazine_low
-    2300016: OnTopBarrel_low
-    2300018: Scar-H_low
-    2300020: Side Details_low
-    2300022: TopRailing1_low
-    2300024: TopRailing2_low
-    2300026: Trigger_low
-    3300000: 7.62x51 Bullet_low
-    3300002: Barrel_low
+    2300006: Clip_low
+    2300008: ExtendedMagazine_low
+    2300010: Grip_low
+    2300012: Magazine_low
+    2300014: Others1_low
+    2300016: Others2_low
+    2300018: Others_low
+    2300020: Trigger_low
+    3300000: Barrel_low
+    3300002: BarrelSilencer_low
     3300004: Bolt_low
-    3300006: IronSighHolder_low
-    3300008: IronSight_low
-    3300010: IronSightFront_low
-    3300012: IronSightTop_low
-    3300014: Magazine_low
-    3300016: OnTopBarrel_low
-    3300018: Scar-H_low
-    3300020: Side Details_low
-    3300022: TopRailing1_low
-    3300024: TopRailing2_low
-    3300026: Trigger_low
-    4300000: Barrel_low
-    4300002: Bolt_low
-    4300004: IronSighHolder_low
-    4300006: IronSight_low
-    4300008: IronSightTop_low
-    4300010: IronSightFront_low
-    4300012: Magazine_low
-    4300014: 7.62x51 Bullet_low
-    4300016: OnTopBarrel_low
-    4300018: Scar-H_low
-    4300020: Side Details_low
-    4300022: TopRailing1_low
-    4300024: TopRailing2_low
-    4300026: Trigger_low
+    3300006: Clip_low
+    3300008: ExtendedMagazine_low
+    3300010: Grip_low
+    3300012: Magazine_low
+    3300014: Others1_low
+    3300016: Others2_low
+    3300018: Others_low
+    3300020: Trigger_low
+    4300000: Bolt_low
+    4300002: Clip_low
+    4300004: Grip_low
+    4300006: Magazine_low
+    4300008: Others_low
+    4300010: Trigger_low
+    4300012: Barrel_low
+    4300014: Others1_low
+    4300016: Others2_low
+    4300018: BarrelSilencer_low
+    4300020: ExtendedMagazine_low
   externalObjects: {}
   materials:
     importMaterials: 1
