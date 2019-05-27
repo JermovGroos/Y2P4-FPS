@@ -31,7 +31,8 @@ MonoBehaviour:
       multipleBullets: 0
       bulletAmount: 0
   - weaponName: 
-    baseWeapon: {fileID: 100020, guid: 9a8609ea3a0ca9747a1f9773ba437083, type: 3}
+    baseWeapon: {fileID: 7968917247841594564, guid: 8de75666e4215e44280a586a1fdc7aa5,
+      type: 3}
     barrels: []
     magazines: []
     stats:
