@@ -70,8 +70,7 @@ public class Player : Photon.MonoBehaviour
     void Start()
     {
 
-        //Set scene camera
-        sceneCam = GameObject.FindGameObjectWithTag(sceneCameraTag);
+        StartCoroutine(FindSceneCam());
 
         //Set player rigidbody
         playerRigidbody = GetComponent<Rigidbody>();
@@ -104,6 +103,26 @@ public class Player : Photon.MonoBehaviour
             IsMineOrLocal();
         }
 
+    }
+
+    IEnumerator FindSceneCam()
+    {
+        bool isFound = false;
+
+        while (!isFound)
+        {
+            //Set scene camera
+            sceneCam = GameObject.FindGameObjectWithTag(sceneCameraTag);
+
+            if(sceneCam != null)
+            {
+                isFound = true;
+            }
+
+            yield return null;
+        }
+
+        yield break;
     }
 
     public void IsMineOrLocal()
@@ -143,16 +162,16 @@ public class Player : Photon.MonoBehaviour
             if (movementAllowed)
                 Jumper();
 
-            if(scoreboard != null)
+            if (scoreboard != null)
             {
-                if(Input.GetButton("Scoreboard"))
+                if (Input.GetButton("Scoreboard"))
                     scoreboard.scoreboardUI.SetActive(true);
-                 else
+                else
                     scoreboard.scoreboardUI.SetActive(false);
-                
+
             }
 
-            if(Input.GetButtonDown("Melee") && canMelee)
+            if (Input.GetButtonDown("Melee") && canMelee)
             {
                 Melee();
             }
@@ -351,8 +370,10 @@ public class Player : Photon.MonoBehaviour
 
                 if (gameInfoManager.allowRespawn || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Waiting || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Warmup)
                     //gameInfoManager.Respawn();
-                    GameObject.FindWithTag(gameInfoManagerTag).GetComponent<PhotonView>().RPC("PlayerKilled", PhotonTargets.All, PhotonNetwork.playerName, damager, damageAmounts, damagers);
+                    GameObject.FindWithTag(gameInfoManagerTag).GetComponent<PhotonView>().RPC("PlayerKilled", PhotonTargets.MasterClient, PhotonNetwork.playerName, damager, damageAmounts, damagers);
 
+                if (gameInfoManager.currentRoundType == GameInfoManager.RoundType.Warmup || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Waiting)
+                    gameInfoManager.Respawn(); 
                 else
                     PhotonNetwork.Destroy(gameObject);
 
@@ -368,7 +389,7 @@ public class Player : Photon.MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, meleeRange, playerLayer))
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, meleeRange, playerLayer))
         {
             hit.transform.GetComponent<Player>().DamagePlayer(PhotonNetwork.playerName, meleeDamage);
             StartCoroutine(WaitForMelee(meleeCooldown));
