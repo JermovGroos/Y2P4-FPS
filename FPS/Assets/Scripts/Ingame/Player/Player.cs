@@ -351,7 +351,7 @@ public class Player : Photon.MonoBehaviour
 
                 if (gameInfoManager.allowRespawn || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Waiting || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Warmup)
                     //gameInfoManager.Respawn();
-                    GameObject.FindWithTag(gameInfoManagerTag).GetComponent<PhotonView>().RPC("PlayerKilled", PhotonTargets.MasterClient, PhotonNetwork.playerName, damager, damages.ToArray(), damagers);
+                    GameObject.FindWithTag(gameInfoManagerTag).GetComponent<PhotonView>().RPC("PlayerKilled", PhotonTargets.All, PhotonNetwork.playerName, damager, damageAmounts, damagers);
 
                 else
                     PhotonNetwork.Destroy(gameObject);
