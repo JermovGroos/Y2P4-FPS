@@ -22,6 +22,12 @@ public class AnnihilationGameManager : GameInfoManager
 
         if (currentRoundType == RoundType.Round)
             CheckIfSOmeoneWon();
+
+        if (killed == PhotonNetwork.playerName)
+            if (currentRoundType == RoundType.Warmup || currentRoundType == RoundType.Waiting)
+                Respawn();
+            else
+                PhotonNetwork.Destroy(yourPlayer);
     }
 
 
