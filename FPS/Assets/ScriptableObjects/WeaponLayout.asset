@@ -14,7 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - weaponName: 
-    baseWeapon: {fileID: 0}
+    baseWeapon: {fileID: 108928550101906636, guid: cec454e8a54eb3b40a01b202969d2812,
+      type: 3}
+    barrels: []
+    magazines: []
+    stats:
+      damage: 0
+      spread: 0
+      fireSpeed: 0
+      weight: 0
+      recoilAmount: 0
+      firetype: 0
+      singleReload: 0
+      maxAmmo: 0
+      reloadSpeed: 0
+      multipleBullets: 0
+      bulletAmount: 0
+  - weaponName: 
+    baseWeapon: {fileID: 100020, guid: 9a8609ea3a0ca9747a1f9773ba437083, type: 3}
     barrels: []
     magazines: []
     stats:
