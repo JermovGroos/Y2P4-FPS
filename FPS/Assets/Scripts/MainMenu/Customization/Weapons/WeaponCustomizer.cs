@@ -1,15 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponCustomizer : MonoBehaviour
 {
     public WeaponCustomizationLayout layout;
     public Transform showLocation;
-    public int currentWeapon = 0;
-    public int currentBarrel = 0;
-    public int currentMagazine = 0;
-    public GameObject currentItem;
+    public WeaponClassData weapon1;
+    public WeaponClassData weapon2;
+
+    public Text weapon1Name;
+    public Image weapon1Image;
+    public Text weapon2Name;
+    public Image weapon2Image;
+
+    [HideInInspector]public bool displayWeapon;
+    [HideInInspector]public int currentlyEditing;
+    GameObject currentWeapon;
 
     public void Start()
     {
@@ -18,60 +26,36 @@ public class WeaponCustomizer : MonoBehaviour
 
     public void DisplayCurrentThings()
     {
-        if (currentItem)
-            Destroy(currentItem);
-        currentItem = Instantiate(layout.weapons[currentWeapon].baseWeapon, showLocation.position, showLocation.rotation);
+        weapon1Name.text = layout.weapons[weapon1.currentWeapon].weaponName;
+        weapon2Name.text = layout.weapons[weapon2.currentWeapon].weaponName;
+        weapon1Image.sprite = layout.weapons[weapon1.currentWeapon].weaponSprite;
+        weapon2Image.sprite = layout.weapons[weapon2.currentWeapon].weaponSprite;
 
-        WeaponCustomizations customization = currentItem.GetComponent<WeaponCustomizations>();
-
-        for (int i = 0; i < customization.barrels.Length; i++)
-            if (i == currentBarrel)
-                customization.barrels[i].SetActive(true);
-            else
-                customization.barrels[i].SetActive(false);
-
-        for (int i = 0; i < customization.magazines.Length; i++)
-            if (i == currentMagazine)
-                customization.magazines[i].SetActive(true);
-            else
-                customization.magazines[i].SetActive(false);
+        if (displayWeapon)
+        {
+            if (currentWeapon)
+                Destroy(currentWeapon);
+            WeaponClassData displayData = (currentlyEditing == 1) ? weapon1 : weapon2;
+            currentWeapon = Instantiate(layout.weapons[displayData.currentWeapon].baseWeapon,showLocation.position,showLocation.rotation);
+            WeaponCustomizations customization = currentWeapon.GetComponent<WeaponCustomizations>();
+            for (int i = 0; i < customization.magazines.Length; i++)
+                if (i == displayData.currentMagazine)
+                    customization.magazines[i].SetActive(true);
+                else
+                    customization.magazines[i].SetActive(false);
+            for (int i = 0; i < customization.barrels.Length; i++)
+                if (i == displayData.currentBarrel)
+                    customization.barrels[i].SetActive(true);
+                else
+                    customization.barrels[i].SetActive(false);
+        }
     }
 
-    public void ChangeWeapon(int i)
+    [System.Serializable]
+    public class WeaponClassData
     {
-        currentWeapon += i;
-        if (currentWeapon == -1)
-            currentWeapon = layout.weapons.Length - 1;
-        if (currentWeapon == layout.weapons.Length)
-            currentWeapon = 0;
-
-        currentBarrel = 0;
-        currentMagazine = 0;
-
-        DisplayCurrentThings();
-    }
-
-    public void ChangeBarrel(int i)
-    {
-        WeaponCustomizations customization = currentItem.GetComponent<WeaponCustomizations>();
-        currentBarrel += i;
-        if (currentBarrel == -1)
-            currentBarrel = customization.barrels.Length - 1;
-        if (currentBarrel == customization.barrels.Length)
-            currentBarrel = 0;
-
-        DisplayCurrentThings();
-    }
-
-    public void ChangeMagazine(int i)
-    {
-        WeaponCustomizations customization = currentItem.GetComponent<WeaponCustomizations>();
-        currentMagazine += i;
-        if (currentMagazine == -1)
-            currentMagazine = customization.magazines.Length - 1;
-        if (currentMagazine == customization.magazines.Length)
-            currentMagazine = 0;
-
-        DisplayCurrentThings();
+        public int currentWeapon;
+        public int  currentMagazine;
+        public int currentBarrel;
     }
 }

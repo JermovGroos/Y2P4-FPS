@@ -11,6 +11,7 @@ public class WeaponCustomizationLayout : ScriptableObject
     public class Weapon
     {
         public string weaponName;
+        public Sprite weaponSprite;
         public GameObject baseWeapon;
         public WeaponScriptableSlot[] barrels, magazines;
         public WeaponStats stats;

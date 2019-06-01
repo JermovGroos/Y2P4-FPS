@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: WeaponLayout
   m_EditorClassIdentifier: 
   weapons:
-  - weaponName: 
+  - weaponName: Scar-H
+    weaponSprite: {fileID: 21300000, guid: 6155f39c392cfe049a29e8cccd5c82a3, type: 3}
     baseWeapon: {fileID: 108928550101906636, guid: cec454e8a54eb3b40a01b202969d2812,
       type: 3}
     barrels: []
@@ -30,7 +31,8 @@ MonoBehaviour:
       reloadSpeed: 0
       multipleBullets: 0
       bulletAmount: 0
-  - weaponName: 
+  - weaponName: p320
+    weaponSprite: {fileID: 21300000, guid: 89c343a2b30f57b4c83de44c10b835c9, type: 3}
     baseWeapon: {fileID: 7968917247841594564, guid: 8de75666e4215e44280a586a1fdc7aa5,
       type: 3}
     barrels: []
