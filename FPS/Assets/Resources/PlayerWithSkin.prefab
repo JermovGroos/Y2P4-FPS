@@ -1652,6 +1652,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 3765392180853494852}
+  - {fileID: 3474830560692557453}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -1708,7 +1709,7 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: Side
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 2
     LayerIndex: 0
 --- !u!1 &7489533460964082756
 GameObject:
