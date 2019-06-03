@@ -306,6 +306,8 @@ public class Player : Photon.MonoBehaviour
 
         print("Dir: " + inputDir);
 
+        Vector3 final = new Vector3(targetSpeed.x, 0f, targetSpeed.y) * Time.deltaTime;
+
 
         transform.Translate(final);
     }
