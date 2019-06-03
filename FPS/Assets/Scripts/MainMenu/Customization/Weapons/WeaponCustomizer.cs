@@ -10,6 +10,10 @@ public class WeaponCustomizer : MonoBehaviour
     public WeaponClassData weapon1;
     public WeaponClassData weapon2;
 
+    public Transform customizationLayoutBarrel;
+    public Transform customizationLayourMagazine;
+    public GameObject cusotmizationPanel;
+
     public Text weapon1Name;
     public Image weapon1Image;
     public Text weapon2Name;
@@ -61,6 +65,25 @@ public class WeaponCustomizer : MonoBehaviour
         currentlyEditing = index;
         DisplayCurrentThings();
         displayWeapon = true;
+    }
+
+    public void DisplayCustomizations()
+    {
+        foreach (Transform child in customizationLayoutBarrel)
+            Destroy(child);
+        foreach (Transform child in customizationLayourMagazine)
+            Destroy(child);
+
+        for (int i = 0; i < layout.weapons[(currentlyEditing == 1)? weapon1.currentWeapon : weapon2.currentWeapon].barrels.Length; i++)
+        {
+            GameObject g = Instantiate(cusotmizationPanel, customizationLayoutBarrel);
+        }
+
+        for (int i = 0; i < layout.weapons[(currentlyEditing == 1) ? weapon1.currentWeapon : weapon2.currentWeapon].magazines.Length; i++)
+        {
+
+        }
+
     }
 
     public void ChangeBarrel(int index)
