@@ -18,23 +18,83 @@ public class WeaponCustomizer : MonoBehaviour
     [HideInInspector]public bool displayWeapon;
     [HideInInspector]public int currentlyEditing;
     GameObject currentWeapon;
+    //WeaponSelect
+    public void StartWeaponSelect(int weaponSlot)
+    {
+        currentlyEditing = weaponSlot;
+    }
 
+    public void SimpleHoverWeaponDisplay(int weaponIndex)
+    {
+        if (currentWeapon)
+            Destroy(currentWeapon);
+        if (displayWeapon)
+            currentWeapon = Instantiate(layout.weapons[weaponIndex].baseWeapon, showLocation.position, showLocation.rotation);
+    }
+
+    public void DisplayWeaponVoid(bool b)
+    {
+        displayWeapon = b;
+        DisplayCurrentThings();
+    }
+
+    public void ChangeWeapon(int index)
+    {
+        if(currentlyEditing == 1)
+        {
+            weapon1.currentWeapon = index;
+            weapon1.currentBarrel = 0;
+            weapon1.currentMagazine = 0;
+        }
+        else
+        {
+            weapon2.currentWeapon = index;
+            weapon2.currentBarrel = 0;
+            weapon2.currentMagazine = 0;
+        }
+        displayWeapon = false;
+        DisplayCurrentThings();
+    }
+    //CustomizationStart
+    public void StartCustomization(int index)
+    {
+        currentlyEditing = index;
+        DisplayCurrentThings();
+        displayWeapon = true;
+    }
+
+    public void ChangeBarrel(int index)
+    {
+        if (currentlyEditing == 1)
+            weapon1.currentBarrel = index;
+        else
+            weapon2.currentBarrel = index;
+    }
+    public void ChangeMagazine(int index)
+    {
+        if (currentlyEditing == 1)
+            weapon1.currentBarrel = index;
+        else
+            weapon2.currentBarrel = index;
+    }
+
+    //Start
     public void Start()
     {
         DisplayCurrentThings();
     }
 
+    //Display
     public void DisplayCurrentThings()
     {
         weapon1Name.text = layout.weapons[weapon1.currentWeapon].weaponName;
         weapon2Name.text = layout.weapons[weapon2.currentWeapon].weaponName;
         weapon1Image.sprite = layout.weapons[weapon1.currentWeapon].weaponSprite;
         weapon2Image.sprite = layout.weapons[weapon2.currentWeapon].weaponSprite;
-
+        if (currentWeapon)
+            Destroy(currentWeapon);
         if (displayWeapon)
         {
-            if (currentWeapon)
-                Destroy(currentWeapon);
             WeaponClassData displayData = (currentlyEditing == 1) ? weapon1 : weapon2;
             currentWeapon = Instantiate(layout.weapons[displayData.currentWeapon].baseWeapon,showLocation.position,showLocation.rotation);
             WeaponCustomizations customization = currentWeapon.GetComponent<WeaponCustomizations>();
