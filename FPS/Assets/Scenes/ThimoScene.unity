@@ -1586,7 +1586,7 @@ MonoBehaviour:
   gameVersion: 0.1
   roomName: ThimoTest
   maxPlayers: 4
-  playerResourceName: Player
+  playerResourceName: PlayerWithSkin
   spawnPoints:
   - {fileID: 1704791794}
   - {fileID: 1974288038}
@@ -1970,7 +1970,9 @@ MonoBehaviour:
   - {fileID: 2145448565}
   - {fileID: 0}
   - {fileID: 0}
-  panelParent: {fileID: 0}
+  scoreboardUI: {fileID: 0}
+  team1PanelParent: {fileID: 0}
+  team2PanelParent: {fileID: 0}
   panelPrefab: {fileID: 0}
   manager: {fileID: 0}
   hertz: 10
@@ -2204,7 +2206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1747974464
 MonoBehaviour:
   m_ObjectHideFlags: 0

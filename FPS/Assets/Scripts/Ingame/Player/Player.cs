@@ -18,7 +18,7 @@ public class Player : Photon.MonoBehaviour
     public Armor playerArmor; //Armor of the player
     public List<Damage> damages = new List<Damage>();
 
-    [Header("Movement")]
+    [Header("OldMovement")]
     public float mainSpeed = 15; //Speed of the player
     public float sprintMultiplier = 1.3f; //Multiplication of speed when sprinting
     public float crouchMultiplier = 0.75f; //Multiplication of speed when crouching
@@ -26,6 +26,11 @@ public class Player : Photon.MonoBehaviour
     public bool movementAllowed = true; //Check if movement is allowed
     bool isGrounded; //Check if grounded
     Vector3 movementVector; //Movement vector of player
+
+    [Header("NewMovement")]
+    public float walkSpeed = 15;
+    public float runSpeed = 20;
+    public float speedDampTime = 0.1f;
 
     [Space(10)]
     public float jumpForce = 250; //Force of the jump
@@ -114,7 +119,7 @@ public class Player : Photon.MonoBehaviour
             //Set scene camera
             sceneCam = GameObject.FindGameObjectWithTag(sceneCameraTag);
 
-            if(sceneCam != null)
+            if (sceneCam != null)
             {
                 isFound = true;
             }
@@ -184,7 +189,11 @@ public class Player : Photon.MonoBehaviour
     {
         if (photonView.isMine)
             if (movementAllowed)
-                Move();
+            {
+
+                //Move();
+                NewMove();
+            }
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -269,18 +278,36 @@ public class Player : Photon.MonoBehaviour
         //Set the final Vector
         Vector3 final = movementVector * mainSpeed * Time.deltaTime;
 
-        // //Set animation triggers
-        // if (Input.GetAxis("Vertical") != 0)
-        //     if (Input.GetButton("Sprint"))
-        //        animator.SetTrigger(sprintingTrigger);
-        //    else
-        //        animator.SetTrigger(walkingTrigger);
-        // else
-        //    animator.SetTrigger(idleTrigger);
-
         //Translate the position
         transform.Translate(final);
 
+    }
+
+    Vector2 currentSpeed;
+    float xSpeedSmoothVelocity;
+    float ySpeedSmoothVelocity;
+
+    void NewMove()
+    {
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 inputDir = input.normalized;
+
+        bool running = Input.GetButton("Sprint");
+
+        Vector2 targetSpeed = new Vector2(((running) ? runSpeed : walkSpeed) * input.x, ((running) ? runSpeed : walkSpeed) * input.y);
+        currentSpeed.x = Mathf.SmoothDamp(currentSpeed.x, targetSpeed.x, ref xSpeedSmoothVelocity, speedDampTime);
+        currentSpeed.y = Mathf.SmoothDamp(currentSpeed.y, targetSpeed.y, ref ySpeedSmoothVelocity, speedDampTime);
+
+
+        inputDir *= ((running) ? 1 : 0.5f);
+
+        animator.SetFloat("Forward", inputDir.y, speedDampTime, Time.deltaTime);
+        animator.SetFloat("Side", inputDir.x, speedDampTime, Time.deltaTime);
+
+        print("Dir: " + inputDir);
+
+
+        transform.Translate(final);
     }
 
     void RotatePlayer()
@@ -367,7 +394,7 @@ public class Player : Photon.MonoBehaviour
                     GameObject.FindWithTag(gameInfoManagerTag).GetComponent<PhotonView>().RPC("PlayerKilled", PhotonTargets.MasterClient, PhotonNetwork.playerName, damager, damageAmounts, damagers);
 
                 if (gameInfoManager.currentRoundType == GameInfoManager.RoundType.Warmup || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Waiting)
-                    gameInfoManager.Respawn(); 
+                    gameInfoManager.Respawn();
                 else
                     PhotonNetwork.Destroy(gameObject);
 
