@@ -6196,7 +6196,7 @@ GameObject:
   - component: {fileID: 1426438065}
   - component: {fileID: 1426438064}
   m_Layer: 0
-  m_Name: NewtorkingManager
+  m_Name: NetworkingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
