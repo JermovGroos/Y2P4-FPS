@@ -11,6 +11,7 @@ public class Player : Photon.MonoBehaviour
     public float networkLerpSmoothing = 10; //Smoothing of network player
     Vector3 networkPosition; //Position of network player
     Quaternion networkRotation; //Rotation of network player
+    public List<SkinnedMeshRenderer> shadowsOnlyIfLocal; //List of skinned mesh renderers to put on shadows-only for player viewport
 
     [Header("Health")]
     public float mainHealth = 100; //Main health of the player
@@ -135,6 +136,11 @@ public class Player : Photon.MonoBehaviour
         TurnOnCamera(true);
         minimapCam.SetActive(true);
         playerRigidbody.useGravity = true;
+
+        foreach(SkinnedMeshRenderer skinnedMeshRenderer in shadowsOnlyIfLocal)
+        {
+            skinnedMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+        }
     }
 
     void TurnOnCamera(bool onOrOff)
@@ -257,58 +263,36 @@ public class Player : Photon.MonoBehaviour
         }
     }
 
-    void Move()
-    {
-
-        //Vector to translate to position
-        movementVector.x = Input.GetAxis("Horizontal");
-        movementVector.y = 0;
-        movementVector.z = Input.GetAxis("Vertical");
-
-        //Check multipliers
-        if (!isGrounded)
-            movementVector *= inAirMultiplier; //Add in air multiplier
-        else if (Input.GetButton("Sprint"))
-            movementVector *= sprintMultiplier; //Add sprinting multiplier
-        else if (Input.GetButton("Crouch"))
-            movementVector *= crouchMultiplier; //Add crouching multiplier
-
-        movementVector *= playerArmor.speedMultiplier; //Add armor multiplier
-
-        //Set the final Vector
-        Vector3 final = movementVector * mainSpeed * Time.deltaTime;
-
-        //Translate the position
-        transform.Translate(final);
-
-    }
-
     Vector2 currentSpeed;
     float xSpeedSmoothVelocity;
     float ySpeedSmoothVelocity;
 
     void NewMove()
     {
+
+        //Retrieve and normalize input
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
+        //Check for sprint
         bool running = Input.GetButton("Sprint");
 
+        //Set target speed and damp to it
         Vector2 targetSpeed = new Vector2(((running) ? runSpeed : walkSpeed) * input.x, ((running) ? runSpeed : walkSpeed) * input.y);
         currentSpeed.x = Mathf.SmoothDamp(currentSpeed.x, targetSpeed.x, ref xSpeedSmoothVelocity, speedDampTime);
         currentSpeed.y = Mathf.SmoothDamp(currentSpeed.y, targetSpeed.y, ref ySpeedSmoothVelocity, speedDampTime);
 
+        //Set animator speed
+        Vector2 animatorSpeed = inputDir * ((running) ? 1 : 0.5f);
 
-        inputDir *= ((running) ? 1 : 0.5f);
+        //Apply animator variables to animator
+        animator.SetFloat("Forward", animatorSpeed.y, speedDampTime, Time.deltaTime);
+        animator.SetFloat("Side", animatorSpeed.x, speedDampTime, Time.deltaTime);
 
-        animator.SetFloat("Forward", inputDir.y, speedDampTime, Time.deltaTime);
-        animator.SetFloat("Side", inputDir.x, speedDampTime, Time.deltaTime);
-
-        print("Dir: " + inputDir);
-
+        //Get final movement vector
         Vector3 final = new Vector3(targetSpeed.x, 0f, targetSpeed.y) * Time.deltaTime;
 
-
+        //Translate final position
         transform.Translate(final);
     }
 

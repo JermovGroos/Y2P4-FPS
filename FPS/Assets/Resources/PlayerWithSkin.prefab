@@ -1597,6 +1597,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLocal: 0
   networkLerpSmoothing: 5
+  shadowsOnlyIfLocal:
+  - {fileID: 7489533460977682754}
+  - {fileID: 7489533460977682752}
+  - {fileID: 7489533460977682758}
+  - {fileID: 7489533460977682756}
   mainHealth: 100
   health: 0
   playerArmor: {fileID: 11400000, guid: 6da65139796a52c449f5c6d876517a7d, type: 2}
@@ -3126,31 +3131,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.024
+      value: -0.0279
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.337
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.028
+      value: 0.0368
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.6328356
+      value: -0.55365705
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.14572938
+      value: 0.4843558
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.61812985
+      value: -0.0258568
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.44294205
+      value: 0.6769009
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_RootOrder
@@ -3158,15 +3163,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -47.798004
+      value: -46.427002
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -76.522
+      value: 96.855
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 147.276
+      value: -55.985004
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 31b3628727520a24a9d002fea3335b48, type: 3}
       propertyPath: m_Layer
