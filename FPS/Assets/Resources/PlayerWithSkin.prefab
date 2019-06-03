@@ -396,7 +396,7 @@ MonoBehaviour:
   recoilReturnSpeed: 5.84
   playerTag: Player
   managerTag: Manager
-  p: {fileID: 0}
+  p: {fileID: 2931764447713329565}
 --- !u!1 &7489533460964082688
 GameObject:
   m_ObjectHideFlags: 0
@@ -3339,3 +3339,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5c8179888934ca4eabf1f1c12297593, type: 3}
+--- !u!198 &2931764447713329565 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1450457877772915188, guid: a5c8179888934ca4eabf1f1c12297593,
+    type: 3}
+  m_PrefabInstance: {fileID: 4363627373896192105}
+  m_PrefabAsset: {fileID: 0}
