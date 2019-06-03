@@ -1537,7 +1537,7 @@ GameObject:
   - component: {fileID: 3474830560692557453}
   m_Layer: 9
   m_Name: PlayerWithSkin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1686,7 +1686,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7489533460964082754}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 80315d3134c41354f8115f2fdd0f56f8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
