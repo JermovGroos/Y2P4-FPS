@@ -1606,8 +1606,8 @@ MonoBehaviour:
   crouchMultiplier: 0.5
   inAirMultiplier: 0.1
   movementAllowed: 1
-  walkSpeed: 15
-  runSpeed: 20
+  walkSpeed: 5
+  runSpeed: 10
   speedDampTime: 0.25
   jumpForce: 250
   jumpBoxCheckSize: {x: 0.4, y: 0.05, z: 0.2}
