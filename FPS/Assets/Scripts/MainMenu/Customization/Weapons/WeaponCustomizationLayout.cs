@@ -21,7 +21,8 @@ public class WeaponCustomizationLayout : ScriptableObject
     public class WeaponScriptableSlot
     {
         public string objName;
-        public GameObject obj;
+        public WeaponStats addStats;
+        public Sprite sprite;
     }
 }
 

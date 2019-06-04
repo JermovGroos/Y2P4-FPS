@@ -77,11 +77,13 @@ public class WeaponCustomizer : MonoBehaviour
         for (int i = 0; i < layout.weapons[(currentlyEditing == 1)? weapon1.currentWeapon : weapon2.currentWeapon].barrels.Length; i++)
         {
             GameObject g = Instantiate(cusotmizationPanel, customizationLayoutBarrel);
+            g.GetComponent<CustomizationPanel>().SetInformation(i, false);
         }
 
         for (int i = 0; i < layout.weapons[(currentlyEditing == 1) ? weapon1.currentWeapon : weapon2.currentWeapon].magazines.Length; i++)
         {
-
+            GameObject g = Instantiate(cusotmizationPanel, customizationLayoutBarrel);
+            g.GetComponent<CustomizationPanel>().SetInformation(i, false);
         }
 
     }
@@ -92,6 +94,7 @@ public class WeaponCustomizer : MonoBehaviour
             weapon1.currentBarrel = index;
         else
             weapon2.currentBarrel = index;
+        DisplayCurrentThings();
     }
     public void ChangeMagazine(int index)
     {
@@ -99,6 +102,7 @@ public class WeaponCustomizer : MonoBehaviour
             weapon1.currentBarrel = index;
         else
             weapon2.currentBarrel = index;
+        DisplayCurrentThings();
     }
 
     //Start
