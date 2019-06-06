@@ -11,8 +11,9 @@ public class CustomizationPanel : MonoBehaviour
     public Text nameInput;
     public Image sprite;
 
-    public void SetInformation(int _index, bool _magazine)
+    public void SetInformation(int _index, bool _magazine, WeaponCustomizer _customizer)
     {
+        customizer = _customizer;
         index = _index;
         magazine = _magazine;
 
@@ -26,5 +27,6 @@ public class CustomizationPanel : MonoBehaviour
             customizer.ChangeMagazine(index);
         else
             customizer.ChangeBarrel(index);
+        Debug.Log("Yes");
     }
 }

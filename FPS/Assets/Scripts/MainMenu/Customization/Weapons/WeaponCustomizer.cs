@@ -22,6 +22,22 @@ public class WeaponCustomizer : MonoBehaviour
     [HideInInspector]public bool displayWeapon;
     [HideInInspector]public int currentlyEditing;
     GameObject currentWeapon;
+    public string savingTag;
+
+    public void LoadData()
+    {
+        Saving saving = GameObject.FindWithTag(savingTag).GetComponent<Saving>();
+        weapon1 = saving.data.lastLoadout.weapon1;
+        weapon2 = saving.data.lastLoadout.weapon2;
+    }
+
+    public void SaveData()
+    {
+        Saving saving = GameObject.FindWithTag(savingTag).GetComponent<Saving>();
+        saving.data.lastLoadout.weapon1 = weapon1;
+        saving.data.lastLoadout.weapon2 = weapon2;
+    }
+
     //WeaponSelect
     public void StartWeaponSelect(int weaponSlot)
     {
@@ -64,28 +80,29 @@ public class WeaponCustomizer : MonoBehaviour
     {
         currentlyEditing = index;
         DisplayCurrentThings();
-        displayWeapon = true;
+        DisplayWeaponVoid(true);
+        DisplayCustomizations();
     }
 
     public void DisplayCustomizations()
     {
         foreach (Transform child in customizationLayoutBarrel)
-            Destroy(child);
+            Destroy(child.gameObject);
         foreach (Transform child in customizationLayourMagazine)
-            Destroy(child);
+            Destroy(child.gameObject);
 
         for (int i = 0; i < layout.weapons[(currentlyEditing == 1)? weapon1.currentWeapon : weapon2.currentWeapon].barrels.Length; i++)
         {
             GameObject g = Instantiate(cusotmizationPanel, customizationLayoutBarrel);
-            g.GetComponent<CustomizationPanel>().SetInformation(i, false);
+            g.GetComponent<CustomizationPanel>().SetInformation(i, false, this);
         }
 
         for (int i = 0; i < layout.weapons[(currentlyEditing == 1) ? weapon1.currentWeapon : weapon2.currentWeapon].magazines.Length; i++)
         {
-            GameObject g = Instantiate(cusotmizationPanel, customizationLayoutBarrel);
-            g.GetComponent<CustomizationPanel>().SetInformation(i, false);
+            GameObject g = Instantiate(cusotmizationPanel, customizationLayourMagazine);
+            g.GetComponent<CustomizationPanel>().SetInformation(i, true, this);
         }
-
+        SaveData();
     }
 
     public void ChangeBarrel(int index)
@@ -99,16 +116,17 @@ public class WeaponCustomizer : MonoBehaviour
     public void ChangeMagazine(int index)
     {
         if (currentlyEditing == 1)
-            weapon1.currentBarrel = index;
+            weapon1.currentMagazine = index;
         else
-            weapon2.currentBarrel = index;
+            weapon2.currentMagazine = index;
         DisplayCurrentThings();
     }
 
     //Start
-    public void Start()
+    public void Awake()
     {
         DisplayCurrentThings();
+        LoadData();
     }
 
     //Display
@@ -136,6 +154,13 @@ public class WeaponCustomizer : MonoBehaviour
                 else
                     customization.barrels[i].SetActive(false);
         }
+    }
+
+    [System.Serializable]
+    public class WeaponLoadoutSlot
+    {
+        public WeaponClassData weapon1;
+        public WeaponClassData weapon2;
     }
 
     [System.Serializable]

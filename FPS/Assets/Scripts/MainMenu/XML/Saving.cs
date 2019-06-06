@@ -66,7 +66,11 @@ public class Saving : MonoBehaviour
             stream.Close();
         }
         else
+        {
             data = new SaveDataBase();
+            data.lastLoadout.weapon1 = new WeaponCustomizer.WeaponClassData();
+            data.lastLoadout.weapon2 = new WeaponCustomizer.WeaponClassData();
+        }
     }
 
     //SaveData
@@ -85,5 +89,6 @@ public class Saving : MonoBehaviour
     public class SaveDataBase
     {
         public string playerName = "";
+        public WeaponCustomizer.WeaponLoadoutSlot lastLoadout;
     }
 }
