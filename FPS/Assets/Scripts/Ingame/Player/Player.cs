@@ -250,9 +250,10 @@ public class Player : Photon.MonoBehaviour
             //Check if player presses the Jump button
             if (Input.GetButtonDown("Jump"))
             {
+                animator.SetTrigger("Jump");
 
                 //Add force to the player rigidbody
-                playerRigidbody.AddRelativeForce(Vector3.up * jumpForce + movementVector * jumpForce, ForceMode.Impulse);
+                //playerRigidbody.AddRelativeForce(Vector3.up * jumpForce + movementVector * jumpForce, ForceMode.Impulse);
             }
         }
         else
