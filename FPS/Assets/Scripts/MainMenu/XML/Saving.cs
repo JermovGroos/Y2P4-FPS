@@ -65,7 +65,11 @@ public class Saving : MonoBehaviour
             stream.Close();
         }
         else
+        {
             data = new SaveDataBase();
+            data.lastLoadout.weapon1 = new WeaponCustomizer.WeaponClassData();
+            data.lastLoadout.weapon2 = new WeaponCustomizer.WeaponClassData();
+        }
     }
 
     //SaveData
