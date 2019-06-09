@@ -65,13 +65,13 @@ MonoBehaviour:
       sprite: {fileID: 0}
     stats:
       fireType: 2
-      damage: -3
+      damage: 15
       fireRate: 0.16
-      spread: 0.014999994
+      spread: 0.05
       clipSize: 20
       bulletAmount: 1
       burstDelay: 1
-      recoil: 2.04
+      recoil: 3
   - weaponName: p320
     weaponSprite: {fileID: 21300000, guid: 89c343a2b30f57b4c83de44c10b835c9, type: 3}
     baseWeapon: {fileID: 7968917247841594564, guid: 8de75666e4215e44280a586a1fdc7aa5,
