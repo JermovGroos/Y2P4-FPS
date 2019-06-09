@@ -40,13 +40,27 @@ public class WeaponStats
     public float burstDelay;
     public float recoil;
 
-    public void AttachmentStatsChange(WeaponStats stats)
+    public WeaponStats()
     {
-        damage += stats.damage;
-        fireRate += stats.fireRate;
-        spread += stats.spread;
-        clipSize += stats.clipSize;
-        burstDelay += stats.bulletAmount;
-        recoil += stats.recoil;
+        fireType = FireTypes.SingleFire;
+        damage = 0;
+        fireRate = 0;
+        spread = 0;
+        clipSize = 0;
+        bulletAmount = 1;
+        burstDelay = 0;
+        recoil = 0;
+    }
+
+    public WeaponStats(WeaponStats copyStats)
+    {
+        fireType = copyStats.fireType;
+        damage = copyStats.damage;
+        fireRate = copyStats.fireRate;
+        spread = copyStats.spread;
+        clipSize = copyStats.clipSize;
+        bulletAmount = copyStats.bulletAmount;
+        burstDelay = copyStats.burstDelay;
+        recoil = copyStats.recoil;
     }
 }

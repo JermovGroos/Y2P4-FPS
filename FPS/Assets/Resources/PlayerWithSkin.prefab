@@ -401,6 +401,9 @@ MonoBehaviour:
   recoilReturnSpeed: 5.84
   weaponDisplay: {fileID: 8592932177378215069}
   saveData: {fileID: 0}
+  zoomed: 0
+  standardFov: 60
+  zoomedFov: 50
 --- !u!114 &2570483605781345891
 MonoBehaviour:
   m_ObjectHideFlags: 0
