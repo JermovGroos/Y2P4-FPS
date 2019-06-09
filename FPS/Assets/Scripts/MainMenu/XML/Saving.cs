@@ -59,18 +59,13 @@ public class Saving : MonoBehaviour
     {
         if (File.Exists(Application.persistentDataPath + "/" + fileName + ".xml"))
         {
-            Debug.Log(Application.persistentDataPath + "/" + fileName + ".xml");
             XmlSerializer serializer = new XmlSerializer(typeof(SaveDataBase));
             FileStream stream = new FileStream(Application.persistentDataPath + "/" + fileName + ".xml", FileMode.Open);
             data = (SaveDataBase)serializer.Deserialize(stream);
             stream.Close();
         }
         else
-        {
             data = new SaveDataBase();
-            data.lastLoadout.weapon1 = new WeaponCustomizer.WeaponClassData();
-            data.lastLoadout.weapon2 = new WeaponCustomizer.WeaponClassData();
-        }
     }
 
     //SaveData

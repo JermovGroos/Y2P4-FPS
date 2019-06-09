@@ -17,7 +17,7 @@ public class CustomizationPanel : MonoBehaviour
         index = _index;
         magazine = _magazine;
 
-        WeaponCustomizationLayout.Weapon weapon = customizer.layout.weapons[(customizer.currentlyEditing == 1) ? customizer.weapon1.currentWeapon : customizer.weapon2.currentWeapon];
+        WeaponCustomizationLayout.Weapon weapon = customizer.layout.weapons[(customizer.currentlyEditing == 1) ? customizer.weapons.weapon1.currentWeapon : customizer.weapons.weapon2.currentWeapon];
         nameInput.text = magazine ? weapon.magazines[index].objName : weapon.barrels[index].objName;
     }
 
@@ -27,6 +27,5 @@ public class CustomizationPanel : MonoBehaviour
             customizer.ChangeMagazine(index);
         else
             customizer.ChangeBarrel(index);
-        Debug.Log("Yes");
     }
 }

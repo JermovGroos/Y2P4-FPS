@@ -7,8 +7,7 @@ public class WeaponCustomizer : MonoBehaviour
 {
     public WeaponCustomizationLayout layout;
     public Transform showLocation;
-    public WeaponClassData weapon1;
-    public WeaponClassData weapon2;
+    public WeaponLoadoutSlot weapons;
 
     public Transform customizationLayoutBarrel;
     public Transform customizationLayourMagazine;
@@ -27,15 +26,14 @@ public class WeaponCustomizer : MonoBehaviour
     public void LoadData()
     {
         Saving saving = GameObject.FindWithTag(savingTag).GetComponent<Saving>();
-        weapon1 = saving.data.lastLoadout.weapon1;
-        weapon2 = saving.data.lastLoadout.weapon2;
+        weapons = saving.data.lastLoadout;
+        DisplayCurrentThings();
     }
 
     public void SaveData()
     {
         Saving saving = GameObject.FindWithTag(savingTag).GetComponent<Saving>();
-        saving.data.lastLoadout.weapon1 = weapon1;
-        saving.data.lastLoadout.weapon2 = weapon2;
+        saving.data.lastLoadout = weapons;
     }
 
     //WeaponSelect
@@ -62,18 +60,20 @@ public class WeaponCustomizer : MonoBehaviour
     {
         if(currentlyEditing == 1)
         {
-            weapon1.currentWeapon = index;
-            weapon1.currentBarrel = 0;
-            weapon1.currentMagazine = 0;
+            weapons.weapon1.currentWeapon = index;
+            weapons.weapon1.currentBarrel = 0;
+            weapons.weapon1.currentMagazine = 0;
         }
         else
         {
-            weapon2.currentWeapon = index;
-            weapon2.currentBarrel = 0;
-            weapon2.currentMagazine = 0;
+            weapons.weapon2.currentWeapon = index;
+            weapons.weapon2.currentBarrel = 0;
+            weapons.weapon2.currentMagazine = 0;
         }
         displayWeapon = false;
         DisplayCurrentThings();
+
+        SaveData();
     }
     //CustomizationStart
     public void StartCustomization(int index)
@@ -91,56 +91,58 @@ public class WeaponCustomizer : MonoBehaviour
         foreach (Transform child in customizationLayourMagazine)
             Destroy(child.gameObject);
 
-        for (int i = 0; i < layout.weapons[(currentlyEditing == 1)? weapon1.currentWeapon : weapon2.currentWeapon].barrels.Length; i++)
+        for (int i = 0; i < layout.weapons[(currentlyEditing == 1)? weapons.weapon1.currentWeapon : weapons.weapon2.currentWeapon].barrels.Length; i++)
         {
             GameObject g = Instantiate(cusotmizationPanel, customizationLayoutBarrel);
             g.GetComponent<CustomizationPanel>().SetInformation(i, false, this);
         }
 
-        for (int i = 0; i < layout.weapons[(currentlyEditing == 1) ? weapon1.currentWeapon : weapon2.currentWeapon].magazines.Length; i++)
+        for (int i = 0; i < layout.weapons[(currentlyEditing == 1) ? weapons.weapon1.currentWeapon : weapons.weapon2.currentWeapon].magazines.Length; i++)
         {
             GameObject g = Instantiate(cusotmizationPanel, customizationLayourMagazine);
             g.GetComponent<CustomizationPanel>().SetInformation(i, true, this);
         }
-        SaveData();
     }
 
     public void ChangeBarrel(int index)
     {
         if (currentlyEditing == 1)
-            weapon1.currentBarrel = index;
+            weapons.weapon1.currentBarrel = index;
         else
-            weapon2.currentBarrel = index;
+            weapons.weapon2.currentBarrel = index;
         DisplayCurrentThings();
+
+        SaveData();
     }
     public void ChangeMagazine(int index)
     {
         if (currentlyEditing == 1)
-            weapon1.currentMagazine = index;
+            weapons.weapon1.currentMagazine = index;
         else
-            weapon2.currentMagazine = index;
+            weapons.weapon2.currentMagazine = index;
         DisplayCurrentThings();
+
+        SaveData();
     }
 
     //Start
     public void Awake()
     {
-        DisplayCurrentThings();
         LoadData();
     }
 
     //Display
     public void DisplayCurrentThings()
     {
-        weapon1Name.text = layout.weapons[weapon1.currentWeapon].weaponName;
-        weapon2Name.text = layout.weapons[weapon2.currentWeapon].weaponName;
-        weapon1Image.sprite = layout.weapons[weapon1.currentWeapon].weaponSprite;
-        weapon2Image.sprite = layout.weapons[weapon2.currentWeapon].weaponSprite;
+        weapon1Name.text = layout.weapons[weapons.weapon1.currentWeapon].weaponName;
+        weapon2Name.text = layout.weapons[weapons.weapon2.currentWeapon].weaponName;
+        weapon1Image.sprite = layout.weapons[weapons.weapon1.currentWeapon].weaponSprite;
+        weapon2Image.sprite = layout.weapons[weapons.weapon2.currentWeapon].weaponSprite;
         if (currentWeapon)
             Destroy(currentWeapon);
         if (displayWeapon)
         {
-            WeaponClassData displayData = (currentlyEditing == 1) ? weapon1 : weapon2;
+            WeaponClassData displayData = (currentlyEditing == 1) ? weapons.weapon1 : weapons.weapon2;
             currentWeapon = Instantiate(layout.weapons[displayData.currentWeapon].baseWeapon,showLocation.position,showLocation.rotation);
             WeaponCustomizations customization = currentWeapon.GetComponent<WeaponCustomizations>();
             for (int i = 0; i < customization.magazines.Length; i++)
