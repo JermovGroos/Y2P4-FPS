@@ -53,4 +53,6 @@ MonoBehaviour:
   - SendRoundMessage
   - DamagePlayer
   - SpawnParticle
+  - DisplayWeapon
+  - ShowMuzzleFlash
   DisableAutoOpenWizard: 1

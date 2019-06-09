@@ -7593,6 +7593,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2146108263}
+        m_MethodName: LoadData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2084553657
@@ -7883,14 +7894,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layout: {fileID: 11400000, guid: d13c0c7f1038e30419701f6f32024ce4, type: 2}
   showLocation: {fileID: 2025744570}
-  weapon1:
-    currentWeapon: 0
-    currentMagazine: 0
-    currentBarrel: 0
-  weapon2:
-    currentWeapon: 1
-    currentMagazine: 0
-    currentBarrel: 0
+  weapons:
+    weapon1:
+      currentWeapon: 0
+      currentMagazine: 0
+      currentBarrel: 0
+    weapon2:
+      currentWeapon: 0
+      currentMagazine: 0
+      currentBarrel: 0
   customizationLayoutBarrel: {fileID: 1676031785}
   customizationLayourMagazine: {fileID: 515922090}
   cusotmizationPanel: {fileID: 7983881369891951168, guid: dbe4ab9d0fe6c664aa2adf666f248f5f,

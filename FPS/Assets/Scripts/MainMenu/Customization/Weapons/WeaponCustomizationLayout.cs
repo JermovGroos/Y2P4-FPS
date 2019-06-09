@@ -29,19 +29,24 @@ public class WeaponCustomizationLayout : ScriptableObject
 [System.Serializable]
 public class WeaponStats
 {
-    [Header("BaseStats")]
+    public enum FireTypes { SingleFire, Burst, Auto }
+    public FireTypes fireType;
     public float damage;
+    public float fireRate;
     public float spread;
-    public float fireSpeed;
-    public float weight;
-    public float recoilAmount;
-    public FireType firetype;
-    public enum FireType { SingleFire,Burst,Auto}
-    [Header("Reload")]
-    public bool singleReload;
-    public float maxAmmo;
-    public float reloadSpeed;
-    [Header("MultipleShotStats")]
-    public bool multipleBullets;
+    public int clipSize;
+    [Range(1, 20)]
     public int bulletAmount;
+    public float burstDelay;
+    public float recoil;
+
+    public void AttachmentStatsChange(WeaponStats stats)
+    {
+        damage += stats.damage;
+        fireRate += stats.fireRate;
+        spread += stats.spread;
+        clipSize += stats.clipSize;
+        burstDelay += stats.bulletAmount;
+        recoil += stats.recoil;
+    }
 }
