@@ -244,8 +244,10 @@ public class Player : Photon.MonoBehaviour
         if (Physics.CheckBox(transform.position, halfExtends, transform.rotation, notPlayer))
         {
 
+            
             //Set isGrounded bool true
             isGrounded = true;
+            animator.SetTrigger("Grounded");
 
             //Check if player presses the Jump button
             if (Input.GetButtonDown("Jump"))
@@ -253,7 +255,7 @@ public class Player : Photon.MonoBehaviour
                 animator.SetTrigger("Jump");
 
                 //Add force to the player rigidbody
-                //playerRigidbody.AddRelativeForce(Vector3.up * jumpForce + movementVector * jumpForce, ForceMode.Impulse);
+                playerRigidbody.AddRelativeForce(Vector3.up * jumpForce + movementVector * jumpForce, ForceMode.Impulse);
             }
         }
         else
