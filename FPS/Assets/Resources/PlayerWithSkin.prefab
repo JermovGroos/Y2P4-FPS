@@ -1592,8 +1592,8 @@ Transform:
   - {fileID: 7489533460964251750}
   - {fileID: 7489533460964251748}
   - {fileID: 7489533460964251754}
-  - {fileID: 7489533460964251756}
   - {fileID: 9004475440395432181}
+  - {fileID: 7489533460964251756}
   - {fileID: 670216432345821604}
   - {fileID: 8180391199568336979}
   m_Father: {fileID: 0}
@@ -1648,6 +1648,7 @@ MonoBehaviour:
   movementAllowed: 1
   walkSpeed: 5
   runSpeed: 10
+  crouchSpeed: 2.75
   speedDampTime: 0.25
   jumpForce: 250
   jumpBoxCheckSize: {x: 0.4, y: 0.05, z: 0.2}
@@ -1661,6 +1662,9 @@ MonoBehaviour:
   playerCam: {fileID: 9050895774844894303}
   sensitivity: 100
   clampRotation: {x: -70, y: 70}
+  standingCamHeight: 1.75
+  crouchingCamHeight: 1.15
+  camDampTime: 0.05
   minimapCam: {fileID: 2788476209353239093}
   animator: {fileID: 7489533460973614978}
   idleTrigger: Idle
@@ -2096,7 +2100,7 @@ Transform:
   - {fileID: 7489533460964252134}
   - {fileID: 7489533460964252132}
   m_Father: {fileID: 7489533460964251746}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7489533460964082766
 GameObject:
@@ -3112,10 +3116,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9050895774844894303}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.053, y: 1.75, z: 0.085}
+  m_LocalPosition: {x: 0.053, y: 1.75, z: 0.08499999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3784258001604216039}
   m_Father: {fileID: 7489533460964251746}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

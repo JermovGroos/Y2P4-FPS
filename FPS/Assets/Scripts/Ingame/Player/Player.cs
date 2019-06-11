@@ -31,6 +31,7 @@ public class Player : Photon.MonoBehaviour
     [Header("NewMovement")]
     public float walkSpeed = 15;
     public float runSpeed = 20;
+    public float crouchSpeed = 7.5f;
     public float speedDampTime = 0.1f;
 
     [Space(10)]
@@ -53,6 +54,9 @@ public class Player : Photon.MonoBehaviour
     public GameObject playerCam; //Camera of the player
     public int sensitivity = 100; //Sensitivity of the camera
     public Vector2 clampRotation; //Min and max clamp
+    public float standingCamHeight = 1.75f; //Height of camera when standing
+    public float crouchingCamHeight = 1.15f; //Position of camera joint when crouching
+    public float camDampTime = 0.05f; //Damp time of camera
     public GameObject minimapCam; //Camera of the minimap
     float camRotation = 0; //Rotation of camera on the X axis.
     bool camToggle; //Toggle camera bool
@@ -269,6 +273,8 @@ public class Player : Photon.MonoBehaviour
     Vector2 currentSpeed;
     float xSpeedSmoothVelocity;
     float ySpeedSmoothVelocity;
+    float camSpeedSmoothVelocity;
+    float currentCamHeight;
     bool isCrouched;
 
     void NewMove()
@@ -281,6 +287,7 @@ public class Player : Photon.MonoBehaviour
         //Make nesseccary Vector2 
         Vector2 animatorSpeed = Vector2.zero;
         Vector2 targetSpeed = Vector2.zero;
+        float targetHeight = 0f;
 
         //Get isCrouched
         isCrouched = Input.GetButton("Crouch");
@@ -288,7 +295,7 @@ public class Player : Photon.MonoBehaviour
         if (isCrouched)
         {
             //Set target speed and damp to it
-            targetSpeed = new Vector2(walkSpeed * input.x, walkSpeed * input.y);
+            targetSpeed = new Vector2(crouchSpeed * input.x, crouchSpeed * input.y);
             currentSpeed.x = Mathf.SmoothDamp(currentSpeed.x, targetSpeed.x, ref xSpeedSmoothVelocity, speedDampTime);
             currentSpeed.y = Mathf.SmoothDamp(currentSpeed.y, targetSpeed.y, ref ySpeedSmoothVelocity, speedDampTime);
 
@@ -297,6 +304,14 @@ public class Player : Photon.MonoBehaviour
 
             //Set crouch bool
             animator.SetBool("Crouched", true);
+
+            //Set cam pos
+            Vector3 localCamPos = playerCam.transform.localPosition;
+            targetHeight = crouchingCamHeight;
+            localCamPos.y = Mathf.SmoothDamp(localCamPos.y, targetHeight, ref camSpeedSmoothVelocity, camDampTime);
+            playerCam.transform.localPosition = localCamPos;
+
+
 
         }
         else
@@ -314,6 +329,12 @@ public class Player : Photon.MonoBehaviour
 
             //Set crouch bool
             animator.SetBool("Crouched", false);
+
+            //Set cam pos
+            Vector3 localCamPos = playerCam.transform.localPosition;
+            targetHeight = standingCamHeight;
+            localCamPos.y = Mathf.SmoothDamp(localCamPos.y, targetHeight, ref camSpeedSmoothVelocity, camDampTime);
+            playerCam.transform.localPosition = localCamPos;
 
         }
 
