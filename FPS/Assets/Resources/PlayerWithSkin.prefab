@@ -1751,6 +1751,12 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 2
     Name: Jump
+  - Type: 9
+    SynchronizeType: 2
+    Name: Grounded
+  - Type: 4
+    SynchronizeType: 2
+    Name: Crouched
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0

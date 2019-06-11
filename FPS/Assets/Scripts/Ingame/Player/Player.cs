@@ -137,7 +137,7 @@ public class Player : Photon.MonoBehaviour
         minimapCam.SetActive(true);
         playerRigidbody.useGravity = true;
 
-        foreach(SkinnedMeshRenderer skinnedMeshRenderer in shadowsOnlyIfLocal)
+        foreach (SkinnedMeshRenderer skinnedMeshRenderer in shadowsOnlyIfLocal)
         {
             skinnedMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         }
@@ -244,7 +244,7 @@ public class Player : Photon.MonoBehaviour
         if (Physics.CheckBox(transform.position, halfExtends, transform.rotation, notPlayer))
         {
 
-            
+
             //Set isGrounded bool true
             isGrounded = true;
             animator.SetTrigger("Grounded");
@@ -269,6 +269,7 @@ public class Player : Photon.MonoBehaviour
     Vector2 currentSpeed;
     float xSpeedSmoothVelocity;
     float ySpeedSmoothVelocity;
+    bool isCrouched;
 
     void NewMove()
     {
@@ -277,16 +278,45 @@ public class Player : Photon.MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
-        //Check for sprint
-        bool running = Input.GetButton("Sprint");
+        //Make nesseccary Vector2 
+        Vector2 animatorSpeed = Vector2.zero;
+        Vector2 targetSpeed = Vector2.zero;
 
-        //Set target speed and damp to it
-        Vector2 targetSpeed = new Vector2(((running) ? runSpeed : walkSpeed) * input.x, ((running) ? runSpeed : walkSpeed) * input.y);
-        currentSpeed.x = Mathf.SmoothDamp(currentSpeed.x, targetSpeed.x, ref xSpeedSmoothVelocity, speedDampTime);
-        currentSpeed.y = Mathf.SmoothDamp(currentSpeed.y, targetSpeed.y, ref ySpeedSmoothVelocity, speedDampTime);
+        //Get isCrouched
+        isCrouched = Input.GetButton("Crouch");
 
-        //Set animator speed
-        Vector2 animatorSpeed = inputDir * ((running) ? 1 : 0.5f);
+        if (isCrouched)
+        {
+            //Set target speed and damp to it
+            targetSpeed = new Vector2(walkSpeed * input.x, walkSpeed * input.y);
+            currentSpeed.x = Mathf.SmoothDamp(currentSpeed.x, targetSpeed.x, ref xSpeedSmoothVelocity, speedDampTime);
+            currentSpeed.y = Mathf.SmoothDamp(currentSpeed.y, targetSpeed.y, ref ySpeedSmoothVelocity, speedDampTime);
+
+            //Set animator speed
+            animatorSpeed = inputDir * (0.5f);
+
+            //Set crouch bool
+            animator.SetBool("Crouched", true);
+
+        }
+        else
+        {
+            //Check for sprint
+            bool running = Input.GetButton("Sprint");
+
+            //Set target speed and damp to it
+            targetSpeed = new Vector2(((running) ? runSpeed : walkSpeed) * input.x, ((running) ? runSpeed : walkSpeed) * input.y);
+            currentSpeed.x = Mathf.SmoothDamp(currentSpeed.x, targetSpeed.x, ref xSpeedSmoothVelocity, speedDampTime);
+            currentSpeed.y = Mathf.SmoothDamp(currentSpeed.y, targetSpeed.y, ref ySpeedSmoothVelocity, speedDampTime);
+
+            //Set animator speed
+            animatorSpeed = inputDir * ((running) ? 1 : 0.5f);
+
+            //Set crouch bool
+            animator.SetBool("Crouched", false);
+
+        }
+
 
         //Apply animator variables to animator
         animator.SetFloat("Forward", animatorSpeed.y, speedDampTime, Time.deltaTime);
