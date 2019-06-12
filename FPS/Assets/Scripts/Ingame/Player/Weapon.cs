@@ -30,6 +30,7 @@ public class Weapon : Photon.MonoBehaviour
     {
         saveData = GameObject.FindWithTag("Saving").GetComponent<Saving>();
         CalculateStats(0);
+        CalculateStats(1);
         weapon1.currentAmmo = weapon1.stats.clipSize;
         currentlySelected = 1;
     }
@@ -38,9 +39,9 @@ public class Weapon : Photon.MonoBehaviour
     {
         WeaponCustomizer.WeaponClassData data = (index == 0) ? saveData.data.lastLoadout.weapon1 : saveData.data.lastLoadout.weapon2;
         WeaponStats stats = layout.weapons[data.currentWeapon].stats;
-        AttachmentStatsChange(layout.weapons[data.currentWeapon].barrels[data.currentBarrel].addStats, 1);
-        AttachmentStatsChange(layout.weapons[data.currentWeapon].magazines[data.currentMagazine].addStats, 1);
-        if (index == 1)
+        AttachmentStatsChange(layout.weapons[data.currentWeapon].barrels[data.currentBarrel].addStats, index);
+        AttachmentStatsChange(layout.weapons[data.currentWeapon].magazines[data.currentMagazine].addStats, index);
+        if (index == 0)
             weapon1.stats = stats;
         else
             weapon2.stats = stats;
@@ -114,16 +115,15 @@ public class Weapon : Photon.MonoBehaviour
                         hit.transform.GetComponent<PhotonView>().RPC("DamagePlayer", PhotonTargets.All, PhotonNetwork.playerName, stats.damage);
                     GameObject.FindWithTag(managerTag).GetComponent<ImpactManager>().SendImpactInfo(hit.collider.material, hit);
                 }
+                if (stats.fireType != WeaponStats.FireTypes.Burst && i == 0)
+                    StartCoroutine(Recoil());
+                else if (stats.fireType != WeaponStats.FireTypes.Burst)
+                    StartCoroutine(Recoil());
+                slot.currentAmmo--;
+
+                if (stats.fireType == WeaponStats.FireTypes.Burst)
+                    yield return new WaitForSeconds(stats.burstDelay);
             }
-            slot.currentAmmo--;
-
-            if (stats.fireType != WeaponStats.FireTypes.Burst && i == 0)
-                StartCoroutine(Recoil());
-            else if (stats.fireType != WeaponStats.FireTypes.Burst)
-                StartCoroutine(Recoil());
-
-            if (stats.fireType == WeaponStats.FireTypes.Burst)
-                yield return new WaitForSeconds(stats.burstDelay);
         }
         yield return new WaitForSeconds(time);
         allowFire = true;
@@ -131,7 +131,7 @@ public class Weapon : Photon.MonoBehaviour
 
     public void AttachmentStatsChange(WeaponStats _stats, int index)
     {
-        WeaponStats tempStats = new WeaponStats((index == 1)? weapon1.stats : weapon2.stats);
+        WeaponStats tempStats = new WeaponStats((index == 0)? weapon1.stats : weapon2.stats);
         tempStats.damage += _stats.damage;
         tempStats.fireRate += _stats.fireRate;
         tempStats.spread += _stats.spread;
@@ -139,7 +139,7 @@ public class Weapon : Photon.MonoBehaviour
         tempStats.burstDelay += _stats.bulletAmount;
         tempStats.recoil += _stats.recoil;
         tempStats.reloadTime = _stats.reloadTime;
-        if (index == 1)
+        if (index == 0)
             weapon1.stats = tempStats;
         else
             weapon2.stats = tempStats;
