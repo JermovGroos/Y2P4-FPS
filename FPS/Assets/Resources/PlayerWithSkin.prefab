@@ -392,6 +392,7 @@ MonoBehaviour:
     fireRate: 0
     spread: 0
     clipSize: 0
+    reloadTime: 0
     bulletAmount: 0
     burstDelay: 0
     recoil: 0
@@ -404,6 +405,7 @@ MonoBehaviour:
   zoomed: 0
   standardFov: 60
   zoomedFov: 50
+  reload: Reload
 --- !u!114 &2570483605781345891
 MonoBehaviour:
   m_ObjectHideFlags: 0

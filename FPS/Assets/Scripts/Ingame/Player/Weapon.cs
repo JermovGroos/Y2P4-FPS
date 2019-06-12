@@ -5,12 +5,12 @@ using UnityEngine;
 public class Weapon : Photon.MonoBehaviour
 {
     public WeaponCustomizationLayout layout;
-    public WeaponStats stats;
+
+    public WeaponIngameSlot weapon1, weapon2;
+    public int currentlySelected;
 
     public string playerTag;
     public string managerTag;
-
-    private int currentAmmo;
 
     public float recoilSpeed;
     public float recoilReturnSpeed;
@@ -24,23 +24,33 @@ public class Weapon : Photon.MonoBehaviour
     public bool zoomed;
     public float standardFov;
     public float zoomedFov;
+    public string reload;
 
     public void Start()
     {
         saveData = GameObject.FindWithTag("Saving").GetComponent<Saving>();
         CalculateStats(0);
+        weapon1.currentAmmo = weapon1.stats.clipSize;
+        currentlySelected = 1;
     }
 
     public void CalculateStats(int index)
     {
         WeaponCustomizer.WeaponClassData data = (index == 0) ? saveData.data.lastLoadout.weapon1 : saveData.data.lastLoadout.weapon2;
-        stats = layout.weapons[data.currentWeapon].stats;
-        AttachmentStatsChange(layout.weapons[data.currentWeapon].barrels[data.currentBarrel].addStats);
-        AttachmentStatsChange(layout.weapons[data.currentWeapon].magazines[data.currentMagazine].addStats);
+        WeaponStats stats = layout.weapons[data.currentWeapon].stats;
+        AttachmentStatsChange(layout.weapons[data.currentWeapon].barrels[data.currentBarrel].addStats, 1);
+        AttachmentStatsChange(layout.weapons[data.currentWeapon].magazines[data.currentMagazine].addStats, 1);
+        if (index == 1)
+            weapon1.stats = stats;
+        else
+            weapon2.stats = stats;
     }
 
     public void FixedUpdate()
     {
+        WeaponStats stats = (currentlySelected == 1) ? weapon1.stats : weapon2.stats;
+        WeaponIngameSlot slot = (currentlySelected == 1) ? weapon1 : weapon2;
+
         transform.rotation = Quaternion.Lerp(transform.rotation, transform.parent.rotation, recoilReturnSpeed * Time.deltaTime);
         if (Input.GetButtonDown("Fire1") && stats.fireType == WeaponStats.FireTypes.SingleFire && allowFire || Input.GetButtonDown("Fire1") && stats.fireType == WeaponStats.FireTypes.Burst && allowFire)
             StartCoroutine(Fire(stats.fireRate));
@@ -52,10 +62,26 @@ public class Weapon : Photon.MonoBehaviour
             zoomed = !zoomed;
             GetComponent<Camera>().fieldOfView = zoomed? zoomedFov : standardFov;
         }
+
+        if (Input.GetButtonDown(reload) && allowFire && slot.currentAmmo != stats.clipSize)
+            StartCoroutine(Reload());
+        else if (Input.GetButtonDown(reload))
+            Debug.Log(allowFire + "   /   " + slot.currentAmmo + "   " + stats.clipSize);
+    }
+
+    public IEnumerator Reload()
+    {
+        WeaponStats stats = (currentlySelected == 1) ? weapon1.stats : weapon2.stats;
+        WeaponIngameSlot slot = (currentlySelected == 1) ? weapon1 : weapon2;
+        allowFire = false;
+        yield return new WaitForSeconds(stats.reloadTime);
+        slot.currentAmmo = stats.clipSize;
+        allowFire = true;
     }
 
     public IEnumerator Recoil()
     {
+        WeaponStats stats = (currentlySelected == 1) ? weapon1.stats : weapon2.stats;
         Vector3 tempRecoil = new Vector3();
         tempRecoil += Vector3.right * -stats.recoil;
         tempRecoil += Vector3.up * Random.Range(-stats.recoil, stats.recoil);
@@ -70,20 +96,26 @@ public class Weapon : Photon.MonoBehaviour
 
     public IEnumerator Fire(float time)
     {
+        WeaponStats stats = (currentlySelected == 1) ? weapon1.stats : weapon2.stats;
+        WeaponIngameSlot slot = (currentlySelected == 1) ? weapon1 : weapon2;
         allowFire = false;
-        weaponDisplay.photonView.RPC("ShowMuzzleFlash", PhotonTargets.All);
         for (int i = 0; i < stats.bulletAmount; i++)
         {
-            Vector3 addDirection = new Vector3(Random.Range(-stats.spread, stats.spread), Random.Range(-stats.spread, stats.spread), Random.Range(-stats.spread, stats.spread));
-            if (zoomed)
-                addDirection /= 2;
-            RaycastHit hit = new RaycastHit();
-            if (Physics.Raycast(transform.position, transform.forward + addDirection ,out hit, Mathf.Infinity))
+            if(slot.currentAmmo > 0)
             {
-                if (hit.transform.tag == playerTag)
-                    hit.transform.GetComponent<PhotonView>().RPC("DamagePlayer", PhotonTargets.All, PhotonNetwork.playerName, stats.damage);
-                GameObject.FindWithTag(managerTag).GetComponent<ImpactManager>().SendImpactInfo(hit.collider.material, hit);
+                weaponDisplay.photonView.RPC("ShowMuzzleFlash", PhotonTargets.All);
+                Vector3 addDirection = new Vector3(Random.Range(-stats.spread, stats.spread), Random.Range(-stats.spread, stats.spread), Random.Range(-stats.spread, stats.spread));
+                if (zoomed)
+                    addDirection /= 2;
+                RaycastHit hit = new RaycastHit();
+                if (Physics.Raycast(transform.position, transform.forward + addDirection, out hit, Mathf.Infinity))
+                {
+                    if (hit.transform.tag == playerTag)
+                        hit.transform.GetComponent<PhotonView>().RPC("DamagePlayer", PhotonTargets.All, PhotonNetwork.playerName, stats.damage);
+                    GameObject.FindWithTag(managerTag).GetComponent<ImpactManager>().SendImpactInfo(hit.collider.material, hit);
+                }
             }
+            slot.currentAmmo--;
 
             if (stats.fireType != WeaponStats.FireTypes.Burst && i == 0)
                 StartCoroutine(Recoil());
@@ -97,15 +129,26 @@ public class Weapon : Photon.MonoBehaviour
         allowFire = true;
     }
 
-    public void AttachmentStatsChange(WeaponStats _stats)
+    public void AttachmentStatsChange(WeaponStats _stats, int index)
     {
-        WeaponStats tempStats = new WeaponStats(stats);
+        WeaponStats tempStats = new WeaponStats((index == 1)? weapon1.stats : weapon2.stats);
         tempStats.damage += _stats.damage;
         tempStats.fireRate += _stats.fireRate;
         tempStats.spread += _stats.spread;
         tempStats.clipSize += _stats.clipSize;
         tempStats.burstDelay += _stats.bulletAmount;
         tempStats.recoil += _stats.recoil;
-        stats = tempStats;
+        tempStats.reloadTime = _stats.reloadTime;
+        if (index == 1)
+            weapon1.stats = tempStats;
+        else
+            weapon2.stats = tempStats;
+    }
+
+    [System.Serializable]
+    public class WeaponIngameSlot
+    {
+        public WeaponStats stats;
+        public int currentAmmo;
     }
 }

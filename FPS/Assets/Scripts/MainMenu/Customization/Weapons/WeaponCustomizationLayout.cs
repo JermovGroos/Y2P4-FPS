@@ -35,6 +35,7 @@ public class WeaponStats
     public float fireRate;
     public float spread;
     public int clipSize;
+    public float reloadTime;
     [Range(1, 20)]
     public int bulletAmount;
     public float burstDelay;
