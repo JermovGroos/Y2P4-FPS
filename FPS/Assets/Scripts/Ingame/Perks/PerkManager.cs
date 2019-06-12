@@ -12,16 +12,25 @@ public class PerkManager : MonoBehaviour
         //Get value of requested variable
         Component component = holder.GetComponent(perk.className); //Get component
         FieldInfo field = component.GetType().GetField(perk.variableName); //Get field
-        float value = (float)field.GetValue(component); //Get value
+        float oldValue = (float)field.GetValue(component); //Get value
 
         //Add value to said variable
-        value *= perk.toMultiply; //Multiply current value with perk multiplier
-        value += perk.toAdd; //Add perk value to current value
+        float newValue = oldValue; //Create new value variable
+        newValue *= perk.toMultiply; //Multiply current value with perk multiplier
+        newValue += perk.toAdd; //Add perk value to current value
 
         //Set new value
-        field.SetValue(component, value); //Set variable
+        field.SetValue(component, oldValue); //Set variable
 
         //Add perk to active perks
-        activePerks.Add(perk);
+        activePerks.Add(perk); //Add perk to active perks
+
+        //Log to console
+        print("Successfully changed " + component.name + "." + field.Name + " on " + holder.name + " from " + oldValue + " to " + newValue);
+    }
+
+    public void RemovePerk(GameObject holder, Perk perk)
+    {
+
     }
 }
