@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PerkManager : MonoBehaviour
 {
-    public List<Perk> perks = new List<Perk>();
+    public List<Perk> activePerks = new List<Perk>();
 
     public void ApplyPerk(GameObject holder, Perk perk)
     {
@@ -20,5 +20,8 @@ public class PerkManager : MonoBehaviour
 
         //Set new value
         field.SetValue(component, value); //Set variable
+
+        //Add perk to active perks
+        activePerks.Add(perk);
     }
 }

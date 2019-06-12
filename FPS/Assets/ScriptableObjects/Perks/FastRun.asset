@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6876b6931e19ec848877b5b505adfac9, type: 3}
-  m_Name: _Temp
+  m_Name: FastRun
   m_EditorClassIdentifier: 
+  name: 
+  description: 
+  cost: 0
   className: 
   variableName: 
   toAdd: 0

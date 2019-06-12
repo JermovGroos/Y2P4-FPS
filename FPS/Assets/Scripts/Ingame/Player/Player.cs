@@ -25,20 +25,14 @@ public class Player : Photon.MonoBehaviour
     public Vector3 crouchingColliderCenter; //Center of the box collider when crouching
     public Vector3 crouchingColliderSize; //Size of the box collider when crouching
 
-    [Header("OldMovement")]
-    public float mainSpeed = 15; //Speed of the player
-    public float sprintMultiplier = 1.3f; //Multiplication of speed when sprinting
-    public float crouchMultiplier = 0.75f; //Multiplication of speed when crouching
-    public float inAirMultiplier = 0.2f; //Multiplication of speed when in-air
+    [Header("Movement")]
+    public float walkSpeed = 5; //Speed of the player when walking
+    public float runSpeed = 10; //Speed of the player when running
+    public float crouchSpeed = 2.75f; //Speed of the player when crouching
+    public float speedDampTime = 0.25f; //Time to damp the speed with
     public bool movementAllowed = true; //Check if movement is allowed
     bool isGrounded; //Check if grounded
     Vector3 movementVector; //Movement vector of player
-
-    [Header("NewMovement")]
-    public float walkSpeed = 15;
-    public float runSpeed = 20;
-    public float crouchSpeed = 7.5f;
-    public float speedDampTime = 0.1f;
 
     [Space(10)]
     public float jumpForce = 250; //Force of the jump
