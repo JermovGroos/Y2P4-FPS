@@ -19,6 +19,12 @@ public class Player : Photon.MonoBehaviour
     public Armor playerArmor; //Armor of the player
     public List<Damage> damages = new List<Damage>();
 
+    [Header("Colliders")]
+    public Vector3 standingColliderCenter; //Center of the box collider when standing
+    public Vector3 standingColliderSize; //Size of the box collider when standing
+    public Vector3 crouchingColliderCenter; //Center of the box collider when crouching
+    public Vector3 crouchingColliderSize; //Size of the box collider when crouching
+
     [Header("OldMovement")]
     public float mainSpeed = 15; //Speed of the player
     public float sprintMultiplier = 1.3f; //Multiplication of speed when sprinting
