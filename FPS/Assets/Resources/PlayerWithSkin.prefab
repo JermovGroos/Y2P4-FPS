@@ -421,6 +421,7 @@ MonoBehaviour:
   standardFov: 60
   zoomedFov: 50
   reload: Reload
+  weaponSwitch: Mouse ScrollWheel
 --- !u!114 &2570483605781345891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3149,10 +3150,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7489533460964251746}
     m_Modifications:
-    - target: {fileID: 100000, guid: c64ce0339417c774c8b7e550c7cdf8d4, type: 3}
-      propertyPath: m_Name
-      value: Helmet LP
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c64ce0339417c774c8b7e550c7cdf8d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.002515636
@@ -3197,6 +3194,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c64ce0339417c774c8b7e550c7cdf8d4, type: 3}
+      propertyPath: m_Name
+      value: Helmet LP
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c64ce0339417c774c8b7e550c7cdf8d4, type: 3}
 --- !u!4 &1357854444663869117 stripped
@@ -3212,10 +3213,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7489533460964251746}
     m_Modifications:
-    - target: {fileID: 100000, guid: d4e616ef9af8d6c4bbdc271f8d3186e1, type: 3}
-      propertyPath: m_Name
-      value: Light Amor LP
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d4e616ef9af8d6c4bbdc271f8d3186e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0027262592
@@ -3259,6 +3256,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: d4e616ef9af8d6c4bbdc271f8d3186e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d4e616ef9af8d6c4bbdc271f8d3186e1, type: 3}
+      propertyPath: m_Name
+      value: Light Amor LP
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4e616ef9af8d6c4bbdc271f8d3186e1, type: 3}

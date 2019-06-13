@@ -25,6 +25,7 @@ public class Weapon : Photon.MonoBehaviour
     public float standardFov;
     public float zoomedFov;
     public string reload;
+    public string weaponSwitch;
 
     public void Start()
     {
@@ -32,6 +33,7 @@ public class Weapon : Photon.MonoBehaviour
         CalculateStats(0);
         CalculateStats(1);
         weapon1.currentAmmo = weapon1.stats.clipSize;
+        weapon2.currentAmmo = weapon2.stats.clipSize;
         currentlySelected = 1;
     }
 
@@ -68,6 +70,22 @@ public class Weapon : Photon.MonoBehaviour
             StartCoroutine(Reload());
         else if (Input.GetButtonDown(reload))
             Debug.Log(allowFire + "   /   " + slot.currentAmmo + "   " + stats.clipSize);
+        if(Input.GetButtonDown(weaponSwitch) && allowFire)
+        {
+            if (currentlySelected == 1)
+                currentlySelected = 2;
+            else
+                currentlySelected = 1;
+        }
+    }
+
+    public IEnumerator WeaponSwitch(int switchTo, int speed)
+    {
+        allowFire = false;
+        currentlySelected = switchTo;
+        weaponDisplay.Display(switchTo - 1);
+        yield return new WaitForSeconds(speed);
+        allowFire = true;
     }
 
     public IEnumerator Reload()
