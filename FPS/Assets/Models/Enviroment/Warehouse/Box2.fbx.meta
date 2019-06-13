@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 91951d4210171074c9db2f379be2c555
+guid: a3087f9e4ddc3d24dbeee8ef2f57fa96
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: No Name
+    2100000: Boxes1 Box
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Beam.002
+    4300000: Box2
   externalObjects: {}
   materials:
     importMaterials: 1
