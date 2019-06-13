@@ -70,16 +70,17 @@ public class Weapon : Photon.MonoBehaviour
             StartCoroutine(Reload());
         else if (Input.GetButtonDown(reload))
             Debug.Log(allowFire + "   /   " + slot.currentAmmo + "   " + stats.clipSize);
-        if(Input.GetButtonDown(weaponSwitch) && allowFire)
+        if (Input.GetAxis(weaponSwitch) != 0 && allowFire)
         {
             if (currentlySelected == 1)
                 currentlySelected = 2;
             else
                 currentlySelected = 1;
+            StartCoroutine(WeaponSwitch(currentlySelected, 0.2f));
         }
     }
 
-    public IEnumerator WeaponSwitch(int switchTo, int speed)
+    public IEnumerator WeaponSwitch(int switchTo, float speed)
     {
         allowFire = false;
         currentlySelected = switchTo;
