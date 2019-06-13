@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class PerkManager : MonoBehaviour
 {
-    public List<Perk> activePerks = new List<Perk>();
+    public List<Perk> activePerks = new List<Perk>(); //List of active perks
 
-    public void ApplyPerk(GameObject holder, Perk perk)
+    public virtual void ApplyPerk(GameObject holder, Perk perk)
     {
         if (!activePerks.Contains(perk))
         {
@@ -32,7 +32,7 @@ public class PerkManager : MonoBehaviour
         }
     }
 
-    public void RemovePerk(GameObject holder, Perk perk)
+    public virtual void RemovePerk(GameObject holder, Perk perk)
     {
         if (activePerks.Contains(perk))
         {
