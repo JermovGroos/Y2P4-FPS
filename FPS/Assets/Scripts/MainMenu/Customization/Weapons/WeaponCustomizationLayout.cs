@@ -40,6 +40,7 @@ public class WeaponStats
     public int bulletAmount;
     public float burstDelay;
     public float recoil;
+    public float switchSpeed;
 
     public WeaponStats()
     {
@@ -63,5 +64,6 @@ public class WeaponStats
         bulletAmount = copyStats.bulletAmount;
         burstDelay = copyStats.burstDelay;
         recoil = copyStats.recoil;
+        switchSpeed = copyStats.switchSpeed;
     }
 }

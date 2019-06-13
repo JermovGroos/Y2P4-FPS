@@ -76,15 +76,16 @@ public class Weapon : Photon.MonoBehaviour
                 currentlySelected = 2;
             else
                 currentlySelected = 1;
-            StartCoroutine(WeaponSwitch(currentlySelected, 0.2f));
+            StartCoroutine(WeaponSwitch(currentlySelected));
         }
     }
 
-    public IEnumerator WeaponSwitch(int switchTo, float speed)
+    public IEnumerator WeaponSwitch(int switchTo)
     {
         allowFire = false;
         currentlySelected = switchTo;
         weaponDisplay.Display(switchTo - 1);
+        float speed = (currentlySelected == 1) ? weapon1.stats.switchSpeed : weapon2.stats.switchSpeed;
         yield return new WaitForSeconds(speed);
         allowFire = true;
     }
@@ -157,7 +158,8 @@ public class Weapon : Photon.MonoBehaviour
         tempStats.clipSize += _stats.clipSize;
         tempStats.burstDelay += _stats.bulletAmount;
         tempStats.recoil += _stats.recoil;
-        tempStats.reloadTime = _stats.reloadTime;
+        tempStats.reloadTime += _stats.reloadTime;
+        tempStats.switchSpeed += _stats.switchSpeed;
         if (index == 0)
             weapon1.stats = tempStats;
         else

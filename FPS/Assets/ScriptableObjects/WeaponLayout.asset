@@ -25,9 +25,11 @@ MonoBehaviour:
         fireRate: 0
         spread: 0.01
         clipSize: 0
+        reloadTime: 0
         bulletAmount: 1
         burstDelay: 0
         recoil: 0.5
+        switchSpeed: 0
       sprite: {fileID: 0}
     - objName: Silencer
       addStats:
@@ -36,9 +38,11 @@ MonoBehaviour:
         fireRate: 0
         spread: -0.008
         clipSize: 0
+        reloadTime: 0
         bulletAmount: 0
         burstDelay: 0
         recoil: 0
+        switchSpeed: 0
       sprite: {fileID: 0}
     magazines:
     - objName: Standard
@@ -48,9 +52,11 @@ MonoBehaviour:
         fireRate: 0
         spread: 0
         clipSize: 0
+        reloadTime: 0
         bulletAmount: 0
         burstDelay: 0
         recoil: 0
+        switchSpeed: 0
       sprite: {fileID: 0}
     - objName: Extended Magazine
       addStats:
@@ -59,9 +65,11 @@ MonoBehaviour:
         fireRate: 0
         spread: 0
         clipSize: 0
+        reloadTime: 0
         bulletAmount: 0
         burstDelay: 0
         recoil: 0
+        switchSpeed: 0
       sprite: {fileID: 0}
     stats:
       fireType: 2
@@ -69,9 +77,11 @@ MonoBehaviour:
       fireRate: 0.16
       spread: 0.05
       clipSize: 20
+      reloadTime: 0.7
       bulletAmount: 1
       burstDelay: 1
       recoil: 3
+      switchSpeed: 0.2
   - weaponName: p320
     weaponSprite: {fileID: 21300000, guid: 89c343a2b30f57b4c83de44c10b835c9, type: 3}
     baseWeapon: {fileID: 7968917247841594564, guid: 8de75666e4215e44280a586a1fdc7aa5,
@@ -84,9 +94,11 @@ MonoBehaviour:
         fireRate: 0
         spread: 0
         clipSize: 0
+        reloadTime: 0
         bulletAmount: 0
         burstDelay: 0
         recoil: 0
+        switchSpeed: 0
       sprite: {fileID: 0}
     - objName: Silencer
       addStats:
@@ -95,9 +107,11 @@ MonoBehaviour:
         fireRate: 0
         spread: 0
         clipSize: 0
+        reloadTime: 0
         bulletAmount: 0
         burstDelay: 0
         recoil: 0
+        switchSpeed: 0
       sprite: {fileID: 0}
     magazines:
     - objName: Standard
@@ -107,9 +121,11 @@ MonoBehaviour:
         fireRate: 0
         spread: 0
         clipSize: 0
+        reloadTime: 0
         bulletAmount: 0
         burstDelay: 0
         recoil: 0
+        switchSpeed: 0
       sprite: {fileID: 0}
     - objName: Extended Clip
       addStats:
@@ -118,16 +134,20 @@ MonoBehaviour:
         fireRate: 0
         spread: 0
         clipSize: 0
+        reloadTime: 0
         bulletAmount: 0
         burstDelay: 0
         recoil: 0
+        switchSpeed: 0
       sprite: {fileID: 0}
     stats:
       fireType: 0
-      damage: 0
-      fireRate: 0
-      spread: 0
-      clipSize: 0
-      bulletAmount: 0
+      damage: 20
+      fireRate: 0.06
+      spread: 0.01
+      clipSize: 16
+      reloadTime: 0.4
+      bulletAmount: 1
       burstDelay: 0
-      recoil: 0
+      recoil: 2.6
+      switchSpeed: 0.1
