@@ -52,12 +52,15 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
         }
         //Checks in what team the killed person was
         bool killedInTeam1 = false;
+        Debug.Log(killed);
+        Debug.Log((currentRoundType == RoundType.Round) + " Round");
         foreach(PlayerInfo player in team1.players)
             if(player.playerInfo.NickName == killed)
             {
                 player.deaths++;
                 if(currentRoundType == RoundType.Round)
                 {
+                    Debug.Log("KilledInTeam1");
                     player.isDead = true;
                     killedInTeam1 = true;
                 }
@@ -70,6 +73,7 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
                     player.deaths++;
                     if (currentRoundType == RoundType.Round)
                         player.isDead = true;
+                    Debug.Log("KilledInTeam2");
                     break;
                 }
         //Gets the assisters name if there was an assist

@@ -429,11 +429,9 @@ public class Player : Photon.MonoBehaviour
                     index += 1;
                 }
 
-                if (gameInfoManager.allowRespawn || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Waiting || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Warmup)
-                    //gameInfoManager.Respawn();
-                    GameObject.FindWithTag(gameInfoManagerTag).GetComponent<PhotonView>().RPC("PlayerKilled", PhotonTargets.MasterClient, PhotonNetwork.playerName, damager, damageAmounts, damagers);
+                GameObject.FindWithTag(gameInfoManagerTag).GetComponent<PhotonView>().RPC("PlayerKilled", PhotonTargets.MasterClient, PhotonNetwork.playerName, damager, damageAmounts, damagers);
 
-                if (gameInfoManager.currentRoundType == GameInfoManager.RoundType.Warmup || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Waiting)
+                if (gameInfoManager.allowRespawn || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Waiting || gameInfoManager.currentRoundType == GameInfoManager.RoundType.Warmup)
                     gameInfoManager.Respawn();
                 else
                     PhotonNetwork.Destroy(gameObject);
