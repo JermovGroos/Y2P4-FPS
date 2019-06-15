@@ -7,6 +7,13 @@ public class WeaponDisplay : Photon.MonoBehaviour
     public WeaponCustomizationLayout layout;
     public WeaponCustomizations weapon;
     public Transform weaponLocation;
+    public Weapon weapons;
+
+    public void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+    {
+        if (photonView.isMine)
+            Display(weapons.currentlySelected - 1);
+    }
 
     public void Start()
     {
@@ -26,7 +33,8 @@ public class WeaponDisplay : Photon.MonoBehaviour
     [PunRPC]
     public void ShowMuzzleFlash()
     {
-        weapon.muzzleFlash.GetComponent<ParticleSystem>().Play();
+        if(weapon)
+            weapon.muzzleFlash.GetComponent<ParticleSystem>().Play();
     }
 
     [PunRPC]
