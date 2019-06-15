@@ -4,17 +4,19 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Roof Glass.001
+    100002: Roof
+    100004: Roof Glass
     400000: //RootNode
-    400002: Roof Glass.001
-    2100000: No Name
+    400002: Roof
+    400004: Roof Glass
+    2100000: Roof
     2100002: Glass
-    2300000: //RootNode
-    2300002: Roof Glass.001
-    3300000: //RootNode
-    3300002: Roof Glass.001
-    4300000: Roof.001
-    4300002: Roof Glass.001
+    2300000: Roof
+    2300002: Roof Glass
+    3300000: Roof
+    3300002: Roof Glass
+    4300000: Roof
+    4300002: Roof Glass
   externalObjects: {}
   materials:
     importMaterials: 1
