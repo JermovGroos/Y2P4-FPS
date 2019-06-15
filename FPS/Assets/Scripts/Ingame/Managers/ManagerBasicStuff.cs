@@ -61,7 +61,7 @@ public class ManagerBasicStuff : Photon.MonoBehaviour
                 if (manager.yourPlayer)
                     PhotonNetwork.Destroy(manager.yourPlayer);
                 manager.yourPlayer = PhotonNetwork.Instantiate(playerObject, victoryScreenSpawnPoints[i].position, victoryScreenSpawnPoints[i].rotation, 0);
-                manager.yourPlayer.GetComponent<TempMovement>().allowMovment = false;
+                manager.yourPlayer.GetComponent<Player>().movementAllowed = false;
                 break;
             }
     }
