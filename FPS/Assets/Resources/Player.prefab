@@ -700,6 +700,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4787286544303165094}
   - component: {fileID: 4787286544310624582}
+  - component: {fileID: 533314152}
+  - component: {fileID: 533314151}
+  - component: {fileID: 533314150}
+  - component: {fileID: 533314149}
+  - component: {fileID: 533314148}
+  - component: {fileID: 533314147}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -741,7 +747,7 @@ Animator:
   m_GameObject: {fileID: 4787286544303329926}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 9c8f5e9e29f423c4b97e250e45f0ca6b, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 00b32d110caab2c419a1082e984af29c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -750,6 +756,168 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &533314152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787286544303329926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de6d24de3c953e428bad9bb53f28c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocal: 0
+  networkLerpSmoothing: 5
+  shadowsOnlyIfLocal:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mainHealth: 100
+  health: 0
+  playerArmor: {fileID: 11400000, guid: 6da65139796a52c449f5c6d876517a7d, type: 2}
+  damages: []
+  standingColliderCenter: {x: 0, y: 0.9418758, z: 0.005770117}
+  standingColliderSize: {x: 1, y: 1.885721, z: 0.4229839}
+  crouchingColliderCenter: {x: 0, y: 0.6615006, z: 0.005770117}
+  crouchingColliderSize: {x: 1, y: 1.324971, z: 0.4229839}
+  walkSpeed: 5
+  runSpeed: 10
+  crouchSpeed: 2.75
+  speedDampTime: 0.25
+  movementAllowed: 1
+  jumpForce: 250
+  jumpBoxCheckSize: {x: 0.4, y: 0.05, z: 0.2}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  meleeRange: 1
+  meleeDamage: 10
+  meleeCooldown: 3
+  sceneCameraTag: SceneCamera
+  playerCam: {fileID: 6423171724280886091}
+  sensitivity: 100
+  clampRotation: {x: -70, y: 70}
+  standingCamHeight: 1.75
+  crouchingCamHeight: 1.15
+  camDampTime: 0.05
+  minimapCam: {fileID: 3710175116358824195}
+  animator: {fileID: 4787286544310624582}
+  idleTrigger: Idle
+  walkingTrigger: Walk
+  sprintingTrigger: Sprint
+  minimapSprite: {fileID: 6357670557542508156}
+  teammateSpriteColor: {r: 0, g: 0.56514657, b: 0.7411765, a: 1}
+  enemySpriteColor: {r: 0.6415094, g: 0.04538981, b: 0.04538981, a: 1}
+  gameInfoManagerTag: Manager
+--- !u!65 &533314151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787286544303329926}
+  m_Material: {fileID: 13400000, guid: 80315d3134c41354f8115f2fdd0f56f8, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.8857214, z: 0.42298394}
+  m_Center: {x: 0, y: 0.9418758, z: 0.005770117}
+--- !u!54 &533314150
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787286544303329926}
+  serializedVersion: 2
+  m_Mass: 75
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &533314149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787286544303329926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 533314152}
+  - {fileID: 533314148}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
+--- !u!114 &533314148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787286544303329926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 1
+    SynchronizeType: 2
+    Name: Forward
+  - Type: 1
+    SynchronizeType: 2
+    Name: Side
+  - Type: 4
+    SynchronizeType: 2
+    Name: Crouched
+  - Type: 9
+    SynchronizeType: 2
+    Name: Grounded
+  - Type: 9
+    SynchronizeType: 2
+    Name: Jump
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
+--- !u!114 &533314147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787286544303329926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e665ab75288614ea6dc059672ce767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layout: {fileID: 11400000, guid: d13c0c7f1038e30419701f6f32024ce4, type: 2}
+  weapon: {fileID: 0}
+  weaponLocation: {fileID: 0}
+  weapons: {fileID: 0}
 --- !u!1 &4787286544303329928
 GameObject:
   m_ObjectHideFlags: 0
