@@ -415,6 +415,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1275839142}
   m_PrefabAsset: {fileID: 0}
+--- !u!132 &80089263
+GUIText:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80089262}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: 
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: a107b0facba65584a8d658ec0aaf6f4f, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!64 &80089265
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6248,7 +6272,7 @@ MonoBehaviour:
   gameVersion: 0.1
   roomName: ThimoTest
   maxPlayers: 4
-  playerResourceName: PlayerWithSkin
+  playerResourceName: Player
   spawnPoints:
   - {fileID: 1704791794}
   - {fileID: 1974288038}
