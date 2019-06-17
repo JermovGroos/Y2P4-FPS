@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1908225232227732171}
   - component: {fileID: 1908225232228535019}
   - component: {fileID: 1908225232229500971}
+  - component: {fileID: 7453878334531698303}
+  - component: {fileID: 9112642971637956013}
   m_Layer: 0
   m_Name: Pillar Wall
   m_TagString: Untagged
@@ -77,3 +79,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &7453878334531698303
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908225232227309291}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1690791, y: 4.068391, z: 3.1271093}
+  m_Center: {x: 0.6234375, y: 2.0342436, z: 0.23680484}
+--- !u!65 &9112642971637956013
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908225232227309291}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.76168, y: 4.068391, z: 1.2584252}
+  m_Center: {x: 0.32713693, y: 2.0342436, z: -0.6975375}

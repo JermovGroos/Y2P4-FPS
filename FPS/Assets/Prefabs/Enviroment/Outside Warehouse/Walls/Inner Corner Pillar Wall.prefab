@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2554061188312947898}
   - component: {fileID: 2554061188316339354}
   - component: {fileID: 2554061188315242074}
+  - component: {fileID: 8519167016653941008}
+  - component: {fileID: 5142879301419469153}
   m_Layer: 0
   m_Name: Inner Corner Pillar Wall
   m_TagString: Untagged
@@ -57,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5adee1e27888030468e6ca9753e788b4, type: 3}
+  - {fileID: 2100000, guid: fcd16979a28ca264ebdbde19584386d5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,3 +79,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8519167016653941008
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2554061188313301146}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 3.0693235, y: 4.068392, z: 3.0278182}
+  m_Center: {x: 0.93725866, y: 2.034244, z: -0.7648623}
+--- !u!65 &5142879301419469153
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2554061188313301146}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1481912, y: 4.068392, z: 1.0915158}
+  m_Center: {x: -0.3191899, y: 2.034244, z: 0.45782673}
