@@ -107,7 +107,7 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
 
     //Respawn
     ///Respawns you on the right team
-    public void Respawn()
+    public virtual void Respawn()
     {
         if (yourPlayer)
             PhotonNetwork.Destroy(yourPlayer);
@@ -192,7 +192,7 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
         currentRoundType = RoundType.Waiting;
     }
 
-    public void OnPhotonPlayerDisconnected(PhotonPlayer player)
+    public virtual void OnPhotonPlayerDisconnected(PhotonPlayer player)
     {
         if (PhotonNetwork.isMasterClient)
         {
@@ -215,7 +215,7 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
     //OnJoinedRoom
     ///Calls the startFunction
     ///Sometimes the player isnt connected while he is in the scene, this is a failsave
-    public void OnJoinedRoom()
+    public virtual void OnJoinedRoom()
     {
         Start();
         if (!PhotonNetwork.isMasterClient)
