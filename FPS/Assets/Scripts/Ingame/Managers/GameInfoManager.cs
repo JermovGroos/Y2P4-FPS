@@ -305,7 +305,7 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
 
     //SerializeMatchData
     ///This is called if the master client wants to serialize the game data to all connected players
-    public void SerializeMatchData()
+    public virtual void SerializeMatchData()
     {
         if (PhotonNetwork.isMasterClient)
         {

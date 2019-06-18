@@ -9,6 +9,7 @@ public class DeathmatchGameManager : GameInfoManager
     public float spawnRange;
     public LayerMask spawnLayer;
 
+   [PunRPC, HideInInspector]
     public override void GameWon(int winnerIndex)
     {
         
@@ -33,8 +34,12 @@ public class DeathmatchGameManager : GameInfoManager
 
     public override bool CheckIfGameWon()
     {
-        //GameWonCheck
-        return false;
+        int mostKills = 0;
+        for (int i = 0; i < players.Count; i++)
+            if (players[i].kills >= players[mostKills].kills)
+                mostKills = i;
+        photonView.RPC("GameWon", PhotonTargets.All, mostKills);
+        return true;
     }
 
     public override void Start()
@@ -110,5 +115,59 @@ public class DeathmatchGameManager : GameInfoManager
                 players.RemoveAt(i);
                 break;
             }
+    }
+
+    public override void PlayerKilled(string killed, string killer, float[] damageDone, string[] damageingPlayers)
+    {
+        //Checks if there was an assist
+        bool isAssisted = false;
+        List<float> damageDoneList = new List<float>(damageDone);
+        List<string> damageingPlayersList = new List<string>(damageingPlayers);
+        if (damageingPlayers.Length > 1)
+        {
+            isAssisted = true;
+            for (int i = 0; i < damageingPlayersList.Count; i++)
+                if (damageingPlayersList[i] == killer)
+                {
+                    damageDoneList.RemoveAt(i);
+                    damageingPlayersList.RemoveAt(i);
+                    break;
+                }
+        }
+
+        string assisterName = "";
+        if (isAssisted)
+        {
+            int bestDamage = 0;
+            for (int i = 0; i < damageDoneList.Count; i++)
+                if (damageDoneList[i] >= damageDoneList[bestDamage])
+                    bestDamage = i;
+            assisterName = damageingPlayersList[bestDamage];
+        }
+
+        foreach(PlayerInfo player in players)
+            if (player.playerInfo.NickName == killed)
+                player.deaths++;
+            else if (player.playerInfo.NickName == killer)
+                player.kills++;
+            else if (isAssisted && player.playerInfo.NickName == assisterName)
+                player.assists++;
+
+        string message = killer + (isAssisted ? " + " + assisterName : "") + " Killed " + killed;
+        photonView.RPC("KillFeed", PhotonTargets.All, message);
+
+        SerializeMatchData();
+    }
+
+    public override void SerializeMatchData()
+    {
+        if (PhotonNetwork.isMasterClient)
+            photonView.RPC("DeserializeDeathMatchData", PhotonTargets.All, players.ToArray());
+    }
+
+    [PunRPC,HideInInspector]
+    public void DeserializeDeathMatchData(PlayerInfo[] playerInfos)
+    {
+        players = new List<PlayerInfo>(playerInfos);
     }
 }

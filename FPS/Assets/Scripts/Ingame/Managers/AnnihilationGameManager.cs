@@ -19,7 +19,6 @@ public class AnnihilationGameManager : GameInfoManager
     {
         base.PlayerKilled(killed, killer, damageDone, damageingPlayers);
 
-
         if (currentRoundType == RoundType.Round)
             CheckIfSOmeoneWon();
     }
