@@ -117,6 +117,7 @@ public class DeathmatchGameManager : GameInfoManager
             }
     }
 
+    [PunRPC,HideInInspector]
     public override void PlayerKilled(string killed, string killer, float[] damageDone, string[] damageingPlayers)
     {
         //Checks if there was an assist
