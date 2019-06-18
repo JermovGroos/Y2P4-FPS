@@ -19,6 +19,7 @@ public class DeathmatchGameManager : GameInfoManager
         Respawn();
         if (PhotonNetwork.isMasterClient)
             photonView.RPC("SendRoundMessage", PhotonTargets.All, "Round has started.");
+        basic.currentRound.text = "Score: 0";
         for (int i = 0; i < remainingTime; i++)
         {
             waitingTime = roundTime - i - (roundTime - remainingTime);
@@ -40,6 +41,10 @@ public class DeathmatchGameManager : GameInfoManager
     {
         base.Start();
         basic.teams.SetActive(false);
+        basic.team1Wins.gameObject.SetActive(false);
+        basic.team1Alive.gameObject.SetActive(false);
+        basic.team2Wins.gameObject.SetActive(false);
+        basic.team2Alive.gameObject.SetActive(false);
     }
     public override void OnJoinedRoom()
     {
@@ -95,5 +100,15 @@ public class DeathmatchGameManager : GameInfoManager
         }
         photonView.RPC("StartWarmup", PhotonTargets.All);
         currentRoundType = RoundType.Warmup;
+    }
+
+    public override void OnPhotonPlayerDisconnected(PhotonPlayer player)
+    {
+        for (int i = 0; i < players.Count; i++)
+            if(players[i].playerInfo.NickName == player.NickName)
+            {
+                players.RemoveAt(i);
+                break;
+            }
     }
 }

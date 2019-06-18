@@ -5207,7 +5207,7 @@ MonoBehaviour:
     teamwins: 0
     players: []
   warmupTime: 30
-  playersNeededATeam: 2
+  playersNeededATeam: 1
   roundTime: 60
   allowRespawn: 1
   basic: {fileID: 0}
