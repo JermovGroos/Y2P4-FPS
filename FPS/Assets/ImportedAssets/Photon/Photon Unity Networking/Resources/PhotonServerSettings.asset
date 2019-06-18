@@ -55,4 +55,5 @@ MonoBehaviour:
   - SpawnParticle
   - DisplayWeapon
   - ShowMuzzleFlash
+  - DeserializeDeathMatchData
   DisableAutoOpenWizard: 1
