@@ -771,10 +771,12 @@ MonoBehaviour:
   isLocal: 0
   networkLerpSmoothing: 5
   shadowsOnlyIfLocal:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4787286544314900358}
+  - {fileID: 4787286544314900356}
+  - {fileID: 4787286544314900354}
+  - {fileID: 4787286544314900352}
+  - {fileID: 4787286544314900366}
+  - {fileID: 4787286544314900364}
   mainHealth: 100
   health: 0
   playerArmor: {fileID: 11400000, guid: 6da65139796a52c449f5c6d876517a7d, type: 2}
