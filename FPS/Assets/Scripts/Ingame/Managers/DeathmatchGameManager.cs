@@ -7,6 +7,7 @@ public class DeathmatchGameManager : GameInfoManager
     public List<PlayerInfo> players;
     public Transform[] spawnPoints;
     public float spawnRange;
+    public LayerMask spawnLayer;
 
     public override void GameWon(int winnerIndex)
     {
@@ -15,6 +16,7 @@ public class DeathmatchGameManager : GameInfoManager
 
     public override IEnumerator RoundTimer(int remainingTime)
     {
+        Respawn();
         if (PhotonNetwork.isMasterClient)
             photonView.RPC("SendRoundMessage", PhotonTargets.All, "Round has started.");
         for (int i = 0; i < remainingTime; i++)
@@ -38,17 +40,18 @@ public class DeathmatchGameManager : GameInfoManager
     {
         base.Start();
         basic.teams.SetActive(false);
-        if (PhotonNetwork.isMasterClient)
-        {
-            PlayerInfo inf = new PlayerInfo();
-            inf.playerInfo = PhotonNetwork.player;
-            players.Add(inf);
-        }
     }
     public override void OnJoinedRoom()
     {
         if (!PhotonNetwork.isMasterClient)
             photonView.RPC("AskForJoiningInformation", PhotonTargets.MasterClient, PhotonNetwork.playerName);
+        else
+        {
+            PlayerInfo inf = new PlayerInfo();
+            inf.playerInfo = PhotonNetwork.player;
+            players.Add(inf);
+            StartCoroutine(CheckForEnoughPlayers());
+        }
         Respawn();
     }
 
@@ -71,12 +74,26 @@ public class DeathmatchGameManager : GameInfoManager
         while (true)
         {
             index = Random.Range(0, spawnPoints.Length);
-            if (!Physics.CheckSphere(spawnPoints[index].transform.position, spawnRange))
+            if (!Physics.CheckSphere(spawnPoints[index].transform.position, spawnRange, spawnLayer))
             {
                 Transform spawnPos = spawnPoints[index];
                 yourPlayer = PhotonNetwork.Instantiate(basic.playerObject, spawnPos.position, spawnPos.rotation, 0);
                 break;
             }
         }
+    }
+
+    public override IEnumerator CheckForEnoughPlayers()
+    {
+        bool b = true;
+        Debug.Log("StartedCheckingForPlaying");
+        while (b)
+        {
+            if (players.Count >= playersNeededATeam)
+                b = false;
+            yield return null;
+        }
+        photonView.RPC("StartWarmup", PhotonTargets.All);
+        currentRoundType = RoundType.Warmup;
     }
 }

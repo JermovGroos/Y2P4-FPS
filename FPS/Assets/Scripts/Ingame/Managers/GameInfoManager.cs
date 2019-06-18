@@ -224,7 +224,7 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
 
     //EnoughPlayerCheck
     ///Checks if there are enough players in both teams
-    public IEnumerator CheckForEnoughPlayers()
+    public virtual IEnumerator CheckForEnoughPlayers()
     {
         bool b = true;
         while (b)

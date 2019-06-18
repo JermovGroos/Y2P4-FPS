@@ -5207,7 +5207,7 @@ MonoBehaviour:
     teamwins: 0
     players: []
   warmupTime: 30
-  playersNeededATeam: 0
+  playersNeededATeam: 2
   roundTime: 60
   allowRespawn: 1
   basic: {fileID: 0}
@@ -5233,6 +5233,9 @@ MonoBehaviour:
   - {fileID: 1591740640}
   - {fileID: 1689878395}
   spawnRange: 3
+  spawnLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &902243678
 GameObject:
   m_ObjectHideFlags: 0
