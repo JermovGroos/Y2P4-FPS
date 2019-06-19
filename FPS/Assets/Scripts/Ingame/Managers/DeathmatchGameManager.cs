@@ -59,12 +59,7 @@ public class DeathmatchGameManager : GameInfoManager
         else
         {
             PlayerInfo inf = new PlayerInfo();
-            foreach (PhotonPlayer pl in PhotonNetwork.playerList)
-                if (pl.NickName == PhotonNetwork.playerName)
-                {
-                    inf.playerInfo = pl;
-                    break;
-                }
+            inf.playerInfo = PhotonNetwork.player;
             players.Add(inf);
             StartCoroutine(CheckForEnoughPlayers());
         }
@@ -76,12 +71,7 @@ public class DeathmatchGameManager : GameInfoManager
         if (PhotonNetwork.isMasterClient)
         {
             PlayerInfo inf = new PlayerInfo();
-            foreach (PhotonPlayer pl in PhotonNetwork.playerList)
-                if (pl.NickName == joinedPlayer.NickName)
-                {
-                    inf.playerInfo = pl;
-                    break;
-                }
+            inf.playerInfo = joinedPlayer;
             players.Add(inf);
             SerializeMatchData();
         }
@@ -189,7 +179,9 @@ public class DeathmatchGameManager : GameInfoManager
     {
         foreach (PlayerInfo player in players)
         {
-            if (player.playerInfo.NickName == PhotonNetwork.playerName)
+            if (player == null)
+                Debug.Log("Player Not Excisting");
+            else if (player.playerInfo.NickName == PhotonNetwork.playerName)
             {
                 basic.currentRound.text = "Score: " + player.kills;
                 break;
