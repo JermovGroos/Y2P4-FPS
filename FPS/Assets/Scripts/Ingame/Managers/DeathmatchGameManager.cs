@@ -173,7 +173,7 @@ public class DeathmatchGameManager : GameInfoManager
         players = new List<PlayerInfo>(playerInfos);
 
         foreach (PlayerInfo player in players)
-            if (player.playerInfo.NickName == PhotonNetwork.playerName)
+            if (player.playerInfo.NickName == PhotonNetwork.player.NickName)
             {
                 basic.currentRound.text = "Score: " + player.kills;
                 break;
