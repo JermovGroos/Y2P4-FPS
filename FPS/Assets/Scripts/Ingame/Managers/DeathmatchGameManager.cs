@@ -9,10 +9,10 @@ public class DeathmatchGameManager : GameInfoManager
     public float spawnRange;
     public LayerMask spawnLayer;
 
-   [PunRPC, HideInInspector]
+    [PunRPC, HideInInspector]
     public override void GameWon(int winnerIndex)
     {
-        
+
     }
 
     public override IEnumerator RoundTimer(int remainingTime)
@@ -111,14 +111,14 @@ public class DeathmatchGameManager : GameInfoManager
     public override void OnPhotonPlayerDisconnected(PhotonPlayer player)
     {
         for (int i = 0; i < players.Count; i++)
-            if(players[i].playerInfo.NickName == player.NickName)
+            if (players[i].playerInfo.NickName == player.NickName)
             {
                 players.RemoveAt(i);
                 break;
             }
     }
 
-    [PunRPC,HideInInspector]
+    [PunRPC, HideInInspector]
     public override void PlayerKilled(string killed, string killer, float[] damageDone, string[] damageingPlayers)
     {
         //Checks if there was an assist
@@ -147,7 +147,7 @@ public class DeathmatchGameManager : GameInfoManager
             assisterName = damageingPlayersList[bestDamage];
         }
 
-        foreach(PlayerInfo player in players)
+        foreach (PlayerInfo player in players)
             if (player.playerInfo.NickName == killed)
                 player.deaths++;
             else if (player.playerInfo.NickName == killer)
@@ -167,25 +167,16 @@ public class DeathmatchGameManager : GameInfoManager
             photonView.RPC("DeserializeDeathMatchData", PhotonTargets.All, players.ToArray());
     }
 
-    [PunRPC,HideInInspector]
+    [PunRPC, HideInInspector]
     public void DeserializeDeathMatchData(PlayerInfo[] playerInfos)
     {
         players = new List<PlayerInfo>(playerInfos);
 
-        SetScore();
-    }
-
-    public void SetScore()
-    {
         foreach (PlayerInfo player in players)
-        {
-            if (player == null)
-                Debug.Log("Player Not Excisting");
-            else if (player.playerInfo.NickName == PhotonNetwork.playerName)
+            if (player.playerInfo.NickName == PhotonNetwork.playerName)
             {
                 basic.currentRound.text = "Score: " + player.kills;
                 break;
             }
-        }
     }
 }
