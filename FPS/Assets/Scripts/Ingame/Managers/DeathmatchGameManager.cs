@@ -76,7 +76,12 @@ public class DeathmatchGameManager : GameInfoManager
         if (PhotonNetwork.isMasterClient)
         {
             PlayerInfo inf = new PlayerInfo();
-            inf.playerInfo = joinedPlayer;
+            foreach (PhotonPlayer pl in PhotonNetwork.playerList)
+                if (pl.NickName == joinedPlayer.NickName)
+                {
+                    inf.playerInfo = pl;
+                    break;
+                }
             players.Add(inf);
             SerializeMatchData();
         }
@@ -184,7 +189,6 @@ public class DeathmatchGameManager : GameInfoManager
     {
         foreach (PlayerInfo player in players)
         {
-            Debug.Log(player.playerInfo.NickName);
             if (player.playerInfo.NickName == PhotonNetwork.playerName)
             {
                 basic.currentRound.text = "Score: " + player.kills;
