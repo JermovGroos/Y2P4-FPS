@@ -172,6 +172,11 @@ public class DeathmatchGameManager : GameInfoManager
     {
         players = new List<PlayerInfo>(playerInfos);
 
+        SetScore();
+    }
+
+    public void SetScore()
+    {
         foreach (PlayerInfo player in players)
             if (player.playerInfo.NickName == PhotonNetwork.playerName)
             {
