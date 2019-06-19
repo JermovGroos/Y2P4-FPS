@@ -3360,11 +3360,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4787286544303165168}
     m_Modifications:
-    - target: {fileID: 108928550101906636, guid: cec454e8a54eb3b40a01b202969d2812,
-        type: 3}
-      propertyPath: m_Name
-      value: Scar-H Complete_low
-      objectReference: {fileID: 0}
     - target: {fileID: 108928550102329580, guid: cec454e8a54eb3b40a01b202969d2812,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3419,6 +3414,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 263.661
+      objectReference: {fileID: 0}
+    - target: {fileID: 108928550101906636, guid: cec454e8a54eb3b40a01b202969d2812,
+        type: 3}
+      propertyPath: m_Name
+      value: Scar-H Complete_low
       objectReference: {fileID: 0}
     - target: {fileID: 108928550099905264, guid: cec454e8a54eb3b40a01b202969d2812,
         type: 3}
@@ -3525,6 +3525,11 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 108928550101906642, guid: cec454e8a54eb3b40a01b202969d2812,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cec454e8a54eb3b40a01b202969d2812, type: 3}
 --- !u!4 &2039903402353320081 stripped
@@ -3540,11 +3545,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8019839235635695233}
     m_Modifications:
-    - target: {fileID: 108928550101906636, guid: cec454e8a54eb3b40a01b202969d2812,
-        type: 3}
-      propertyPath: m_Name
-      value: Scar-H Complete_low
-      objectReference: {fileID: 0}
     - target: {fileID: 108928550102329580, guid: cec454e8a54eb3b40a01b202969d2812,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3599,6 +3599,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108928550101906636, guid: cec454e8a54eb3b40a01b202969d2812,
+        type: 3}
+      propertyPath: m_Name
+      value: Scar-H Complete_low
       objectReference: {fileID: 0}
     - target: {fileID: 108928550099905264, guid: cec454e8a54eb3b40a01b202969d2812,
         type: 3}
