@@ -59,7 +59,7 @@ public class DeathmatchGameManager : GameInfoManager
         else
         {
             PlayerInfo inf = new PlayerInfo();
-            inf.playerInfo = PhotonNetwork.player;
+            inf.playerInfo = PhotonNetwork.otherPlayers[0];
             players.Add(inf);
             StartCoroutine(CheckForEnoughPlayers());
         }
@@ -178,10 +178,13 @@ public class DeathmatchGameManager : GameInfoManager
     public void SetScore()
     {
         foreach (PlayerInfo player in players)
-            if (player.playerInfo != null && PhotonNetwork.playerName != null && player.playerInfo.NickName == PhotonNetwork.playerName)
+        {
+            Debug.Log(player.playerInfo.NickName);
+            if (player.playerInfo.NickName == PhotonNetwork.playerName)
             {
                 basic.currentRound.text = "Score: " + player.kills;
                 break;
             }
+        }
     }
 }
