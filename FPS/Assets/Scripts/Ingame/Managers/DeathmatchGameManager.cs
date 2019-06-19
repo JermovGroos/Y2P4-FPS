@@ -59,7 +59,12 @@ public class DeathmatchGameManager : GameInfoManager
         else
         {
             PlayerInfo inf = new PlayerInfo();
-            inf.playerInfo = PhotonNetwork.otherPlayers[0];
+            foreach (PhotonPlayer pl in PhotonNetwork.playerList)
+                if (pl.NickName == PhotonNetwork.playerName)
+                {
+                    inf.playerInfo = pl;
+                    break;
+                }
             players.Add(inf);
             StartCoroutine(CheckForEnoughPlayers());
         }
