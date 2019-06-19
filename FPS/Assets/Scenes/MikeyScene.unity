@@ -48,7 +48,7 @@ LightmapSettings:
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
-    m_IndirectOutputScale: 1
+    m_IndirectOutputScale: 0.4
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
     m_EnableBakedLightmaps: 1
@@ -30100,10 +30100,10 @@ MonoBehaviour:
     orthographicSize: 5
     renderingPath: 0
     shadowDistance: 100
-  m_Multiplier: 1
+  m_Multiplier: 7
   m_Weight: 1
   m_Mode: 0
-  m_RefreshMode: 0
+  m_RefreshMode: 1
   m_CustomTexture: {fileID: 0}
   m_BakedTexture: {fileID: 0}
   m_RenderDynamicObjects: 0
