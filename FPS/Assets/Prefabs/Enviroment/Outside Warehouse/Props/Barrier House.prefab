@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2236710812171837041}
   - component: {fileID: 2236710812174736977}
   - component: {fileID: 2236710812173606033}
+  - component: {fileID: 8935557269791863263}
   m_Layer: 0
   m_Name: Barrier House
   m_TagString: Untagged
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8935557269791863263
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236710812171403857}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.1418464, y: 3.1642582, z: 3.2426524}
+  m_Center: {x: 0.030002601, y: 1.5821289, z: -0.08663716}
