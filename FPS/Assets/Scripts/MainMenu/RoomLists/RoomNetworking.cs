@@ -9,10 +9,6 @@ public class RoomNetworking : Photon.MonoBehaviour
     public string loadSeneName;
     public string savingTag;
 
-    [Header("UI")]
-    public GameObject roomsPanel;
-    public GameObject mainMenuPanel;
-
     [Header("RoomsInfo")]
     public GameObject roomButton;
     public Transform roomButtonLayout;
@@ -30,8 +26,6 @@ public class RoomNetworking : Photon.MonoBehaviour
         GameObject.FindWithTag(savingTag).GetComponent<Saving>().currentGamemodeIndex = roomType;
         Debug.Log("Connecting to: " + version + "_" + roomTypes[roomType]);
         PhotonNetwork.ConnectUsingSettings(version + "_" + roomTypes[roomType]);
-        roomsPanel.SetActive(true);
-        mainMenuPanel.SetActive(false);
         PhotonNetwork.automaticallySyncScene = true;
         foreach (Transform child in roomButtonLayout)
             Destroy(child.gameObject);
@@ -43,8 +37,6 @@ public class RoomNetworking : Photon.MonoBehaviour
     {
         Debug.Log("Disconnected");
         PhotonNetwork.Disconnect();
-        roomsPanel.SetActive(false);
-        mainMenuPanel.SetActive(true);
     }
 
     //RoomList

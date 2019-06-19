@@ -12,7 +12,7 @@ public class Saving : MonoBehaviour
     public string fileName;
     public SaveDataBase data;
     [Header("UI")]
-    public GameObject nameInput;
+    public GameObject nameInput, UI;
     public Text playerName;
 
     public int currentGamemodeIndex;
@@ -29,6 +29,7 @@ public class Saving : MonoBehaviour
         {
             playerName.text = "Welcome " + data.playerName;
             PhotonNetwork.playerName = data.playerName;
+            UI.SetActive(true);
         }
     }
 
@@ -50,6 +51,7 @@ public class Saving : MonoBehaviour
             nameInput.SetActive(false);
             playerName.text = "Welcome " + data.playerName;
             PhotonNetwork.playerName = data.playerName;
+            UI.SetActive(true);
         }
     }
 
@@ -70,6 +72,7 @@ public class Saving : MonoBehaviour
             data.lastLoadout = new WeaponCustomizer.WeaponLoadoutSlot();
             data.lastLoadout.weapon1 = new WeaponCustomizer.WeaponClassData();
             data.lastLoadout.weapon2 = new WeaponCustomizer.WeaponClassData();
+            data.lastLoadout.weapon2.currentWeapon = 1;
         }
     }
 
