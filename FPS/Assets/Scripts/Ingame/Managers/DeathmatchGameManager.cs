@@ -26,6 +26,7 @@ public class DeathmatchGameManager : GameInfoManager
             waitingTime = roundTime - i - (roundTime - remainingTime);
             basic.CalculateTime(waitingTime, basic.time);
             yield return new WaitForSeconds(1);
+
         }
 
         SerializeMatchData();
@@ -170,5 +171,12 @@ public class DeathmatchGameManager : GameInfoManager
     public void DeserializeDeathMatchData(PlayerInfo[] playerInfos)
     {
         players = new List<PlayerInfo>(playerInfos);
+
+        foreach (PlayerInfo player in players)
+            if (player.playerInfo.NickName == PhotonNetwork.playerName)
+            {
+                basic.currentRound.text = "Score: " + player.kills;
+                break;
+            }
     }
 }
