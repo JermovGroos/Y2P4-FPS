@@ -1,18 +1,17 @@
 walking sound stone			X
 walking sound grass			X
-ambient sound
-main menu music
-ui button press
-ui button quit press
-start game sound
-volume sound
-perk activate
-impact sound metal
-impact sound stone
-impact sound grass
-impact sound blood
-hit sound
-weapon switch
-notification
-click for weapon custimization
+ambient sound				X
+main menu music				X
+ui button press				X
+ui button quit press			X
+start game sound			X
+perk activate				X
+impact sound metal			X		
+impact sound stone			X
+impact sound grass			X
+impact sound blood			X
+hit sound				X
+weapon switch				X
+notification				X
+click for weapon custimization		X
 jump sound				X
