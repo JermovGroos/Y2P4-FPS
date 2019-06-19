@@ -389,15 +389,7 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
         public static byte[] Serialize(object info)
         {
             PlayerInfo playerInf = (PlayerInfo)info;
-            int index = 0;
-            for (int i = 0; i < PhotonNetwork.playerList.Length; i++)
-                if (PhotonNetwork.playerList[i] == playerInf.playerInfo)
-                {
-                    index = i;
-                    break;
-                }
             List<byte> bytes = new List<byte>();
-            bytes.Add((byte)index);
             bytes.Add((byte)(playerInf.isDead? 1 : 2));
             bytes.Add((byte)playerInf.kills);
             bytes.Add((byte)playerInf.assists);
@@ -411,11 +403,10 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
         public static PlayerInfo Deserialize(byte[] info)
         {
             PlayerInfo playerInf = new PlayerInfo();
-            playerInf.playerInfo = PhotonNetwork.playerList[info[0]];
-            playerInf.isDead = (info[1] == 1);
-            playerInf.kills = info[2];
-            playerInf.assists = info[3];
-            playerInf.deaths = info[4];
+            playerInf.isDead = (info[0] == 1);
+            playerInf.kills = info[1];
+            playerInf.assists = info[2];
+            playerInf.deaths = info[3];
             return playerInf;
         }
     }

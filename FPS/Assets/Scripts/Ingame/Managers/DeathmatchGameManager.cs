@@ -163,14 +163,19 @@ public class DeathmatchGameManager : GameInfoManager
 
     public override void SerializeMatchData()
     {
+        List<PhotonPlayer> photonPlayers = new List<PhotonPlayer>();
+        foreach (PlayerInfo player in players)
+            photonPlayers.Add(player.playerInfo);
         if (PhotonNetwork.isMasterClient)
-            photonView.RPC("DeserializeDeathMatchData", PhotonTargets.All, players.ToArray());
+            photonView.RPC("DeserializeDeathMatchData", PhotonTargets.All, players.ToArray(), photonPlayers.ToArray());
     }
 
     [PunRPC, HideInInspector]
-    public void DeserializeDeathMatchData(PlayerInfo[] playerInfos)
+    public void DeserializeDeathMatchData(PlayerInfo[] playerInfos, PhotonPlayer[] photonPlayers)
     {
         players = new List<PlayerInfo>(playerInfos);
+        for (int i = 0; i < players.Count; i++)
+            players[i].playerInfo = photonPlayers[i];
 
         foreach (PlayerInfo player in players)
         {
