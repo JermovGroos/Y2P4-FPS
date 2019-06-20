@@ -2127,7 +2127,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: dab0766de4a4b5349b80ce1a86555414, type: 2}
+  sharedProfile: {fileID: 0}
 --- !u!4 &373417952
 Transform:
   m_ObjectHideFlags: 0
@@ -5095,7 +5095,7 @@ MonoBehaviour:
   - {fileID: 764736684}
   - {fileID: 597316314}
   - {fileID: 1527955397}
-  playerObject: PlayerWithSkin
+  playerObject: Player
   victoryScreenSpawnPoints:
   - {fileID: 1511153957}
   - {fileID: 4958573}
