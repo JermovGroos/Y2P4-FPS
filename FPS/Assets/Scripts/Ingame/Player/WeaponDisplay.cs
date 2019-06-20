@@ -43,22 +43,7 @@ public class WeaponDisplay : Photon.MonoBehaviour
     [PunRPC]
     public void DisplayWeapon(int _weapon, int _barrel, int _magazine)
     {
-        foreach (Transform chid in otherPos)
-            Destroy(chid.gameObject);
-        tempWeapon = Instantiate(layout.weapons[_weapon].baseWeapon, weaponLocation).GetComponent<WeaponCustomizations>();
-        for (int i = 0; i < tempWeapon.barrels.Length; i++)
-            if (i == _barrel)
-                tempWeapon.barrels[i].SetActive(true);
-            else
-                tempWeapon.barrels[i].SetActive(false);
-
-        for (int i = 0; i < tempWeapon.magazines.Length; i++)
-            if (i == _magazine)
-                tempWeapon.magazines[i].SetActive(true);
-            else
-                tempWeapon.magazines[i].SetActive(false);
-
-        if (!photonView.isMine)
+        if (photonView.isMine)
         {
             foreach (Transform chid in weaponLocation)
                 Destroy(chid.gameObject);
@@ -74,6 +59,23 @@ public class WeaponDisplay : Photon.MonoBehaviour
                     weapon.magazines[i].SetActive(true);
                 else
                     weapon.magazines[i].SetActive(false);
+        }
+        else
+        {
+            foreach (Transform chid in otherPos)
+                Destroy(chid.gameObject);
+            tempWeapon = Instantiate(layout.weapons[_weapon].baseWeapon, weaponLocation).GetComponent<WeaponCustomizations>();
+            for (int i = 0; i < tempWeapon.barrels.Length; i++)
+                if (i == _barrel)
+                    tempWeapon.barrels[i].SetActive(true);
+                else
+                    tempWeapon.barrels[i].SetActive(false);
+
+            for (int i = 0; i < tempWeapon.magazines.Length; i++)
+                if (i == _magazine)
+                    tempWeapon.magazines[i].SetActive(true);
+                else
+                    tempWeapon.magazines[i].SetActive(false);
         }
     }
 }
