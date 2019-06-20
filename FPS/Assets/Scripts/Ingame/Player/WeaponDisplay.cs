@@ -43,7 +43,7 @@ public class WeaponDisplay : Photon.MonoBehaviour
     [PunRPC]
     public void DisplayWeapon(int _weapon, int _barrel, int _magazine)
     {
-        if (!weaponLocation.gameObject.activeInHierarchy)
+        if (!weaponLocation.parent.parent.gameObject.activeInHierarchy)
         {
             foreach (Transform chid in otherPos)
                 Destroy(chid.gameObject);
