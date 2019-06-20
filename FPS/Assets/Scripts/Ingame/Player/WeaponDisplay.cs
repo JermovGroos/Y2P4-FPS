@@ -40,6 +40,11 @@ public class WeaponDisplay : Photon.MonoBehaviour
             tempWeapon.muzzleFlash.GetComponent<ParticleSystem>().Play();
     }
 
+    public void CallSound(int index)
+    {
+        GameObject.FindWithTag("Audio").GetComponent<PhotonView>().RPC("WorldSpaceAudioClip", PhotonTargets.All, index, weapon.muzzleFlash.transform.position);
+    }
+
     [PunRPC]
     public void DisplayWeapon(int _weapon, int _barrel, int _magazine)
     {

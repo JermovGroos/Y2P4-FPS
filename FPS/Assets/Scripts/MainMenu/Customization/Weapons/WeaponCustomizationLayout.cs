@@ -15,6 +15,7 @@ public class WeaponCustomizationLayout : ScriptableObject
         public GameObject baseWeapon;
         public WeaponScriptableSlot[] barrels, magazines;
         public WeaponStats stats;
+        public int soundIndex;
     }
 
     [System.Serializable]
@@ -23,6 +24,7 @@ public class WeaponCustomizationLayout : ScriptableObject
         public string objName;
         public WeaponStats addStats;
         public Sprite sprite;
+        public int soundIndex;
     }
 }
 

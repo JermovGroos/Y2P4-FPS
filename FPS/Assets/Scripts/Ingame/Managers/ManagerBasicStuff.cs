@@ -33,6 +33,8 @@ public class ManagerBasicStuff : Photon.MonoBehaviour
     public GameObject roundInfoPanel;
     public Text roundInfoText;
     public float roundInfoVisibleTime;
+    public AudioClip roundMessageSound;
+    public AudioSource audioSource;
 
     [HideInInspector]
     [PunRPC]
@@ -45,6 +47,7 @@ public class ManagerBasicStuff : Photon.MonoBehaviour
     {
         roundInfoText.text = _message;
         roundInfoPanel.SetActive(true);
+        audioSource.PlayOneShot(roundMessageSound);
         yield return new WaitForSeconds(roundInfoVisibleTime);
         roundInfoPanel.SetActive(false);
     }

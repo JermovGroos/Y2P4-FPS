@@ -25,6 +25,7 @@ public class ImpactManager : Photon.MonoBehaviour
     [PunRPC]
     public void SpawnParticle(int index, Vector3 pos, Quaternion rot)
     {
+        GameObject.FindWithTag("Audio").GetComponent<CallWorldSPaceSound>().WorldSpaceAudioClip(impactTypes[index].audioIndex, pos);
         Destroy(Instantiate(impactTypes[index].particle, pos, rot),particleLifetime);
     }
 
@@ -33,5 +34,6 @@ public class ImpactManager : Photon.MonoBehaviour
     {
         public PhysicMaterial materialType;
         public GameObject particle;
+        public int audioIndex;
     }
 }

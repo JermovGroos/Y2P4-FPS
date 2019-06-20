@@ -44,6 +44,11 @@ public class Weapon : Photon.MonoBehaviour
         AttachmentStatsChange(layout.weapons[data.currentWeapon].barrels[data.currentBarrel].addStats, index);
         AttachmentStatsChange(layout.weapons[data.currentWeapon].magazines[data.currentMagazine].addStats, index);
         if (index == 0)
+            weapon1.soundIndex = layout.weapons[data.currentWeapon].barrels[data.currentBarrel].soundIndex;
+        else
+            weapon2.soundIndex = layout.weapons[data.currentWeapon].barrels[data.currentBarrel].soundIndex;
+
+        if (index == 0)
             weapon1.stats = stats;
         else
             weapon2.stats = stats;
@@ -125,6 +130,7 @@ public class Weapon : Photon.MonoBehaviour
             if(slot.currentAmmo > 0)
             {
                 weaponDisplay.photonView.RPC("ShowMuzzleFlash", PhotonTargets.All);
+                weaponDisplay.CallSound((currentlySelected == 1) ? weapon1.soundIndex : weapon2.soundIndex);
                 Vector3 addDirection = new Vector3(Random.Range(-stats.spread, stats.spread), Random.Range(-stats.spread, stats.spread), Random.Range(-stats.spread, stats.spread));
                 if (zoomed)
                     addDirection /= 2;
@@ -171,5 +177,6 @@ public class Weapon : Photon.MonoBehaviour
     {
         public WeaponStats stats;
         public int currentAmmo;
+        public int soundIndex;
     }
 }
