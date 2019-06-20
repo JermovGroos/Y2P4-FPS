@@ -16,11 +16,13 @@ public class DeathmatchGameManager : GameInfoManager
         basic.victoryScreenCamera.SetActive(true);
         basic.victoryTeamTextBar.gameObject.SetActive(true);
         basic.victoryTeamTextBar.text = winningPlayer + " Won";
-
-        if (yourPlayer)
-            PhotonNetwork.Destroy(yourPlayer);
-        yourPlayer = PhotonNetwork.Instantiate(basic.playerObject, basic.victoryScreenSpawnPoints[0].position, basic.victoryScreenSpawnPoints[0].rotation, 0);
-        yourPlayer.GetComponent<Player>().movementAllowed = false;
+        if(winningPlayer == PhotonNetwork.playerName)
+        {
+            if (yourPlayer)
+                PhotonNetwork.Destroy(yourPlayer);
+            yourPlayer = PhotonNetwork.Instantiate(basic.playerObject, basic.victoryScreenSpawnPoints[0].position, basic.victoryScreenSpawnPoints[0].rotation, 0);
+            yourPlayer.GetComponent<Player>().movementAllowed = false;
+        }
     }
 
     public override IEnumerator RoundTimer(int remainingTime)

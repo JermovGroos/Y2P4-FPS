@@ -6622,7 +6622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f11c77bf41ba84409d5c71e9a8e34ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 100, z: 0}
+  rotation: {x: 0, y: 4000, z: 0}
 --- !u!1 &1783136612
 GameObject:
   m_ObjectHideFlags: 0
@@ -9274,7 +9274,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.11212076, y: -0.12103301, z: 0.9346848}
+  m_ConnectedAnchor: {x: 0.47541296, y: -0.121199846, z: 0.93429035}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -9620,7 +9620,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.43729407, y: -0.11720431, z: 0.84460783}
+  m_ConnectedAnchor: {x: -0.6887925, y: -0.11717683, z: 0.8446442}
   m_UseSpring: 0
   m_Spring:
     spring: 0
