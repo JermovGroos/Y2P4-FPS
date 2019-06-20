@@ -71,8 +71,6 @@ public class Saving : MonoBehaviour
             data = new SaveDataBase();
             data.lastLoadout = new WeaponCustomizer.WeaponLoadoutSlot();
             data.lastLoadout.weapon1 = new WeaponCustomizer.WeaponClassData();
-            data.lastLoadout.weapon2 = new WeaponCustomizer.WeaponClassData();
-            data.lastLoadout.weapon2.currentWeapon = 1;
         }
     }
 

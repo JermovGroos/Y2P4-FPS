@@ -12,7 +12,15 @@ public class DeathmatchGameManager : GameInfoManager
     [PunRPC, HideInInspector]
     public override void GameWon(int winnerIndex)
     {
+        string winningPlayer = players[winnerIndex].playerInfo.NickName;
+        basic.victoryScreenCamera.SetActive(true);
+        basic.victoryTeamTextBar.gameObject.SetActive(true);
+        basic.victoryTeamTextBar.text = winningPlayer + " Won";
 
+        if (yourPlayer)
+            PhotonNetwork.Destroy(yourPlayer);
+        yourPlayer = PhotonNetwork.Instantiate(basic.playerObject, basic.victoryScreenSpawnPoints[0].position, basic.victoryScreenSpawnPoints[0].rotation, 0);
+        yourPlayer.GetComponent<Player>().movementAllowed = false;
     }
 
     public override IEnumerator RoundTimer(int remainingTime)
