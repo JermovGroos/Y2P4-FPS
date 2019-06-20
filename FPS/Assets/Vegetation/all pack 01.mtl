@@ -1,0 +1,169 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl VP_Hor_mur_Leaf_01
+Ka 0.000000 0.000000 0.000000
+Kd 0.768627 0.674510 0.545098
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/VP_Hor_mur_Leaf_01.png
+
+newmtl VP_Hor_mur_Leaf_02
+Ka 0.000000 0.000000 0.000000
+Kd 0.600000 0.611765 0.439216
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/VP_Hor_mur_Leaf_02.png
+
+newmtl VP_Hor_mur_Stem
+Ka 0.000000 0.000000 0.000000
+Kd 0.580392 0.623529 0.368627
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/VP_Hor_mur_Stem.png
+
+newmtl VP_Hor_mur_Leaf_03
+Ka 0.000000 0.000000 0.000000
+Kd 0.494118 0.564706 0.360784
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/VP_Hor_mur_Leaf_03.png
+
+newmtl VP_Hor_mur_Seed_02
+Ka 0.000000 0.000000 0.000000
+Kd 0.756863 0.674510 0.486275
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/VP_Hor_mur_Seed_02.png
+
+newmtl VP_Hor_mur_Seed_01
+Ka 0.000000 0.000000 0.000000
+Kd 0.619608 0.654902 0.392157
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/VP_Hor_mur_Seed_01.png
+
+newmtl Material__10
+Ka 0.000000 0.000000 0.000000
+Kd 0.250980 0.278431 0.054902
+Ks 0.330000 0.330000 0.330000
+
+newmtl Material__37
+Ka 0.000000 0.000000 0.000000
+Kd 0.913725 0.658824 0.019608
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/Material__37.png
+
+newmtl Material__36
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 0.976471 0.976471
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/Material__36.png
+
+newmtl Material__38
+Ka 0.000000 0.000000 0.000000
+Kd 0.752941 0.792157 0.666667
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/Material__38.png
+
+newmtl stem
+Ka 0.000000 0.000000 0.000000
+Kd 0.600000 0.678431 0.482353
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/stem.png
+
+newmtl leaf_03_C
+Ka 0.000000 0.000000 0.000000
+Kd 0.517647 0.619608 0.439216
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_03_C.png
+
+newmtl leaf_05_A
+Ka 0.000000 0.000000 0.000000
+Kd 0.619608 0.682353 0.568627
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_05_A.png
+
+newmtl leaf_06_A
+Ka 0.000000 0.000000 0.000000
+Kd 0.576471 0.639216 0.517647
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_06_A.png
+
+newmtl leaf_04_C
+Ka 0.000000 0.000000 0.000000
+Kd 0.596078 0.662745 0.505882
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_04_C.png
+
+newmtl leaf_1_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.603922 0.678431 0.564706
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_1_1.png
+
+newmtl leaf_05_B
+Ka 0.000000 0.000000 0.000000
+Kd 0.533333 0.603922 0.470588
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_05_B.png
+
+newmtl leaf_04_B
+Ka 0.000000 0.000000 0.000000
+Kd 0.596078 0.662745 0.501961
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_04_B.png
+
+newmtl leaf_03_A
+Ka 0.000000 0.000000 0.000000
+Kd 0.560784 0.650980 0.490196
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_03_A.png
+
+newmtl leaf_02_C
+Ka 0.000000 0.000000 0.000000
+Kd 0.517647 0.611765 0.462745
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_02_C.png
+
+newmtl leaf_04_A
+Ka 0.000000 0.000000 0.000000
+Kd 0.619608 0.682353 0.549020
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_04_A.png
+
+newmtl leaf_06_B
+Ka 0.000000 0.000000 0.000000
+Kd 0.588235 0.647059 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_06_B.png
+
+newmtl leaf_02_A
+Ka 0.000000 0.000000 0.000000
+Kd 0.576471 0.662745 0.533333
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/leaf_02_A.png
+
+newmtl Material__40
+Ka 0.000000 0.000000 0.000000
+Kd 0.839216 0.780392 0.800000
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/Material__40.png
+
+newmtl Material__3
+Ka 0.000000 0.000000 0.000000
+Kd 0.913725 0.658824 0.019608
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/Material__3.png
+
+newmtl Material__1
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 0.976471 0.976471
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/Material__1.png
+
+newmtl Material__2
+Ka 0.000000 0.000000 0.000000
+Kd 0.752941 0.792157 0.666667
+Ks 0.330000 0.330000 0.330000
+map_Kd all pack 01/Material__2.png
+
+newmtl VP_Poa_Prat_Leaf_02
+Ka 0.000000 0.000000 0.000000
+Kd 0.427451 0.556863 0.274510
+Ks 0.3300
