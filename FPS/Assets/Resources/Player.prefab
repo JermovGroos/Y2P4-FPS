@@ -206,6 +206,7 @@ MonoBehaviour:
       recoil: 0
       switchSpeed: 0
     currentAmmo: 0
+    soundIndex: 0
   weapon2:
     stats:
       fireType: 0
@@ -219,6 +220,7 @@ MonoBehaviour:
       recoil: 0
       switchSpeed: 0
     currentAmmo: 0
+    soundIndex: 0
   currentlySelected: 0
   playerTag: Player
   managerTag: Manager
@@ -327,7 +329,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4286026574167744456}
   - component: {fileID: 2379072546106966890}
-  - component: {fileID: 6214091188243693395}
   - component: {fileID: 1543924600963646122}
   m_Layer: 0
   m_Name: MinimapCamera
@@ -392,14 +393,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6214091188243693395
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3710175116358824195}
-  m_Enabled: 1
 --- !u!114 &1543924600963646122
 MonoBehaviour:
   m_ObjectHideFlags: 0
