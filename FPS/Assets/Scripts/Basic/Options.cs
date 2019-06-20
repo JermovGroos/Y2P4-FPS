@@ -75,4 +75,8 @@ public class Options : MonoBehaviour {
         Application.Quit();
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
