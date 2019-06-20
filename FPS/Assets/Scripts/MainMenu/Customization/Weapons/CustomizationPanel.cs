@@ -27,5 +27,6 @@ public class CustomizationPanel : MonoBehaviour
             customizer.ChangeMagazine(index);
         else
             customizer.ChangeBarrel(index);
+        GameObject.FindWithTag("Audio").GetComponent<UISounds>().playStandardUISound();
     }
 }
