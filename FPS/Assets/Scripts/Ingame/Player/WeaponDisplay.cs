@@ -37,7 +37,7 @@ public class WeaponDisplay : Photon.MonoBehaviour
         if(weapon)
             weapon.muzzleFlash.GetComponent<ParticleSystem>().Play();
         if (tempWeapon)
-            weapon.muzzleFlash.GetComponent<ParticleSystem>().Play();
+            tempWeapon.muzzleFlash.GetComponent<ParticleSystem>().Play();
     }
 
     [PunRPC]
