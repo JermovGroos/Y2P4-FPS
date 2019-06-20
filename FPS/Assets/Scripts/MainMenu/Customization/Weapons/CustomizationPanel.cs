@@ -16,9 +16,9 @@ public class CustomizationPanel : MonoBehaviour
         customizer = _customizer;
         index = _index;
         magazine = _magazine;
-
         WeaponCustomizationLayout.Weapon weapon = customizer.layout.weapons[(customizer.currentlyEditing == 1) ? customizer.weapons.weapon1.currentWeapon : customizer.weapons.weapon2.currentWeapon];
         nameInput.text = magazine ? weapon.magazines[index].objName : weapon.barrels[index].objName;
+        sprite.sprite = magazine ? weapon.magazines[index].sprite : weapon.barrels[index].sprite;
     }
 
     public void OnButtonPressed()

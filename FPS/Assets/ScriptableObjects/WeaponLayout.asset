@@ -30,7 +30,7 @@ MonoBehaviour:
         burstDelay: 0
         recoil: 0.5
         switchSpeed: 0
-      sprite: {fileID: 0}
+      sprite: {fileID: 21300000, guid: 0652a0e5d837c8e48bac6a6c006897d9, type: 3}
     - objName: Silencer
       addStats:
         fireType: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
         burstDelay: 0
         recoil: 0
         switchSpeed: 0
-      sprite: {fileID: 0}
+      sprite: {fileID: 21300000, guid: d45d39223ae4ee747819525f611ce7dc, type: 3}
     magazines:
     - objName: Standard
       addStats:
@@ -57,7 +57,7 @@ MonoBehaviour:
         burstDelay: 0
         recoil: 0
         switchSpeed: 0
-      sprite: {fileID: 0}
+      sprite: {fileID: 21300000, guid: 0652a0e5d837c8e48bac6a6c006897d9, type: 3}
     - objName: Extended Magazine
       addStats:
         fireType: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
         burstDelay: 0
         recoil: 0
         switchSpeed: 0
-      sprite: {fileID: 0}
+      sprite: {fileID: 21300000, guid: eab1a5909ed30c14ea8cf1a073efe258, type: 3}
     stats:
       fireType: 2
       damage: 15
@@ -99,7 +99,7 @@ MonoBehaviour:
         burstDelay: 0
         recoil: 0
         switchSpeed: 0
-      sprite: {fileID: 0}
+      sprite: {fileID: 21300000, guid: 0652a0e5d837c8e48bac6a6c006897d9, type: 3}
     - objName: Silencer
       addStats:
         fireType: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
         burstDelay: 0
         recoil: 0
         switchSpeed: 0
-      sprite: {fileID: 0}
+      sprite: {fileID: 21300000, guid: 057186a37c2a41f42927e68dd3ddcaf7, type: 3}
     magazines:
     - objName: Standard
       addStats:
@@ -126,7 +126,7 @@ MonoBehaviour:
         burstDelay: 0
         recoil: 0
         switchSpeed: 0
-      sprite: {fileID: 0}
+      sprite: {fileID: 21300000, guid: 0652a0e5d837c8e48bac6a6c006897d9, type: 3}
     - objName: Extended Clip
       addStats:
         fireType: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
         burstDelay: 0
         recoil: 0
         switchSpeed: 0
-      sprite: {fileID: 0}
+      sprite: {fileID: 21300000, guid: 66f4289275d29ee46bf66a6f9a16b841, type: 3}
     stats:
       fireType: 0
       damage: 20
