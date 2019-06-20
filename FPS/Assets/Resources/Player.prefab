@@ -1009,9 +1009,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layout: {fileID: 11400000, guid: d13c0c7f1038e30419701f6f32024ce4, type: 2}
   weapon: {fileID: 0}
+  tempWeapon: {fileID: 0}
   weaponLocation: {fileID: 1541018891218489088}
   weapons: {fileID: 2563705465981785951}
-  otherPos: {fileID: 0}
+  otherPos: {fileID: 2591223000143418125}
 --- !u!1 &4787286544303329928
 GameObject:
   m_ObjectHideFlags: 0
