@@ -101,6 +101,9 @@ public class Player : Photon.MonoBehaviour
             healthBar = basicManager.healthBar;
         }
 
+        //Set bar to 100%
+        healthBar.fillAmount = 1;
+
         if (!isLocal)
             if (photonView.isMine)
             {
