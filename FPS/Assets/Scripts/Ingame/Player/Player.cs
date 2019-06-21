@@ -99,10 +99,10 @@ public class Player : Photon.MonoBehaviour
             scoreboard = manager.GetComponent<Scoreboard>();
 
             healthBar = basicManager.healthBar;
-        }
 
-        //Set bar to 100%
-        healthBar.fillAmount = 1;
+            //Set bar to 100%
+            healthBar.fillAmount = 1;
+        }
 
         if (!isLocal)
             if (photonView.isMine)
