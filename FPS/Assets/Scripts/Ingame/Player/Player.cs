@@ -199,6 +199,9 @@ public class Player : Photon.MonoBehaviour
                 TurnOnCamera(!camToggle);
                 camToggle = !camToggle;
             }
+
+            if (transform.position.y <= -40)
+                GameObject.FindWithTag(gameInfoManagerTag).GetComponent<GameInfoManager>().Respawn();
         }
 
     }
