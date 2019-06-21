@@ -16,12 +16,15 @@ public class DeathmatchGameManager : GameInfoManager
         basic.victoryScreenCamera.SetActive(true);
         basic.victoryTeamTextBar.gameObject.SetActive(true);
         basic.victoryTeamTextBar.text = winningPlayer + " Won";
-        if(winningPlayer == PhotonNetwork.playerName)
+        if (yourPlayer)
+            PhotonNetwork.Destroy(yourPlayer);
+        if (winningPlayer == PhotonNetwork.playerName)
         {
-            if (yourPlayer)
-                PhotonNetwork.Destroy(yourPlayer);
             yourPlayer = PhotonNetwork.Instantiate(basic.playerObject, basic.victoryScreenSpawnPoints[0].position, basic.victoryScreenSpawnPoints[0].rotation, 0);
             yourPlayer.GetComponent<Player>().movementAllowed = false;
+            yourPlayer.GetComponent<Player>().enabled = false;
+            /*foreach (SkinnedMeshRenderer skinnedMeshRenderer in yourPlayer.GetComponent<Player>().shadowsOnlyIfLocal)
+                skinnedMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;*/
         }
     }
 
