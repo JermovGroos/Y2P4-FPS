@@ -18,6 +18,7 @@ public class ManagerBasicStuff : Photon.MonoBehaviour
     public Text team1Alive, team2Alive;
     public GameObject teams;
     public Text victoryTeamTextBar;
+    public Image healthBar;
 
     [Header("Killfeed")]
     public GameObject killfeedPanel;

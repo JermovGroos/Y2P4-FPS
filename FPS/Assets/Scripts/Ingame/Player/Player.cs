@@ -69,6 +69,7 @@ public class Player : Photon.MonoBehaviour
 
     [Header("UI")]
     public SpriteRenderer minimapSprite; //Sprite of the player on the minimap
+    public Image healthBar; //Healthbar of the player
     public Color teammateSpriteColor = Color.blue; //Color to make your teammates sprites
     public Color enemySpriteColor = Color.red; //Color to make your enemies sprites
     Scoreboard scoreboard; //Scoreboard manager
@@ -76,6 +77,7 @@ public class Player : Photon.MonoBehaviour
     [Header("Managers")]
     public string gameInfoManagerTag = "Manager"; //Tag of the game info manager gameobject
     GameInfoManager gameInfoManager; //Game info manager
+    ManagerBasicStuff basicManager;
 
     void Start()
     {
@@ -93,7 +95,10 @@ public class Player : Photon.MonoBehaviour
         {
             GameObject manager = GameObject.FindWithTag(gameInfoManagerTag);
             gameInfoManager = manager.GetComponent<GameInfoManager>();
+            basicManager = manager.GetComponent<ManagerBasicStuff>();
             scoreboard = manager.GetComponent<Scoreboard>();
+
+            healthBar = basicManager.healthBar;
         }
 
         if (!isLocal)
@@ -391,6 +396,9 @@ public class Player : Photon.MonoBehaviour
 
             //Subtract damage from health
             health -= damageAmount;
+
+            //Set health bar fill
+            healthBar.fillAmount = mainHealth / health;
 
             //Check if player already got damaged by damager     
             bool containsDamage = false;
