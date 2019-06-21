@@ -102,12 +102,20 @@ public class Weapon : Photon.MonoBehaviour
 
     public IEnumerator Reload()
     {
+        ManagerBasicStuff basic = GameObject.FindWithTag(managerTag).GetComponent<ManagerBasicStuff>();
         WeaponStats stats = (currentlySelected == 1) ? weapon1.stats : weapon2.stats;
         WeaponIngameSlot slot = (currentlySelected == 1) ? weapon1 : weapon2;
         allowFire = false;
-        yield return new WaitForSeconds(stats.reloadTime);
+        basic.reload.gameObject.SetActive(true);
+        float fillValue = 0;
+        for (int i = 0; i < 24f; i++)
+        {
+            fillValue += 1f / 24f;
+            basic.reload.fillAmount = fillValue;
+            yield return new WaitForSeconds(stats.reloadTime / 24f);
+        }
+        basic.reload.gameObject.SetActive(false);
         slot.currentAmmo = stats.clipSize;
-        ManagerBasicStuff basic = GameObject.FindWithTag(managerTag).GetComponent<ManagerBasicStuff>();
         basic.currentAmmo.text = (currentlySelected == 1) ? weapon1.currentAmmo.ToString() : weapon2.currentAmmo.ToString();
         allowFire = true;
     }

@@ -130,6 +130,7 @@ public class DeathmatchGameManager : GameInfoManager
 
     public override void Respawn()
     {
+        basic.reload.gameObject.SetActive(false);
         if (yourPlayer)
             PhotonNetwork.Destroy(yourPlayer);
         int index = 0;
