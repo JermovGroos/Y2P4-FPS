@@ -145,7 +145,10 @@ public class Weapon : Photon.MonoBehaviour
                 if (Physics.Raycast(transform.position, transform.forward + addDirection, out hit, Mathf.Infinity))
                 {
                     if (hit.transform.tag == playerTag)
+                    {
                         hit.transform.GetComponent<PhotonView>().RPC("DamagePlayer", PhotonTargets.All, PhotonNetwork.playerName, stats.damage);
+                        GameObject.FindWithTag("HitMarker").GetComponent<Hitmarker>().HitMarker();
+                    }
                     GameObject.FindWithTag(managerTag).GetComponent<ImpactManager>().SendImpactInfo(hit.collider.material, hit);
                 }
                 if (stats.fireType != WeaponStats.FireTypes.Burst && i == 0)
