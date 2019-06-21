@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1450457876768799503
 Transform:
   m_ObjectHideFlags: 0
@@ -43,9 +43,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 0.55015415, b: 0.23113209, a: 1}
-  m_Intensity: 31.709234
-  m_Range: 3.31
+  m_Color: {r: 0.8962264, g: 0.8511793, b: 0.6468049, a: 1}
+  m_Intensity: 5.704113
+  m_Range: 1.4
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -110,7 +110,7 @@ MonoBehaviour:
   useOldInspector: 0
   featuresFoldout: 1
   showAdditionalSettings: 1
-  displayLightIntensity: 398.47
+  displayLightIntensity: 71.68
   displayAreaLightEmissiveMesh: 0
   lightLayers: 1
   shadowNearPlane: 0.1
@@ -8728,7 +8728,7 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 1
+    enabled: 0
     ratio: 0.1
     light: {fileID: 1450457876768799490}
     randomDistribution: 0
