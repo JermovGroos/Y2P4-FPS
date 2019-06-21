@@ -26,7 +26,13 @@
         "Glass": {
             "shader": "Main shader"
         },
+        "Outside Wall Corner": {
+            "shader": "Main shader"
+        },
         "Roof": {
+            "shader": "Main shader"
+        },
+        "Upper Wall": {
             "shader": "Main shader"
         }
     }
