@@ -398,7 +398,9 @@ public class Player : Photon.MonoBehaviour
             health -= damageAmount;
 
             //Set health bar fill
-            healthBar.fillAmount = mainHealth / health;
+            float barAmount = health / mainHealth;
+            print("Healthbar fill percentage: " + barAmount.ToString());
+            healthBar.fillAmount = barAmount;
 
             //Check if player already got damaged by damager     
             bool containsDamage = false;
