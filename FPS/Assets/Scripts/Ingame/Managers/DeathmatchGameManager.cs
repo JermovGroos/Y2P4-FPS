@@ -14,7 +14,7 @@ public class DeathmatchGameManager : GameInfoManager
     {
         string winningPlayer = players[winnerIndex].playerInfo.NickName;
         basic.victoryScreenCamera.SetActive(true);
-        basic.victoryTeamTextBar.gameObject.SetActive(true);
+        basic.victoryTeamTextBar.transform.parent.gameObject.SetActive(true);
         basic.victoryTeamTextBar.text = winningPlayer + " Won";
         if (yourPlayer)
             PhotonNetwork.Destroy(yourPlayer);

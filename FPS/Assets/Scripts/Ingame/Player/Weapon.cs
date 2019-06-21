@@ -91,6 +91,11 @@ public class Weapon : Photon.MonoBehaviour
         currentlySelected = switchTo;
         weaponDisplay.Display(switchTo - 1);
         float speed = (currentlySelected == 1) ? weapon1.stats.switchSpeed : weapon2.stats.switchSpeed;
+        ManagerBasicStuff basic = GameObject.FindWithTag(managerTag).GetComponent<ManagerBasicStuff>();
+        WeaponCustomizer.WeaponClassData data = (currentlySelected == 1) ? saveData.data.lastLoadout.weapon1 : saveData.data.lastLoadout.weapon2;
+        basic.currentAmmo.text = (switchTo == 1) ? weapon1.currentAmmo.ToString() : weapon2.currentAmmo.ToString();
+        basic.maxAmmo.text = (switchTo == 1) ? weapon1.stats.clipSize.ToString() : weapon2.stats.clipSize.ToString();
+        basic.weaponSprite.sprite = layout.weapons[data.currentWeapon].weaponSprite;
         yield return new WaitForSeconds(speed);
         allowFire = true;
     }
@@ -102,6 +107,8 @@ public class Weapon : Photon.MonoBehaviour
         allowFire = false;
         yield return new WaitForSeconds(stats.reloadTime);
         slot.currentAmmo = stats.clipSize;
+        ManagerBasicStuff basic = GameObject.FindWithTag(managerTag).GetComponent<ManagerBasicStuff>();
+        basic.currentAmmo.text = (currentlySelected == 1) ? weapon1.currentAmmo.ToString() : weapon2.currentAmmo.ToString();
         allowFire = true;
     }
 
@@ -149,6 +156,9 @@ public class Weapon : Photon.MonoBehaviour
 
                 if (stats.fireType == WeaponStats.FireTypes.Burst)
                     yield return new WaitForSeconds(stats.burstDelay);
+
+                ManagerBasicStuff basic = GameObject.FindWithTag(managerTag).GetComponent<ManagerBasicStuff>();
+                basic.currentAmmo.text = (currentlySelected == 1) ? weapon1.currentAmmo.ToString() : weapon2.currentAmmo.ToString();
             }
         }
         yield return new WaitForSeconds(time);

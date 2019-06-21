@@ -36,6 +36,11 @@ public class ManagerBasicStuff : Photon.MonoBehaviour
     public AudioClip roundMessageSound;
     public AudioSource audioSource;
 
+    [Header("AmmoCount")]
+    public Image weaponSprite;
+    public Text currentAmmo;
+    public Text maxAmmo;
+
     [HideInInspector]
     [PunRPC]
     public void SendRoundMessage(string message)
