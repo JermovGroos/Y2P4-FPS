@@ -30,6 +30,8 @@ public class DeathmatchGameManager : GameInfoManager
 
     public override IEnumerator RoundTimer(int remainingTime)
     {
+        StatReset();
+        SerializeMatchData();
         Respawn();
         if (PhotonNetwork.isMasterClient)
             photonView.RPC("SendRoundMessage", PhotonTargets.All, "Round has started.");
@@ -44,6 +46,17 @@ public class DeathmatchGameManager : GameInfoManager
 
         SerializeMatchData();
         CheckIfGameWon();
+    }
+
+    public void StatReset()
+    {
+        foreach(PlayerInfo player in players)
+        {
+            player.kills = 0;
+            player.deaths = 0;
+            player.assists = 0;
+        }
+            
     }
 
     public override bool CheckIfGameWon()
