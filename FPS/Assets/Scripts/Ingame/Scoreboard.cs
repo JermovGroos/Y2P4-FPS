@@ -17,10 +17,12 @@ public class Scoreboard : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(UpdateScoreboard());
+        StartCoroutine(UpdateAnnhaliationScoreboard());
     }
 
-    private IEnumerator UpdateScoreboard()
+
+
+    private IEnumerator UpdateAnnhaliationScoreboard()
     {
         while (true)
         {
@@ -70,58 +72,6 @@ public class Scoreboard : MonoBehaviour
                 uiPanels.Add(newPanel);
             }
 
-
-
-            ////Instantiate score panels
-            //for (int i = 0; i < manager.team1.players.Count; i++)
-            //{
-
-            //    //Get info
-            //    GameInfoManager.PlayerInfo info = manager.team1.players[i];
-
-            //    //Create panel
-            //    string playerName = info.playerInfo.NickName;
-            //    string kills = info.kills.ToString();
-            //    string deaths = info.deaths.ToString();
-            //    string assists = info.assists.ToString();
-
-            //    //Instantiate panel and set text
-            //    GameObject newPanel = Instantiate(panelPrefab, team1PanelParent.transform);
-            //    newPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = playerName;
-            //    newPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = kills;
-            //    newPanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = deaths;
-            //    newPanel.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = assists;
-
-            //    //Add it to the list
-            //    uiPanels.Add(newPanel);
-
-            //}
-
-            ////Instantiate score panels
-            //for (int i = 0; i < manager.team2.players.Count; i++)
-            //{
-
-            //    //Get info
-            //    GameInfoManager.PlayerInfo info = manager.team2.players[i];
-
-            //    //Create panel
-            //    string playerName = info.playerInfo.NickName;
-            //    string kills = info.kills.ToString();
-            //    string deaths = info.deaths.ToString();
-            //    string assists = info.assists.ToString();
-
-            //    //Instantiate panel and set text
-            //    GameObject newPanel = Instantiate(panelPrefab, team2PanelParent.transform);
-            //    newPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = playerName;
-            //    newPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = kills;
-            //    newPanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = deaths;
-            //    newPanel.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = assists;
-
-            //    //Add it to the list
-            //    uiPanels.Add(newPanel);
-
-            //}
-
             //Wait for update
             yield return new WaitForSeconds((float)hertz / 60);
         }
@@ -131,6 +81,6 @@ public class Scoreboard : MonoBehaviour
 
     private void OnDisable()
     {
-        StopCoroutine(UpdateScoreboard());
+        StopCoroutine(UpdateAnnhaliationScoreboard());
     }
 }
