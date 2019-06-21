@@ -99,9 +99,6 @@ public class Player : Photon.MonoBehaviour
             scoreboard = manager.GetComponent<Scoreboard>();
 
             healthBar = basicManager.healthBar;
-
-            //Set bar to 100%
-            healthBar.fillAmount = 1;
         }
 
         if (!isLocal)
@@ -109,6 +106,9 @@ public class Player : Photon.MonoBehaviour
             {
                 print("Photon View is mine");
                 IsMineOrLocal();
+
+                //Set bar to 100%
+                healthBar.fillAmount = 1;
             }
             else
             {

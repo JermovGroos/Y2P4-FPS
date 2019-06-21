@@ -12,11 +12,6 @@ public class Hitmarker : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            HitMarker();
-        }
-
         _time += 1 * Time.deltaTime;
 
         hitmarker.color = new Color(255,255,255,opacityOverTime.Evaluate(_time));
