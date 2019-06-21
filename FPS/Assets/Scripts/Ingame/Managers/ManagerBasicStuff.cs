@@ -55,7 +55,7 @@ public class ManagerBasicStuff : Photon.MonoBehaviour
     public void DisplayWinningTeam(int winningTeam)
     {
         victoryScreenCamera.SetActive(true);
-        victoryTeamTextBar.gameObject.SetActive(true);
+        victoryTeamTextBar.transform.parent.gameObject.SetActive(true);
         victoryTeamTextBar.text = "Team" + winningTeam.ToString() + " Won";
         GameInfoManager.TeamInfo team = (winningTeam == 1)? manager.team1 : manager.team2;
         for (int i = 0; i < team.players.Count; i++)
