@@ -186,6 +186,12 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
     public virtual void Start()
     {
         basic = gameObject.GetComponent<ManagerBasicStuff>();
+        basic.currentRound.text = "Waiting";
+        basic.time.text = "0:00";
+        basic.team1Alive.text = "0/0";
+        basic.team2Alive.text = "0/0";
+        basic.team1Wins.text = "0";
+        basic.team2Wins.text = "0";
         if (PhotonNetwork.isMasterClient)
             StartCoroutine(CheckForEnoughPlayers());
         NetworkingPeer.RegisterType(typeof(PlayerInfo), 24, PlayerInfo.Serialize, PlayerInfo.Deserialize);

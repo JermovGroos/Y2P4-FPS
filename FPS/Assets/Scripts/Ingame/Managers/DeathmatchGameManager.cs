@@ -74,9 +74,9 @@ public class DeathmatchGameManager : GameInfoManager
         base.Start();
         basic.teams.SetActive(false);
         basic.team1Wins.gameObject.SetActive(false);
-        basic.team1Alive.gameObject.SetActive(false);
+        basic.team1Alive.transform.parent.gameObject.SetActive(false);
         basic.team2Wins.gameObject.SetActive(false);
-        basic.team2Alive.gameObject.SetActive(false);
+        basic.team2Alive.transform.parent.gameObject.SetActive(false);
     }
     public override void OnJoinedRoom()
     {
