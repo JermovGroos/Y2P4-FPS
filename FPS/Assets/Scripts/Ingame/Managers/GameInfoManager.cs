@@ -185,6 +185,8 @@ public abstract class GameInfoManager : Photon.MonoBehaviour
     ///and it ads the player info to serialization
     public virtual void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         basic = gameObject.GetComponent<ManagerBasicStuff>();
         basic.currentRound.text = "Waiting";
         basic.time.text = "0:00";

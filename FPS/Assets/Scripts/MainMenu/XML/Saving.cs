@@ -21,6 +21,8 @@ public class Saving : MonoBehaviour
     ///Makes it so the object wont be destroyed && checks if there is a savefile by checking the name
     public void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         DontDestroyOnLoad(gameObject);
         LoadData();
         if (data.playerName == "")

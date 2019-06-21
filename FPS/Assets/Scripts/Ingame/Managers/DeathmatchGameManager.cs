@@ -12,6 +12,7 @@ public class DeathmatchGameManager : GameInfoManager
     [PunRPC, HideInInspector]
     public override void GameWon(int winnerIndex)
     {
+        basic.ui.SetActive(false);
         string winningPlayer = players[winnerIndex].playerInfo.NickName;
         basic.victoryScreenCamera.SetActive(true);
         basic.victoryTeamTextBar.transform.parent.gameObject.SetActive(true);
@@ -53,6 +54,7 @@ public class DeathmatchGameManager : GameInfoManager
 
     public override IEnumerator RoundTimer(int remainingTime)
     {
+        basic.ui.SetActive(true);
         StatReset();
         SerializeMatchData();
         Respawn();

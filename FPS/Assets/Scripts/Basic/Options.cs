@@ -65,7 +65,9 @@ public class Options : MonoBehaviour {
 
         //Load main menu
         print("Going to main menu...");
-        SceneManager.LoadScene (mainMenuName);
+        PhotonNetwork.Disconnect();
+        Destroy(GameObject.FindWithTag("Saving"));
+        SceneManager.LoadScene ("JelmerMainMenu");
     }
 
     public void QuitGame () {

@@ -13,16 +13,12 @@ public class ToggleInGameOptions : MonoBehaviour
         {
             options.SetActive(!options.activeInHierarchy);
             Cursor.visible = options.activeInHierarchy;
+            Cursor.lockState = options.activeInHierarchy ? CursorLockMode.None : CursorLockMode.Locked;
         }
     }
 
     public void Return()
     {
         options.SetActive(false);
-    }
-
-    public void MainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
     }
 }
