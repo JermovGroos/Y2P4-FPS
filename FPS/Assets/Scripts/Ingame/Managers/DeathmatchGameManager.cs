@@ -23,9 +23,32 @@ public class DeathmatchGameManager : GameInfoManager
             yourPlayer = PhotonNetwork.Instantiate(basic.playerObject, basic.victoryScreenSpawnPoints[0].position, basic.victoryScreenSpawnPoints[0].rotation, 0);
             yourPlayer.GetComponent<Player>().movementAllowed = false;
             yourPlayer.GetComponent<Player>().enabled = false;
-            /*foreach (SkinnedMeshRenderer skinnedMeshRenderer in yourPlayer.GetComponent<Player>().shadowsOnlyIfLocal)
-                skinnedMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;*/
         }
+        if (PhotonNetwork.isMasterClient)
+            StartCoroutine(StartNewGameCounter());
+    }
+
+    public IEnumerator StartNewGameCounter()
+    {
+        yield return new WaitForSeconds(1);
+        photonView.RPC("SendRoundMessage", PhotonTargets.All, "A new game wil start in 10 seconds");
+        yield return new WaitForSeconds(10);
+        photonView.RPC("StartNewGame", PhotonTargets.All);
+    }
+
+    [PunRPC,HideInInspector]
+    public void StartNewGame()
+    {
+        if (PhotonNetwork.isMasterClient)
+        {
+            StatReset();
+            SerializeMatchData();
+        }
+
+        basic.victoryScreenCamera.SetActive(false);
+        basic.victoryTeamTextBar.transform.parent.gameObject.SetActive(false);
+
+        StartCoroutine(RoundTimer(roundTime));
     }
 
     public override IEnumerator RoundTimer(int remainingTime)

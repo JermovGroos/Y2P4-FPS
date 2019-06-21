@@ -12,6 +12,7 @@ public class ToggleInGameOptions : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
             options.SetActive(!options.activeInHierarchy);
+            Cursor.visible = options.activeInHierarchy;
         }
     }
 

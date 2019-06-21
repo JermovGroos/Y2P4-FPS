@@ -57,4 +57,5 @@ MonoBehaviour:
   - ShowMuzzleFlash
   - DeserializeDeathMatchData
   - WorldSpaceAudioClip
+  - StartNewGame
   DisableAutoOpenWizard: 1
